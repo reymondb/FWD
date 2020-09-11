@@ -60,15 +60,9 @@
                                 <a class="nav-link" href="/import"><div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
                                     Migrate Leads
                                 </a>
-                                <!--<a class="nav-link" href="/hosts"><div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                    Hosts
+                                <a class="nav-link" href="/campaigns"><div class="sb-nav-link-icon"><i class="fas fa-headset"></i></div>
+                                    Campaigns
                                 </a>
-                                <a class="nav-link" href="/gametypes"><div class="sb-nav-link-icon"><i class="fas fa-dice-d20"></i></div>
-                                    Game Types
-                                </a>
-                                <a class="nav-link" href="/content"><div class="sb-nav-link-icon"><i class="far fa-edit"></i></div>
-                                    Content
-                                </a>!-->
                             </div>
                         </div>
                         <div class="sb-sidenav-footer">
