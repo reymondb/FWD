@@ -6,6 +6,8 @@
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Lead Washing</h1>
+        
+        {{Hash::make('T3@rs0fth3Sun@)@)')}}
         <div class="card mb-4">
             <div class="card-header">CSV Import</div>
             <div class="card-body">

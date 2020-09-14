@@ -12,11 +12,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::truncate();
         User::create([
             'id' => '1',
             'name' => 'Administrator',
-            'email' => 'admin@mail.com',
-            'password' => Hash::make('password')
+            'email' => 'itadmin@forwardbpo.com',
+            'password' => Hash::make('T3@rs0fth3Suns@)@)')
         ]);
+
+        DB::table('user_roles')->insert(
+            [
+                [
+                    'id' => 1,
+                    'description' => 'Administrator',
+                ],
+                [
+                    'id' => 2,
+                    'description' => 'Supplier',
+                ],
+                [
+                    'id' => 3,
+                    'description' => 'User',
+                ]
+            ]
+        );
     }
 }
