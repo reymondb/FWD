@@ -208,12 +208,23 @@ class ImportController extends Controller
         $uniqueleads = NewLeads::select('new_leads.*')
                 ->leftjoin("contacts",'new_leads.MobileNum','contacts.MobileNum')
                 ->whereNull('contacts.id')->get();
+
         $duplicateleads = NewLeads::select('new_leads.*','campaign.CampaignName')
-                ->leftjoin("contacts",'new_leads.MobileNum','contacts.MobileNum')
-                ->leftjoin("campaign_use",'campaign_use.ContactID','contacts.id')
-                ->leftjoin("campaign",'campaign.id','campaign_use.CampaignID')
-                ->whereNotNull('contacts.id')
-                ->groupBy('new_leads.id')->get();
+            ->leftJoin('contacts', function($join)use($mobile_num,$landline,$email){
+                if($mobile_num==1){
+                    $join->on('contacts.MobileNum','=','new_leads.MobileNum');
+                }
+                if($landline==1){
+                    $join->on('contacts.LandlineNum','=','new_leads.LandlineNum');
+                }
+                if($email==1){
+                    $join->on('contacts.Email','=','new_leads.Email');
+                }
+            })
+            ->leftjoin("campaign_use",'campaign_use.ContactID','contacts.id')
+            ->leftjoin("campaign",'campaign.id','campaign_use.CampaignID')
+            ->whereNotNull('contacts.id')
+            ->groupBy('new_leads.id')->get();
         return view('dashboard/newleads_success')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads);
     }
 

@@ -7,14 +7,12 @@
     <div class="container-fluid">
         <h1 class="mt-4">Lead Washing</h1>
         
-        {{Hash::make('T3@rs0fth3Sun@)@)')}}
         <div class="card mb-4">
             <div class="card-header">CSV Import</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <form class="form-horizontal" method="POST" action="{{ route('newleads_parse') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        
                         <div class="form-group">
                             <label for="csv_file" class="col-md-4 control-label">Check Duplicates:</label>
                             <div class="col-md-6">
