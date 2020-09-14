@@ -57,11 +57,17 @@
                                 <a class="nav-link" href="/dashboard"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                     Dashboard
                                 </a>
+                                <a class="nav-link" href="/campaigns"><div class="sb-nav-link-icon"><i class="fas fa-headset"></i></div>
+                                    Campaigns
+                                </a>
+                                <a class="nav-link" href="/leads"><div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                    Leads
+                                </a>
                                 <a class="nav-link" href="/import"><div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
                                     Migrate Leads
                                 </a>
-                                <a class="nav-link" href="/campaigns"><div class="sb-nav-link-icon"><i class="fas fa-headset"></i></div>
-                                    Campaigns
+                                <a class="nav-link" href="/newleads"><div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
+                                    Lead Washing
                                 </a>
                             </div>
                         </div>

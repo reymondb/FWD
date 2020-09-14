@@ -27,10 +27,20 @@ Route::get('/import', 'ImportController@getImport')->name('import');
 Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
 Route::post('/import_process', 'ImportController@processImport')->name('import_process');
 
+Route::get('/leads', 'LeadsController@Index')->name('import');
+
+Route::get('/newleads', 'ImportController@getNewLeads')->name('newleads');
+Route::post('/newleads_parse', 'ImportController@parseNewLeads')->name('newleads_parse');
+Route::post('/newleads_process', 'ImportController@processNewLeads')->name('newleads_process');
+Route::get('/new_leads_report', 'ImportController@newleadsReport')->name('newleadsReport');
+
+
 Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
 Route::post('/createcampaign', 'CampaignController@createCampaign')->name('createCampaign');
 Route::get('/deletecampaign/{id}', 'CampaignController@deleteCampaign')->name('deleteCampaign');
 Route::post('/editcampaign', 'CampaignController@editCampaign')->name('editCampaign');
+
+
 
 /**
  * middleware('App\Http\Middleware\AdminMiddleware')->

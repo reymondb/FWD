@@ -1,28 +1,23 @@
 @extends('dashboard.dashboardlayout')
-@section('title', 'Dashboard > Lead Migration')
+@section('title', 'Dashboard > Lead Washing')
 
 @section('content')
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Lead Migration</h1>
-        @if($warning==1)
-            <p class="warning">*Warning: This file might have already been uploaded.</p>
-        @endif
+        <h1 class="mt-4">Lead Washing</h1>
         <div class="card mb-4">
             <div class="card-header">CSV Import</div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <form class="form-horizontal" method="POST" action="{{ route('import_process') }}" style="font-size:14px">
+                    <form class="form-horizontal" method="POST" action="{{ route('newleads_process') }}" style="font-size:14px">
                         {{ csrf_field() }}
-                        
-                        <input type="hidden" name="campaign" value="{{ $campaign }}" />
-                        <input type="hidden" name="batchdesc" value="{{ $batchdesc }}" />
                         <input type="hidden" name="csv_data_file_id" value="{{ $csv_data_file->id }}" />
+                        <input type="hidden" name="mobile_num" value="{{ $mobile_num }}" />
+                        <input type="hidden" name="landline" value="{{ $landline }}" />
+                        <input type="hidden" name="email" value="{{ $email }}" />
 
                         <table class="table">
-                            
-                        
                             @if (isset($csv_header_fields))
                             <tr>
                                 @foreach ($csv_header_fields as $csv_header_field)
@@ -68,13 +63,7 @@
 </main>
     
     
-<style>
-    .warning{
-        font-style: italic;
-        color:red;
-        font-weight: bold;
-    }
-</style>
+
 @stop
 
 @section('js')
