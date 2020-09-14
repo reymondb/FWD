@@ -31,7 +31,7 @@ class ImportController extends Controller
         
         $campaign = $request->campaign;
         $batchdesc = $request->batch_desc;
-
+        $filename = $request->file('csv_file')->getClientOriginalName();
         
         $path = $request->file('csv_file')->getRealPath();
 
@@ -66,7 +66,7 @@ class ImportController extends Controller
             $warning=0;
         }
 
-        return view('dashboard/import_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('campaign',$campaign)->with('batchdesc',$batchdesc)->with('warning',$warning);
+        return view('dashboard/import_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('campaign',$campaign)->with('batchdesc',$batchdesc)->with('warning',$warning)->with('filename',$filename);
 
     }
 
@@ -79,7 +79,7 @@ class ImportController extends Controller
         // create lead batch in database
         $lb = new LeadBatch();        
         $lb->BatchDescription = $batchdesc;
-        $lb->FileName = $request->file('csv_file')->getClientOriginalName();
+        $lb->FileName = $request->filename;
         $lb->supplier_id =$supplier_id;
         $lb->save();
         $batch_id = $lb->id;
@@ -203,10 +203,11 @@ class ImportController extends Controller
         $mobile_num = $request->mobile_num;
         $landline = $request->landline;
         $email = $request->email;
-        
+
         //DB::enableQueryLog(); // Enable query log
-        $uniqueleads = NewLeads::select('new_leads.*')->leftjoin("contacts",'new_leads.MobileNum','contacts.MobileNum')
-                    ->whereNull('contacts.id')->get();
+        $uniqueleads = NewLeads::select('new_leads.*')
+                ->leftjoin("contacts",'new_leads.MobileNum','contacts.MobileNum')
+                ->whereNull('contacts.id')->get();
         $duplicateleads = NewLeads::select('new_leads.*','campaign.CampaignName')
                 ->leftjoin("contacts",'new_leads.MobileNum','contacts.MobileNum')
                 ->leftjoin("campaign_use",'campaign_use.ContactID','contacts.id')

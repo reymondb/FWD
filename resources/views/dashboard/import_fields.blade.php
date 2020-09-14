@@ -18,6 +18,8 @@
                         
                         <input type="hidden" name="campaign" value="{{ $campaign }}" />
                         <input type="hidden" name="batchdesc" value="{{ $batchdesc }}" />
+                        <input type="hidden" name="filename" value="{{ $filename }}" />
+                        
                         <input type="hidden" name="csv_data_file_id" value="{{ $csv_data_file->id }}" />
 
                         <table class="table">
