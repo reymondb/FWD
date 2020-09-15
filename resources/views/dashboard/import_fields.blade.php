@@ -46,11 +46,11 @@
                                 @foreach ($csv_data[0] as $key => $value)
                                     <td>
                                         <select name="fields[{{ $key }}]">
-                                            <option value="">Ignore</option>
+                                            <option value="" selected>Ignore</option>
                                             <!--(\Request::has('header')) ? $db_field :!-->
+                                            <!-- @if ($loop->index == $i) selected @endif !-->
                                             @foreach (config('app.db_fields') as $db_field)
-                                                <option value="{{ $loop->index }}" 
-                                                @if ($loop->index == $i) selected @endif >{{ $db_field }}</option>
+                                                <option value="{{ $loop->index }}"  >{{ $db_field }}</option>
                                             @endforeach
                                         </select>
                                     </td>
