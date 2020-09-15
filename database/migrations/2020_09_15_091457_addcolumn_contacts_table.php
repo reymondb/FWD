@@ -41,11 +41,5 @@ class AddcolumnContactsTable extends Migration
                 $table->dropColumn('ListID');
             });
         }
-        if (Schema::hasTable('new_leads')) {
-            Schema::table('new_leads', function (Blueprint $table) {
-                $table->dropColumn('PhoneCode');
-                $table->dropColumn('ListID');
-            });
-        }
     }
 }
