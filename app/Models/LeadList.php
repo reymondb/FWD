@@ -8,4 +8,5 @@ class LeadList extends Model
 {
     protected $table = 'lead_list';
     protected $primaryKey = 'id';
+    
 }

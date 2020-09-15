@@ -232,6 +232,8 @@ return [
     'db_fields' => [
         'MobileNum',
         'LandlineNum',
+        'PhoneCode',
+        'ListID',
         'FirstName',
         'LastName',
         'Address',

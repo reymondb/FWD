@@ -28,7 +28,9 @@ Route::get('/import', 'ImportController@getImport')->name('import');
 Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
 Route::post('/import_process', 'ImportController@processImport')->name('import_process');
 
-Route::get('/leads', 'LeadsController@Index')->name('import');
+Route::get('/leads', 'LeadsController@Index')->name('contactszz');
+
+Route::get('/contacts', 'LeadsController@Index')->name('contacts');
 
 Route::get('/newleads', 'ImportController@getNewLeads')->name('newleads');
 Route::post('/newleads_parse', 'ImportController@parseNewLeads')->name('newleads_parse');
