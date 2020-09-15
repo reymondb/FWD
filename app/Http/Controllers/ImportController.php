@@ -42,12 +42,12 @@ class ImportController extends Controller
         //}
         //print_r($data);
         if (count($data) > 0) {
-            /* ($request->has('header')) {
+            if($request->has('header')) {
                 $csv_header_fields = [];
-                foreach ($data[0] as $key => $value) {
+                /* foreach ($data[0] as $key => $value) {
                     $csv_header_fields[] = $key;
-                }
-            }*/
+                }*/
+            }
             $csv_data = array_slice($data, 0, 2);
 
             $csv_data_file = CsvData::create([
@@ -146,12 +146,12 @@ class ImportController extends Controller
         //}
         //print_r($data);
         if (count($data) > 0) {
-            /* ($request->has('header')) {
+             if($request->has('header')) {
                 $csv_header_fields = [];
-                foreach ($data[0] as $key => $value) {
+                /*foreach ($data[0] as $key => $value) {
                     $csv_header_fields[] = $key;
-                }
-            }*/
+                }*/
+            }
             $csv_data = array_slice($data, 0, 2);
 
             $csv_data_file = CsvData::create([
