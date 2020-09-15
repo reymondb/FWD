@@ -93,18 +93,26 @@ class ImportController extends Controller
         else{
             $csv_data = json_decode($data->csv_data, true);
         }
+        //print_r($request->fields);
+        $db_field = config('app.db_fields');
+        //print_r($db_field);
         foreach ($csv_data as $row) {
             $contact = new Contact();
-            foreach (config('app.db_fields') as $index => $field) {
-               /* if ($data->csv_header) {
-                    $contact->$field = $row[$request->fields[$field]];
-                } else {
-                   */ 
-                if(($index+1) < count($row)){
-                    $contact->$field = $row[$request->fields[$index]];
-                }
+                //foreach (config('app.db_fields') as $index => $field) {
+                /* if ($data->csv_header) {
+                        $contact->$field = $row[$request->fields[$field]];
+                    } else {
+                    */ 
+                    //if(($index+1) <= count($row)){
+                    // $contact->$field = $row[$request->fields[$index]]; 
+                    //}
+                    //}
                 //}
-            }
+                foreach($request->fields as $index => $field){
+                    $dbf = $db_field[$field];
+                    //echo $db_field[$field] ." == ".$row[$index];
+                    $contact->$dbf = $row[$index];
+                }
             $contact->supplier_id =$supplier_id;
             $contact->save();
             
@@ -179,20 +187,15 @@ class ImportController extends Controller
         else{
             $csv_data = json_decode($data->csv_data, true);
         }
+        $db_field = config('app.db_fields');
         //empty Lead Washing table
         NewLeads::truncate();
         foreach ($csv_data as $row) {
-            
             $contact = new NewLeads();
-            foreach (config('app.db_fields') as $index => $field) {
-                /* if ($data->csv_header) {
-                     $contact->$field = $row[$request->fields[$field]];
-                 } else {
-                    */ 
-                 if(($index+1) < count($row)){
-                     $contact->$field = $row[$request->fields[$index]];
-                 }
-                 //}
+            foreach($request->fields as $index => $field){
+                $dbf = $db_field[$field];
+                //echo $db_field[$field] ." == ".$row[$index];
+                $contact->$dbf = $row[$index];
             }
             $contact->save();
         }
