@@ -35,7 +35,6 @@ class AddcolsNewLeads extends Migration
      */
     public function down()
     {
-        
         if (Schema::hasTable('contacts')) {
             Schema::table('contacts', function (Blueprint $table) {
                 $table->dropColumn('PhoneCode');

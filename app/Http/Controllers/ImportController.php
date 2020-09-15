@@ -95,8 +95,10 @@ class ImportController extends Controller
         //print_r($request->fields);
         $db_field = config('app.db_fields');
         //print_r($db_field);
+
+        $x=1;
         foreach ($csv_data as $row) {
-            $contact = new Contact();
+             $contact = new Contact();
                 //foreach (config('app.db_fields') as $index => $field) {
                 /* if ($data->csv_header) {
                         $contact->$field = $row[$request->fields[$field]];
@@ -107,6 +109,10 @@ class ImportController extends Controller
                     //}
                     //}
                 //}
+                
+            //if(str_replace(' ', '', $row[0])!=" " && str_replace(' ', '', $row[1])!=" " && str_replace(' ', '', $row[02])!=" " && str_replace(' ', '', $row[3])!=" " && str_replace(' ', '', $row[4])!=" "){
+            if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
+                echo $x ." = ".$row[0]." == ".$row[1]." == ".$row[2]." == ".$row[3]." == ".$row[4]."<br>";
                 foreach($request->fields as $index => $field){
                     if(isset($field) || $field!=""){
                         $dbf = $db_field[$field];
@@ -114,26 +120,24 @@ class ImportController extends Controller
                         $contact->$dbf = $row[$index];
                     }
                 }
-            $contact->supplier_id =$supplier_id;
-            $contact->save();
+                $contact->supplier_id =$supplier_id;
+                $contact->save();
+                $x++;
+                // insert Campaign use database table
+                $campaignuse = new CampaignUse();
+                $campaignuse->ContactID = $contact->id;
+                $campaignuse->CampaignID = $campaignid;
+                $campaignuse->save();
+                 // insert lead list database table
+                $ll = new LeadList();
+                $ll->BatchID = $batch_id;
+                $ll->CampaignID = $campaignid;
+                $ll->ContactID = $contact->id;
+                $ll->save();
+            }
             
-            // insert lead list database table
-            $ll = new LeadList();
-            $ll->BatchID = $batch_id;
-            $ll->CampaignID = $campaignid;
-            $ll->ContactID = $contact->id;
-            $ll->save();
-
-            // insert Campaign use database table
-            $campaignuse = new CampaignUse();
-            $campaignuse->ContactID = $contact->id;
-            $campaignuse->CampaignID = $campaignid;
-            $campaignuse->save();
-            
-
         }
-
-        return view('dashboard/import_success');
+        return view('dashboard/import_success')->with('totalcount',$x);
     }
 
 
@@ -191,16 +195,19 @@ class ImportController extends Controller
         $db_field = config('app.db_fields');
         //empty Lead Washing table
         NewLeads::truncate();
+        $x=1;
         foreach ($csv_data as $row) {
             $contact = new NewLeads();
-            foreach($request->fields as $index => $field){
-                if(isset($field) || $field!=""){
-                    $dbf = $db_field[$field];
-                    //echo $db_field[$field] ." == ".$row[$index];
-                    $contact->$dbf = $row[$index];
+            if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
+                foreach($request->fields as $index => $field){
+                    if(isset($field) || $field!=""){
+                        $dbf = $db_field[$field];
+                        //echo $db_field[$field] ." == ".$row[$index];
+                        $contact->$dbf = $row[$index];
+                    }
                 }
+                $contact->save();
             }
-            $contact->save();
         }
         
         $mobile_num = $request->mobile_num;

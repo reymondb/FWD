@@ -10,7 +10,7 @@
         <div class="card mb-4">
             <div class="card-header">CSV Import</div>
                 <div class="card-body">
-                    Data imported successfully.
+                   <b>{{$totalcount}}</b> Data imported successfully.
                 </div>
             </div>
         </div>
