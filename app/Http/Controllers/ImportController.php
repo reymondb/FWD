@@ -170,7 +170,6 @@ class ImportController extends Controller
     public function processNewLeads(Request $request)
     {
         //$csv_data = json_decode($data->csv_data, true);
-        
         //import csv start
         $data = CsvData::find($request->csv_data_file_id);
         if ($data->csv_header) {
@@ -196,38 +195,50 @@ class ImportController extends Controller
                  //}
             }
             $contact->save();
-            
-
         }
         
         $mobile_num = $request->mobile_num;
         $landline = $request->landline;
         $email = $request->email;
-
-        //DB::enableQueryLog(); // Enable query log
+        //DB::enableQueryLog();
         $uniqueleads = NewLeads::select('new_leads.*')
-                ->leftjoin("contacts",'new_leads.MobileNum','contacts.MobileNum')
-                ->whereNull('contacts.id')->get();
-
+            ->leftJoin('contacts', function($join)use($mobile_num,$landline,$email){
+                if($mobile_num==1){
+                    $join->orOn('contacts.MobileNum','=','new_leads.MobileNum');
+                }
+                if($landline==1){
+                    $join->orOn('contacts.LandlineNum','=','new_leads.LandlineNum');
+                }
+                if($email==1){
+                    $join->orOn('contacts.Email','=','new_leads.Email');
+                }
+            })
+        ->whereNull('contacts.id')->get();
+        //dd(DB::getQueryLog());
+                #->leftjoin("contacts",'new_leads.MobileNum','contacts.MobileNum')
+        
+        //dd($uniqueleads);die();
+        //DB::enableQueryLog(); // Enable query log
         $duplicateleads = NewLeads::select('new_leads.*','campaign.CampaignName')
             ->leftJoin('contacts', function($join)use($mobile_num,$landline,$email){
                 if($mobile_num==1){
-                    $join->on('contacts.MobileNum','=','new_leads.MobileNum');
+                    $join->orOn('contacts.MobileNum','=','new_leads.MobileNum');
                 }
                 if($landline==1){
-                    $join->on('contacts.LandlineNum','=','new_leads.LandlineNum');
+                    $join->orOn('contacts.LandlineNum','=','new_leads.LandlineNum');
                 }
                 if($email==1){
-                    $join->on('contacts.Email','=','new_leads.Email');
+                    $join->orOn('contacts.Email','=','new_leads.Email');
                 }
             })
             ->leftjoin("campaign_use",'campaign_use.ContactID','contacts.id')
             ->leftjoin("campaign",'campaign.id','campaign_use.CampaignID')
             ->whereNotNull('contacts.id')
             ->groupBy('new_leads.id')->get();
+        //dd(DB::getQueryLog());
         return view('dashboard/newleads_success')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads);
     }
-
+    /*
     public function newleadsReport()
     {
         //DB::enableQueryLog(); // Enable query log
@@ -242,6 +253,6 @@ class ImportController extends Controller
         //dd(DB::getQueryLog()); // Show results of log
         return view('dashboard/new_leads_report')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads);
     }
-    
+    */
 
 }

@@ -19,21 +19,21 @@
                                 <div class="col-md-4 col-md-offset-3">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="mobile_num" checked> Mobile number
+                                            <input type="checkbox" name="mobile_num" value="1" checked  /> Mobile number
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-md-offset-3">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="landline" checked> Landline number
+                                            <input type="checkbox" name="landline" value="1" > Landline number
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-md-offset-3">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="email" checked> Email
+                                            <input type="checkbox" name="email" value="1" > Email
                                         </label>
                                     </div>
                                 </div>
