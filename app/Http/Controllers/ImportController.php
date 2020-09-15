@@ -41,9 +41,9 @@ class ImportController extends Controller
             $data = array_map('str_getcsv', file($path));
         //}
         //print_r($data);
+        $csv_header_fields = [];
         if (count($data) > 0) {
             if($request->has('header')) {
-                $csv_header_fields = [];
                 /* foreach ($data[0] as $key => $value) {
                     $csv_header_fields[] = $key;
                 }*/
@@ -145,9 +145,9 @@ class ImportController extends Controller
             $data = array_map('str_getcsv', file($path));
         //}
         //print_r($data);
+        $csv_header_fields = [];
         if (count($data) > 0) {
              if($request->has('header')) {
-                $csv_header_fields = [];
                 /*foreach ($data[0] as $key => $value) {
                     $csv_header_fields[] = $key;
                 }*/
