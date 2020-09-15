@@ -17,14 +17,14 @@ class AddcolumnLeadsTable extends Migration
             Schema::table('contacts', function (Blueprint $table) {
                 $table->string('City')->after('Address')->nullable(); 
                 $table->string('State')->after('City')->nullable();
-                $table->string('Zip')->after('Zip')->nullable();             
+                $table->string('Zip')->after('State')->nullable();             
             });
         }
         if (Schema::hasTable('new_leads')) {
             Schema::table('new_leads', function (Blueprint $table) {
                 $table->string('City')->after('Address')->nullable(); 
                 $table->string('State')->after('City')->nullable();
-                $table->string('Zip')->after('Zip')->nullable();             
+                $table->string('Zip')->after('State')->nullable();             
             });
         }
         

@@ -12,6 +12,62 @@
             <div class="card-header"><i class="fas fa-table mr-1"></i>Contact Leads</div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <form id="contact_filter" method="POST">
+                        <table id="contact_filter_table" class="table" style="background-color:rgba(0, 0, 0, 0.03)">
+                            <tr>
+                                <td>
+                                    <select name="supplier_id" class="form-control filter_inputs">
+                                        <option value="">Select Supplier</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="batch_id" class="form-control filter_inputs">
+                                        <option value="">Select batch</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="campaign_id" class="form-control filter_inputs">
+                                        <option value="">Select Campaign</option>
+                                    </select>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="mobile_num" value="1" checked  /> Mobile number
+                                        </label>
+                                    </div>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="landline" value="1" checked  /> Landline
+                                        </label>
+                                    </div>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="email" value="1" checked  /> Email
+                                        </label>
+                                    </div>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="first_name" value="1" checked  /> First Name
+                                        </label>
+                                    </div>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="last_name" value="1" checked  /> Last  Name
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                     <table id="contacts_all" class="table table-condensed table-bordered table-striped " style="margin-top: 20px ">
                         <thead>
                             <tr>
@@ -64,6 +120,14 @@
        
     });
 </script>
+<style>
+    .filter_inputs{
+        font-size:14px;
+    }
+    #contact_filter_table th, #contact_filter_table td {
+        border-top: 0px solid #dee2e6;
+    }
+</style>
 
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
