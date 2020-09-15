@@ -96,7 +96,7 @@ class ImportController extends Controller
         $db_field = config('app.db_fields');
         //print_r($db_field);
 
-        $x=1;
+        $x=0;
         foreach ($csv_data as $row) {
              $contact = new Contact();
                 //foreach (config('app.db_fields') as $index => $field) {
@@ -112,7 +112,7 @@ class ImportController extends Controller
                 
             //if(str_replace(' ', '', $row[0])!=" " && str_replace(' ', '', $row[1])!=" " && str_replace(' ', '', $row[02])!=" " && str_replace(' ', '', $row[3])!=" " && str_replace(' ', '', $row[4])!=" "){
             if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
-                echo $x ." = ".$row[0]." == ".$row[1]." == ".$row[2]." == ".$row[3]." == ".$row[4]."<br>";
+                //echo $x ." = ".$row[0]." == ".$row[1]." == ".$row[2]." == ".$row[3]." == ".$row[4]."<br>";
                 foreach($request->fields as $index => $field){
                     if(isset($field) || $field!=""){
                         $dbf = $db_field[$field];
