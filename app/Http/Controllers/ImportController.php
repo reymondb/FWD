@@ -83,7 +83,6 @@ class ImportController extends Controller
         $lb->supplier_id =$supplier_id;
         $lb->save();
         $batch_id = $lb->id;
-
         //import csv start
         $data = CsvData::find($request->csv_data_file_id);
         if ($data->csv_header) {
