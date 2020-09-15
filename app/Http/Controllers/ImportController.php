@@ -117,7 +117,13 @@ class ImportController extends Controller
                     if(isset($field) || $field!=""){
                         $dbf = $db_field[$field];
                         //echo $db_field[$field] ." == ".$row[$index];
-                        $contact->$dbf = $row[$index];
+                        if($dbf=="MobileNum" || $dbf=="LandlineNum"){
+                            $val=intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
+                        }
+                        else{
+                            $val = $row[$index];
+                        }
+                        $contact->$dbf = $val;
                     }
                 }
                 $contact->supplier_id =$supplier_id;
@@ -203,7 +209,13 @@ class ImportController extends Controller
                     if(isset($field) || $field!=""){
                         $dbf = $db_field[$field];
                         //echo $db_field[$field] ." == ".$row[$index];
-                        $contact->$dbf = $row[$index];
+                        if($dbf=="MobileNum" || $dbf=="LandlineNum"){
+                            $val=intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
+                        }
+                        else{
+                            $val = $row[$index];
+                        }
+                        $contact->$dbf = $val;;
                     }
                 }
                 $contact->save();
