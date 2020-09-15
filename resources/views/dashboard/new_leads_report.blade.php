@@ -1,4 +1,3 @@
-
 @extends('dashboard.dashboardlayout')
 @section('title', 'Upload Leads Success')
 
@@ -6,74 +5,25 @@
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Lead Washing Report</h1>
+        <h1 class="mt-4">Lead Washing Report </h1>
+        <div class="card mb-4">
+            <div class="card-header">CSV Import</div>
+            <div class="card-body">
+                Data washed successfully.
+            </div>
+        </div>
+        
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Unique Leads</div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table id="unique_all" class="table table-condensed table-bordered table-striped " style="margin-top: 20px ">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>MobileNum</th>
-                                <th>Landline</th>
-                                <th>FirstName</th>
-                                <th>LastName</th>
-                                <th>Address</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($uniqueleads as $u)
-                                <tr>
-                                    <td>{{$u->id}}</td>
-                                    <td>{{$u->MobileNum}}</td>
-                                    <td>{{$u->LandlineNum}}</td>
-                                    <td>{{$u->FirstName}}</td>
-                                    <td>{{$u->LastName}}</td>
-                                    <td>{{$u->Address}}</td>
-                                    <td>{{$u->Email}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                Total Unique: {{ isset($uniqueleads) ? $uniqueleads : '0'}}
             </div>
         </div>
 
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Duplicate Leads</div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table id="duplicates_all" class="table table-condensed table-bordered table-striped " style="margin-top: 20px ">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>MobileNum</th>
-                                <th>Landline</th>
-                                <th>FirstName</th>
-                                <th>LastName</th>
-                                <th>Address</th>
-                                <th>Email</th>
-                                <th>Campaign Name Used</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($duplicateleads as $d)
-                                <tr>
-                                    <td>{{$d->id}}</td>
-                                    <td>{{$d->MobileNum}}</td>
-                                    <td>{{$d->LandlineNum}}</td>
-                                    <td>{{$d->FirstName}}</td>
-                                    <td>{{$d->LastName}}</td>
-                                    <td>{{$d->Address}}</td>
-                                    <td>{{$d->Email}}</td>
-                                    <td>{{$d->CampaignName}}</td>                                        
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                Total Duplicate: {{ isset($duplicateleads) ? $duplicateleads : '0'}}
             </div>
         </div>
     </div>

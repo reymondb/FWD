@@ -9,7 +9,7 @@
         <div class="card mb-4">
             <div class="card-header">CSV Import</div>
                 <div class="card-body">
-                    Data imported successfully.
+                    Data washed successfully.
                 </div>
             </div>
         </div>
@@ -17,7 +17,8 @@
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Unique Leads</div>
             <div class="card-body">
-                <div class="table-responsive">
+                Total Unique: {{$uniqueleads[0]->totalunique}}
+                <!--<div class="table-responsive">
                     <table id="unique_all" class="table table-condensed table-bordered table-striped " style="margin-top: 20px ">
                         <thead>
                             <tr>
@@ -44,14 +45,15 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div>!-->
             </div>
         </div>
 
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Duplicate Leads</div>
             <div class="card-body">
-                <div class="table-responsive">
+                Total Duplicate: {{$duplicateleads[0]->totalduplicate}}
+                <!--<div class="table-responsive">
                     <table id="duplicates_all" class="table table-condensed table-bordered table-striped " style="margin-top: 20px ">
                         <thead>
                             <tr>
@@ -80,7 +82,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div>!-->
             </div>
         </div>
     </div>
