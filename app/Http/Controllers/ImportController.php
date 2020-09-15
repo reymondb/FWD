@@ -109,9 +109,11 @@ class ImportController extends Controller
                     //}
                 //}
                 foreach($request->fields as $index => $field){
-                    $dbf = $db_field[$field];
-                    //echo $db_field[$field] ." == ".$row[$index];
-                    $contact->$dbf = $row[$index];
+                    if(isset($field) || $field!=""){
+                        $dbf = $db_field[$field];
+                        //echo $db_field[$field] ." == ".$row[$index];
+                        $contact->$dbf = $row[$index];
+                    }
                 }
             $contact->supplier_id =$supplier_id;
             $contact->save();
@@ -193,9 +195,11 @@ class ImportController extends Controller
         foreach ($csv_data as $row) {
             $contact = new NewLeads();
             foreach($request->fields as $index => $field){
-                $dbf = $db_field[$field];
-                //echo $db_field[$field] ." == ".$row[$index];
-                $contact->$dbf = $row[$index];
+                if(isset($field) || $field!=""){
+                    $dbf = $db_field[$field];
+                    //echo $db_field[$field] ." == ".$row[$index];
+                    $contact->$dbf = $row[$index];
+                }
             }
             $contact->save();
         }
