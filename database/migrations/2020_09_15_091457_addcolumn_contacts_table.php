@@ -19,6 +19,12 @@ class AddcolumnContactsTable extends Migration
                 $table->string('ListID')->after('PhoneCode')->nullable(); 
             });
         }
+        if (Schema::hasTable('new_leads')) {
+            Schema::table('new_leads', function (Blueprint $table) {
+                $table->string('PhoneCode')->after('LandlineNum')->nullable();
+                $table->string('ListID')->after('PhoneCode')->nullable(); 
+            });
+        }
     }
 
     /**
@@ -31,6 +37,12 @@ class AddcolumnContactsTable extends Migration
         
         if (Schema::hasTable('contacts')) {
             Schema::table('contacts', function (Blueprint $table) {
+                $table->dropColumn('PhoneCode');
+                $table->dropColumn('ListID');
+            });
+        }
+        if (Schema::hasTable('new_leads')) {
+            Schema::table('new_leads', function (Blueprint $table) {
                 $table->dropColumn('PhoneCode');
                 $table->dropColumn('ListID');
             });

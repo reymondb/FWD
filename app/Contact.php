@@ -10,6 +10,6 @@ class Contact extends Model
 
     public function campaign_use()
     {
-        return $this->hasOne('App\Models\CampaignUse','id','ContactID');
+        return $this->hasMany('App\Models\CampaignUse','id','ContactID');
     }
 }

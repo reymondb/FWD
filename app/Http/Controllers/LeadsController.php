@@ -27,6 +27,16 @@ class LeadsController extends Controller
         //dd(DB::getQueryLog()); // Show results of log
         return view('dashboard/leads')->with('contacts',$contacts);
     }
+
+    public function contacts()
+    {
+       // DB::enableQueryLog(); // Enable query log
+        $contacts = Contact::select('contacts.*')->with('campaign')
+        ->limit(1000)
+        ->get();
+        //dd(DB::getQueryLog()); // Show results of log
+        return view('dashboard/contacts')->with('contacts',$contacts);
+    }
     
 
 }

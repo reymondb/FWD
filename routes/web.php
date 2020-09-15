@@ -30,7 +30,7 @@ Route::post('/import_process', 'ImportController@processImport')->name('import_p
 
 Route::get('/leads', 'LeadsController@Index')->name('contactszz');
 
-Route::get('/contacts', 'LeadsController@Index')->name('contacts');
+Route::get('/contacts', 'LeadsController@contacts')->name('contacts');
 
 Route::get('/newleads', 'ImportController@getNewLeads')->name('newleads');
 Route::post('/newleads_parse', 'ImportController@parseNewLeads')->name('newleads_parse');
