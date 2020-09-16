@@ -9,6 +9,8 @@ use App\Models\NewLeads;
 use App\Models\LeadBatch;
 use App\Models\LeadList;
 
+use App\User;
+
 use App\CsvData;
 use App\Http\Requests\CsvImportRequest;
 use Illuminate\Http\Request;
@@ -22,7 +24,8 @@ class ImportController extends Controller
     public function getImport()
     {
         $campaigns=Campaigns::all();
-        return view('dashboard/import')->with('campaigns',$campaigns);
+        $suppliers=User::all();
+        return view('dashboard/import')->with('campaigns',$campaigns)->with('suppliers',$suppliers);
     }
 
     //parse csv 
@@ -31,6 +34,8 @@ class ImportController extends Controller
         
         $campaign = $request->campaign;
         $batchdesc = $request->batch_desc;
+        $supplier_id = $request->supplier_id;
+        
         $filename = $request->file('csv_file')->getClientOriginalName();
         
         $path = $request->file('csv_file')->getRealPath();
@@ -66,7 +71,8 @@ class ImportController extends Controller
             $warning=0;
         }
 
-        return view('dashboard/import_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('campaign',$campaign)->with('batchdesc',$batchdesc)->with('warning',$warning)->with('filename',$filename);
+        return view('dashboard/import_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('campaign',$campaign)
+        ->with('batchdesc',$batchdesc)->with('warning',$warning)->with('filename',$filename)->with('supplier_id',$supplier_id);
 
     }
 
@@ -75,7 +81,8 @@ class ImportController extends Controller
     {
         $campaignid= $request->campaign;
         $batchdesc = $request->batchdesc;
-        $supplier_id = Auth::user()->id;
+        $supplier_id = $request->supplier_id;
+        #$supplier_id = Auth::user()->id;
         // create lead batch in database
         $lb = new LeadBatch();        
         $lb->BatchDescription = $batchdesc;

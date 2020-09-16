@@ -97,32 +97,6 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="bookedmodal" role="dialog">
-            <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content" style="width: 800px;">
-                <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><i class="fas fa-table mr-1"></i>Registered For <span id="game_title"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="table-responsive" id="bookingholder">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-            </div>
-        </div>
 
 
 @stop

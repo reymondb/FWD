@@ -15,15 +15,13 @@
                 <div class="table-responsive">
                     <form class="form-horizontal" method="POST" action="{{ route('import_process') }}" style="font-size:14px">
                         {{ csrf_field() }}
-                        
                         <input type="hidden" name="campaign" value="{{ $campaign }}" />
                         <input type="hidden" name="batchdesc" value="{{ $batchdesc }}" />
                         <input type="hidden" name="filename" value="{{ $filename }}" />
-                        
+                        <input type="hidden" name="supplier_id" value="{{ $supplier_id }}" />
                         <input type="hidden" name="csv_data_file_id" value="{{ $csv_data_file->id }}" />
 
                         <table class="table">
-                            
                         
                             @if (isset($csv_header_fields))
                             <tr>
@@ -59,9 +57,9 @@
                             </tr>
                         </table>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" onlclick="loading()">
                             Import Data
-                        </button><br><br>
+                        </button> <div class="loading" ><img src="images/blue loading.gif" height="100">Exporting...</div><br><br>
                     </form>
                 </div>
             </div>
@@ -77,6 +75,11 @@
         font-weight: bold;
     }
 </style>
+<script>
+    function loading(){
+        $(".loading").show();
+    }
+</script>
 @stop
 
 @section('js')

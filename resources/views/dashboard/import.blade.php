@@ -20,9 +20,20 @@
                                         <option value="{{$c->id}}">{{$c->CampaignName}}</option>
                                     @endforeach
                                 </select>
-
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="campaign" class="col-md-4 control-label">Supplier</label>
+                            <div class="col-md-6">
+                                <select id="supplier_id"  class="form-control" name="supplier_id" required>
+                                    @foreach($suppliers as $s)
+                                        <option value="{{$s->id}}">{{$s->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="batch_desc" class="col-md-4 control-label">Batch Description</label>
                             <div class="col-md-6">

@@ -35,8 +35,6 @@ Route::get('/leadwashing/exportduplicate/{mobile_num}/{landline}/{email}', 'Lead
 Route::get('/leadwashing/exportunique/{mobile_num}/{landline}/{email}', 'LeadsController@exportUniqueLeads')->name('exportUniqueLeads');
 Route::get('/export', 'LeadsController@export')->name('export');
 
-
-
 Route::get('/contacts', 'LeadsController@contacts')->name('contacts');
 
 Route::get('/newleads', 'ImportController@getNewLeads')->name('newleads');
@@ -44,12 +42,15 @@ Route::post('/newleads_parse', 'ImportController@parseNewLeads')->name('newleads
 Route::post('/newleads_process', 'ImportController@processNewLeads')->name('newleads_process');
 Route::get('/new_leads_report', 'ImportController@newleadsReport')->name('newleadsReport');
 
-
 Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
 Route::post('/createcampaign', 'CampaignController@createCampaign')->name('createCampaign');
 Route::get('/deletecampaign/{id}', 'CampaignController@deleteCampaign')->name('deleteCampaign');
 Route::post('/editcampaign', 'CampaignController@editCampaign')->name('editCampaign');
 
+Route::get('/supplier', 'SupplierController@supplier')->name('supplier');
+Route::post('/createsupplier', 'SupplierController@createSupplier')->name('createSupplier');
+Route::get('/deletesupplier/{id}', 'SupplierController@deleteSupplier')->name('deleteSupplier');
+Route::post('/editsupplier', 'SupplierController@editSupplier')->name('editSupplier');
 
 
 /**

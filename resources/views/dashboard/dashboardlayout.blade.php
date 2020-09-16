@@ -69,6 +69,9 @@
                                 <a class="nav-link" href="/newleads"><div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
                                     Lead Washing
                                 </a>
+                                <a class="nav-link" href="/supplier"><div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
+                                    Supplier
+                                </a>
                             </div>
                         </div>
                         <div class="sb-sidenav-footer">
