@@ -1,5 +1,5 @@
 @extends('dashboard.dashboardlayout')
-@section('title', 'Upload Leads Success')
+@section('title', 'Leads Washing Success')
 
 @section('content')
 
@@ -12,18 +12,37 @@
                 Data washed successfully.
             </div>
         </div>
-        
+        @csrf
+        <input type="hidden" name="mobile_num" id="mobile_num" value="{{$mobile_num}}" />
+        <input type="hidden" name="landline" id="landline" value="{{$landline}}" />
+        <input type="hidden" name="email" id="email" value="{{$email}}" />
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Unique Leads</div>
             <div class="card-body">
-                Total Unique: {{ isset($uniqueleads) ? $uniqueleads : '0'}}
+                <div class="row">
+                    <div class="col-md-2">
+                        Total Unique: {{ isset($uniqueleads) ? $uniqueleads : '0'}} 
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/leadwashing/exportunique/{{$mobile_num}}/{{$landline}}/{{$email}}" id="downloadLink" class="btn btn-primary" download>Export Unique</a>
+                    </div>
+                    <div class="loading col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
+                </div>
             </div>
         </div>
 
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Duplicate Leads</div>
             <div class="card-body">
-                Total Duplicate: {{ isset($duplicateleads) ? $duplicateleads : '0'}}
+                <div class="row">
+                    <div class="col-md-2">
+                        Total Duplicate: {{ isset($duplicateleads) ? $duplicateleads : '0'}}
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/leadwashing/exportduplicate/{{$mobile_num}}/{{$landline}}/{{$email}}" id="downloadLink2" class="btn btn-primary" download>Export Duplicates</a>
+                    </div>
+                    <div class="loading2 col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -32,37 +51,53 @@
 @stop
 
 @section('js')
- 
 <script>
     $(document).ready(function() {
-        $('#unique_all').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5'
-            ]
-        });
-        
-        $('#duplicates_all').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5'
-            ]
-        });
+        $(".loading").hide();
+        $(".loading2").hide();
     });
-</script>
 
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+    var setCookie = function(name, value, expiracy) {
+        var exdate = new Date();
+        exdate.setTime(exdate.getTime() + expiracy * 1000);
+        var c_value = escape(value) + ((expiracy == null) ? "" : "; expires=" + exdate.toUTCString());
+        document.cookie = name + "=" + c_value + '; path=/';
+    };
+
+    var getCookie = function(name) {
+        var i, x, y, ARRcookies = document.cookie.split(";");
+        for (i = 0; i < ARRcookies.length; i++) {
+            x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+            y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+            x = x.replace(/^\s+|\s+$/g, "");
+            if (x == name) {
+            return y ? decodeURI(unescape(y.replace(/\+/g, ' '))) : y; //;//unescape(decodeURI(y));
+            }
+        }
+    };
+
+    $('#downloadLink').click(function() {
+        $(".loading").hide();
+        setCookie('downloadStarted', 0, 100); //Expiration could be anything... As long as we reset the value
+        setTimeout(checkDownloadCookie, 1000); //Initiate the loop to check the cookie.
+    });
+    $('#downloadLink2').click(function() {
+        $(".loading2").show();
+        setCookie('downloadStarted', 0, 100); //Expiration could be anything... As long as we reset the value
+        setTimeout(checkDownloadCookie, 1000); //Initiate the loop to check the cookie.
+    });
+    var downloadTimeout;
+    var checkDownloadCookie = function() {
+        if (getCookie("downloadStarted") == 1) {
+            setCookie("downloadStarted", "false", 100); //Expiration could be anything... As long as we reset the value
+            $(".loading2").hide();
+            $(".loading").hide();
+        } else {
+            downloadTimeout = setTimeout(checkDownloadCookie, 1000); //Re-run this function in 1 second.
+        }
+    };
+        
+</script>
 
 @stop
     

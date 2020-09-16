@@ -29,6 +29,13 @@ Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse
 Route::post('/import_process', 'ImportController@processImport')->name('import_process');
 
 Route::get('/leads', 'LeadsController@Index')->name('contactszz');
+#Route::post('/leadwashing/exportunique', 'LeadsController@exportUniqueLeads')->name('exportUniqueLeads');
+#Route::post('/leadwashing/exportduplicate', 'LeadsController@exportDuplicateLeads')->name('exportDuplicateLeads');
+Route::get('/leadwashing/exportduplicate/{mobile_num}/{landline}/{email}', 'LeadsController@exportDuplicateLeads2')->name('exportDuplicateLeads2');
+Route::get('/leadwashing/exportunique/{mobile_num}/{landline}/{email}', 'LeadsController@exportUniqueLeads')->name('exportUniqueLeads');
+Route::get('/export', 'LeadsController@export')->name('export');
+
+
 
 Route::get('/contacts', 'LeadsController@contacts')->name('contacts');
 

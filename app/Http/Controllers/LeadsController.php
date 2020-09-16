@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
+use App\Exports\UniqueLeadsExport;
+use App\Exports\DuplicateLeadsExport;
+use App\Exports\UniqueExport;
+
+
 class LeadsController extends Controller
 {
 
@@ -38,5 +43,43 @@ class LeadsController extends Controller
         return view('dashboard/contacts')->with('contacts',$contacts);
     }
     
+    public function exportUniqueLeads(Request $request)
+    {
+        $mobile_num = $request->mobile_num;
+        $landline = $request->landline;
+        $email = $request->email;
+        $type ="csv";
+        $datetime=date("Y-m-d H:i:s");
+        return Excel::download(new UniqueLeadsExport($mobile_num,$landline,$email), "Lead Wasing - Unique Leads.csv");
+    }
+    public function exportDuplicateLeads(Request $request)
+    {
+        $mobile_num = $request->mobile_num;
+        $landline = $request->landline;
+        $email = $request->email;
+        $type ="csv";
+        $datetime=date("Y-m-d H:i:s");
+        return Excel::download(new DuplicateLeadsExport($mobile_num,$landline,$email), "Lead Wasing - Duplicate Leads.csv");
+    }
+    
+    public function exportDuplicateLeads2($mobile_num,$landline,$email)
+    {
+        
+        $datetime=date("Y-m-d His");
+        setCookie("downloadStarted", 1, time() + 20, '/', "", false, false);
+        return Excel::download(new DuplicateLeadsExport($mobile_num,$landline,$email), "Lead Wasing - Duplicate Leads $datetime.csv");
+    }
 
+    public function exportUniqueLeads2($mobile_num,$landline,$email)
+    {
+        $datetime=date("Y-m-d His");
+        setCookie("downloadStarted", 1, time() + 20, '/', "", false, false);
+        return Excel::download(new UniqueLeadsExport($mobile_num,$landline,$email), "Lead Wasing - Unique Leads $datetime.csv");
+    }
+
+    public function export() 
+    {
+            return Excel::download(new UniqueExport, 'zzz.csv');
+    }
+    
 }
