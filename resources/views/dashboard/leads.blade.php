@@ -1,6 +1,6 @@
 
 @extends('dashboard.dashboardlayout')
-@section('title', 'Upload Leads Success')
+@section('title', 'Contact Leads List')
 
 @section('content')
 
