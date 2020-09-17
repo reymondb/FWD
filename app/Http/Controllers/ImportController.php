@@ -277,6 +277,7 @@ class ImportController extends Controller
         //dd(DB::getQueryLog());
         */
         //DB::enableQueryLog();
+        /* replaced to redirect 
         $uniqueleadsz = NewLeads::select("contacts.id")
             ->leftJoin('contacts', function($join)use($mobile_num,$landline,$email){
                 if($mobile_num==1){
@@ -290,6 +291,7 @@ class ImportController extends Controller
                 }
             })
         ->whereNull('contacts.id')->get();
+
         //dd(DB::getQueryLog());die();
         $uniqueleads = $uniqueleadsz->count();//$uniqueleadsz[0]['totalunique'];
           //  dd($uniqueleads);die();
@@ -309,13 +311,19 @@ class ImportController extends Controller
             ->leftjoin("campaign_use",'campaign_use.ContactID','contacts.id')
             ->leftjoin("campaign",'campaign.id','campaign_use.CampaignID')
             ->whereNotNull('contacts.id')
-            ->groupBy('new_leads.id')->get();
+            #->groupBy('new_leads.id')
+            ->get();
             //dd($duplicateleadsz->count());
             //dd(DB::getQueryLog());die();
             $duplicateleads = $duplicateleadsz->count();//$uniqueleadsz[0]['totalduplicate'];
 
         return view('dashboard/newleads_success')->with('uniqueleads',$uniqueleads)
         ->with('duplicateleads',$duplicateleads)
+        ->with('mobile_num',$mobile_num)
+        ->with('landline',$landline)
+        ->with('email',$email);
+        */
+        return view('dashboard/newleads_success')
         ->with('mobile_num',$mobile_num)
         ->with('landline',$landline)
         ->with('email',$email);
@@ -335,11 +343,11 @@ class ImportController extends Controller
                 ->groupBy('new_leads.id')->get();
         //dd(DB::getQueryLog()); // Show results of log
         */
-        $mobile_num=1;
+        $mobile_num=0;
         $landline=1;
         $email=0;
 
-        $uniqueleadsz = NewLeads::select("contacts.id")
+       /* $uniqueleadsz = NewLeads::select("contacts.id")
             ->leftJoin('contacts', function($join)use($mobile_num,$landline,$email){
                 if($mobile_num==1){
                     $join->orOn('contacts.MobileNum','=','new_leads.MobileNum');
@@ -352,29 +360,48 @@ class ImportController extends Controller
                 }
             })
         ->whereNull('contacts.id')->get();
+        */
+        $uniqueleadsz = DB::select( DB::raw("SELECT count(*) as totalunique FROM        
+                (SELECT 
+                    *
+                FROM
+                    (SELECT `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
+                        '1' AS checker
+                FROM
+                    new_leads a UNION SELECT 
+                    `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
+                        '2' AS checker
+                FROM
+                    contacts b) AS z
+                GROUP BY LandlineNum
+                HAVING COUNT(*) <= 1
+                ORDER BY checker ASC) AS d
+            WHERE
+                checker = 1
+            "));
         //dd(DB::getQueryLog());die();
-        $uniqueleads = $uniqueleadsz->count();//$uniqueleadsz[0]['totalunique'];
+        $uniqueleads = $uniqueleadsz[0]->totalunique; //$uniqueleadsz[0]['totalunique']; //$uniqueleadsz->count();
           //  dd($uniqueleads);die();
           //DB::enableQueryLog(); // Enable query log
-        $duplicateleadsz = NewLeads::select("contacts.id")
-            ->leftJoin('contacts', function($join)use($mobile_num,$landline,$email){
-                if($mobile_num==1){
-                    $join->orOn('contacts.MobileNum','=','new_leads.MobileNum');
-                }
-                if($landline==1){
-                    $join->orOn('contacts.LandlineNum','=','new_leads.LandlineNum');
-                }
-                if($email==1){
-                    $join->orOn('contacts.Email','=','new_leads.Email');
-                }
-            })
-            ->leftjoin("campaign_use",'campaign_use.ContactID','contacts.id')
-            ->leftjoin("campaign",'campaign.id','campaign_use.CampaignID')
-            ->whereNotNull('contacts.id')
-            ->groupBy('new_leads.id')->get();
+        $duplicateleadsz =DB::select( DB::raw("SELECT count(*) as totalduplicate FROM        
+        (SELECT 
+            *
+        FROM
+            (SELECT `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
+                '1' AS checker
+        FROM
+            new_leads a UNION SELECT 
+            `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
+                '2' AS checker
+        FROM
+            contacts b)  AS z
+            GROUP BY LandlineNum
+            HAVING COUNT(*) > 1
+            ORDER BY checker ASC) AS d
+    "));
             //dd($duplicateleadsz->count());
             //dd(DB::getQueryLog());die();
-            $duplicateleads = $duplicateleadsz->count();//$uniqueleadsz[0]['totalduplicate'];
+            $duplicateleads = $duplicateleadsz[0]->totalduplicate; //$uniqueleadsz[0]['totalduplicate'];//$duplicateleadsz->count();
         return view('dashboard/new_leads_report')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads)
         ->with('mobile_num',$mobile_num)
         ->with('landline',$landline) 
