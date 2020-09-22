@@ -79,15 +79,15 @@
             i = 1;
             var elem = document.getElementById("myBar");
             var width = 10;
-            var id = setInterval(frame, 100);
+            var id = setInterval(frame, 80);
             function frame() {
             if (width >= totalrows) {
                 clearInterval(id);
                 i = 0;
             } else {
                 width++;
-                elem.style.width = ((width/totalrows)*100) + "%";
-                elem.innerHTML = ((width/totalrows)*100)  + "%";
+                elem.style.width = Math.round((width/totalrows)*100) + "%";
+                elem.innerHTML = Math.round((width/totalrows)*100)  + "%";
                 document.getElementById("counter").innerHTML = width  + " upoaded";
                 
             }
