@@ -13,9 +13,6 @@
             </div>
         </div>
         @csrf
-        <input type="hidden" name="mobile_num" id="mobile_num" value="{{$mobile_num}}" />
-        <input type="hidden" name="landline" id="landline" value="{{$landline}}" />
-        <input type="hidden" name="email" id="email" value="{{$email}}" />
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Unique Leads</div>
             <div class="card-body">

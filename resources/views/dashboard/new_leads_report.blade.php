@@ -13,9 +13,6 @@
             </div>
         </div>
         @csrf
-        <input type="hidden" name="mobile_num" id="mobile_num" value="{{$mobile_num}}" />
-        <input type="hidden" name="landline" id="landline" value="{{$landline}}" />
-        <input type="hidden" name="email" id="email" value="{{$email}}" />
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Unique Leads</div>
             <div class="card-body">
@@ -24,7 +21,7 @@
                         Total Unique: {{ isset($uniqueleads) ? $uniqueleads : '0'}} 
                     </div>
                     <div class="col-md-2">
-                        <a href="/leadwashing/exportunique/{{$mobile_num}}/{{$landline}}/{{$email}}" id="downloadLink" class="btn btn-primary" download>Export Unique</a>
+                        <a href="/leadwashing/exportunique/" id="downloadLink" class="btn btn-primary" download>Export Unique</a>
                     </div>
                     <div class="loading col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
                 </div>
@@ -39,7 +36,7 @@
                         Total Duplicate: {{ isset($duplicateleads) ? $duplicateleads : '0'}}
                     </div>
                     <div class="col-md-2">
-                        <a href="/leadwashing/exportduplicate/{{$mobile_num}}/{{$landline}}/{{$email}}" id="downloadLink2" class="btn btn-primary" download>Export Duplicates</a>
+                        <a href="/leadwashing/exportduplicate/" id="downloadLink2" class="btn btn-primary" download>Export Duplicates</a>
                     </div>
                     <div class="loading2 col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
                 </div>

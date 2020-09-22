@@ -14,12 +14,6 @@ class UniqueLeadsExport implements FromQuery, WithHeadings
 {
     use Exportable;
 
-    public function __construct(int $mobile_num,int $landline,int $email)
-    {
-        $this->mobile_num = $mobile_num;
-        $this->email = $email;
-        $this->landline = $landline;
-    }
 
     public function query()
     {
@@ -61,7 +55,7 @@ class UniqueLeadsExport implements FromQuery, WithHeadings
             'OptInWhere',
             'OptInWhen',
             'DateFirstImported',
-            'LastDNCWashing')->get();
+            'LastDNCWashing');
                 
         return $uniqueleads;
     }

@@ -14,13 +14,6 @@ class DuplicateLeadsExport implements FromQuery, WithHeadings
 {
     use Exportable;
 
-    public function __construct(int $mobile_num,int $landline,int $email)
-    {
-        $this->mobile_num = $mobile_num;
-        $this->email = $email;
-        $this->landline = $landline;
-    }
-
     public function query()
     {
         /*
@@ -46,7 +39,7 @@ class DuplicateLeadsExport implements FromQuery, WithHeadings
         "));
                    // dd(DB::getQueryLog());die();
         return $duplicates;*/
-        $duplicates =DuplicateLeads::select('id',       
+        $duplicates = DuplicateLeads::select('id',       
         'MobileNum',
         'LandlineNum',
         'PhoneCode',
@@ -61,7 +54,7 @@ class DuplicateLeadsExport implements FromQuery, WithHeadings
         'OptInWhere',
         'OptInWhen',
         'DateFirstImported',
-        'LastDNCWashing')->get();
+        'LastDNCWashing');
             
         return $duplicates;
     }
@@ -69,6 +62,7 @@ class DuplicateLeadsExport implements FromQuery, WithHeadings
     public function headings() : array
     {
         return [            
+            'id',
         'MobileNum',
         'LandlineNum',
         'PhoneCode',

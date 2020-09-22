@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <h1 class="mt-4">Lead Washing</h1>
         <div class="card mb-4">
-            <div class="card-header">CSV Import (Check duplicate by @if($checkduplicate==1): Mobile Number @endif @if($checkduplicate==2): Landline Number @endif @if($checkduplicate==3): Email @endif</div>
+            <div class="card-header">CSV Import {{$totalrows}} (Check duplicates by @if($checkduplicate==1): Mobile Number @endif @if($checkduplicate==2): Landline Number @endif @if($checkduplicate==3): Email @endif)</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <form class="form-horizontal" method="POST" action="{{ route('newleads_process') }}" style="font-size:14px">
@@ -50,11 +50,16 @@
                             </tr>
                         </table>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" onclick="move()" class="btn btn-primary">
                             Import Data
                         </button><br><br>
+
                     </form>
                 </div>
+                <div id="myProgress">
+                    <div id="myBar" style="color:#FFF">0 Loaded</div>
+                </div>
+                  Total Uploaded: <div id="counter" >0 Loaded</div>
             </div>
         </div>
     </div>
@@ -65,6 +70,42 @@
 @stop
 
 @section('js')
-
+<script>
+    console.log("{{$totalrows}}")
+    var i = 0;
+    var totalrows={{$totalrows}};
+    function move() {
+        if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("myBar");
+            var width = 10;
+            var id = setInterval(frame, 30);
+            function frame() {
+            if (width >= totalrows) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = width + "Loaded";
+                document.getElementById("counter").innerHTML = width  + " upoaded";
+                
+            }
+            }
+        }
+    }
+</script>
 @stop
+<style>
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+}
+
+</style>
     

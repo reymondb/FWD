@@ -171,6 +171,7 @@ class ImportController extends Controller
         //}
         //print_r($data);
         $csv_header_fields = [];
+        $total=count($data);
         if (count($data) > 0) {
              if($request->has('header')) {
                 /*foreach ($data[0] as $key => $value) {
@@ -188,7 +189,7 @@ class ImportController extends Controller
             return redirect()->back();
         }
 
-        return view('dashboard/newleads_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('checkduplicate',$checkduplicate);
+        return view('dashboard/newleads_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('checkduplicate',$checkduplicate)->with('totalrows',$total);
 
     }
 
@@ -214,8 +215,6 @@ class ImportController extends Controller
         UniqueLeads::truncate(); 
         $x=1;
         foreach ($csv_data as $row) {
-           
-            
             if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
                 $contact = new NewLeads();
                 foreach($request->fields as $index => $field){
@@ -238,7 +237,7 @@ class ImportController extends Controller
                         if($dbf=="email"){
                             $email = $row[$index];
                         }
-
+                        
                         $contact->$dbf = $val;
 
                     }
@@ -397,10 +396,8 @@ class ImportController extends Controller
         ->with('landline',$landline)
         ->with('email',$email);
         */
-        return view('dashboard/newleads_success')
-        ->with('mobile_num',$mobile_num)
-        ->with('landline',$landline)
-        ->with('email',$email);
+        //return view('dashboard/newleads_success');
+        return redirect('/new_leads_report');
     }
    
     public function newleadsReport()
@@ -435,51 +432,16 @@ class ImportController extends Controller
             })
         ->whereNull('contacts.id')->get();
         */
-        $uniqueleadsz = DB::select( DB::raw("SELECT count(*) as totalunique FROM        
-                (SELECT 
-                    *
-                FROM
-                    (SELECT `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
-                        '1' AS checker
-                FROM
-                    new_leads a UNION SELECT 
-                    `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
-                        '2' AS checker
-                FROM
-                    contacts b) AS z
-                GROUP BY LandlineNum
-                HAVING COUNT(*) <= 1
-                ORDER BY checker ASC) AS d
-            WHERE
-                checker = 1
-            "));
-        //dd(DB::getQueryLog());die();
-        $uniqueleads = $uniqueleadsz[0]->totalunique; //$uniqueleadsz[0]['totalunique']; //$uniqueleadsz->count();
-          //  dd($uniqueleads);die();
-          //DB::enableQueryLog(); // Enable query log
-        $duplicateleadsz =DB::select( DB::raw("SELECT count(*) as totalduplicate FROM        
-        (SELECT 
-            *
-        FROM
-            (SELECT `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
-                '1' AS checker
-        FROM
-            new_leads a UNION SELECT 
-            `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
-                '2' AS checker
-        FROM
-            contacts b)  AS z
-            GROUP BY LandlineNum
-            HAVING COUNT(*) > 1
-            ORDER BY checker ASC) AS d
-    "));
-            //dd($duplicateleadsz->count());
-            //dd(DB::getQueryLog());die();
-    $duplicateleads = $duplicateleadsz[0]->totalduplicate; //$uniqueleadsz[0]['totalduplicate'];//$duplicateleadsz->count();
-        return view('dashboard/new_leads_report')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads)
-        ->with('mobile_num',$mobile_num)
-        ->with('landline',$landline) 
-        ->with('email',$email);;
+         
+        $uniqueleadsz = NewLeads::all();
+;        //dd(DB::getQueryLog());die();
+        $uniqueleads = $uniqueleadsz->count();// $uniqueleadsz[0]->totalunique; //$uniqueleadsz[0]['totalunique']; //;
+          
+        $duplicateleadsz = DuplicateLeads::all();
+          
+        $duplicateleads = $duplicateleadsz->count();//$duplicateleadsz[0]->totalduplicate; //$uniqueleadsz[0]['totalduplicate'];//;
+    
+        return view('dashboard/new_leads_report')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads);
     }
     
 

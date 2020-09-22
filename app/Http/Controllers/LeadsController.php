@@ -62,19 +62,19 @@ class LeadsController extends Controller
         return Excel::download(new DuplicateLeadsExport($mobile_num,$landline,$email), "Lead Wasing - Duplicate Leads.csv");
     }
     
-    public function exportDuplicateLeads2($mobile_num,$landline,$email)
+    public function exportDuplicateLeads2()
     {
         
         $datetime=date("Y-m-d His");
         setCookie("downloadStarted", 1, time() + 20, '/', "", false, false);
-        return Excel::download(new DuplicateLeadsExport($mobile_num,$landline,$email), "Lead Wasing - Duplicate Leads $datetime.csv");
+        return Excel::download(new DuplicateLeadsExport(), "Lead Wasing - Duplicate Leads $datetime.csv");
     }
 
-    public function exportUniqueLeads2($mobile_num,$landline,$email)
+    public function exportUniqueLeads2()
     {
         $datetime=date("Y-m-d His");
         setCookie("downloadStarted", 1, time() + 20, '/', "", false, false);
-        return Excel::download(new UniqueLeadsExport($mobile_num,$landline,$email), "Lead Wasing - Unique Leads $datetime.csv");
+        return Excel::download(new UniqueLeadsExport(), "Lead Wasing - Unique Leads $datetime.csv");
     }
 
     public function export() 
