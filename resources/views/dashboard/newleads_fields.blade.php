@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <h1 class="mt-4">Lead Washing</h1>
         <div class="card mb-4">
-            <div class="card-header">CSV Import</div>
+            <div class="card-header">CSV Import (Check duplicate by @if($checkduplicate==1): Mobile Number @endif @if($checkduplicate==2): Landline Number @endif @if($checkduplicate==3): Email @endif</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <form class="form-horizontal" method="POST" action="{{ route('newleads_process') }}" style="font-size:14px">
