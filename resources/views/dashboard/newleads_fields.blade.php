@@ -13,9 +13,7 @@
                     <form class="form-horizontal" method="POST" action="{{ route('newleads_process') }}" style="font-size:14px">
                         {{ csrf_field() }}
                         <input type="hidden" name="csv_data_file_id" value="{{ $csv_data_file->id }}" />
-                        <input type="hidden" name="mobile_num" value="{{ $mobile_num }}" />
-                        <input type="hidden" name="landline" value="{{ $landline }}" />
-                        <input type="hidden" name="email" value="{{ $email }}" />
+                        <input type="hidden" name="checkduplicate" value="{{ $checkduplicate }}" />
 
                         <table class="table">
                             @if (isset($csv_header_fields))

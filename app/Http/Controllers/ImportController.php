@@ -162,9 +162,8 @@ class ImportController extends Controller
     public function parseNewLeads(CsvImportRequest $request)
     {
         $path = $request->file('csv_file')->getRealPath();
-        $mobile_num = $request->mobile_num;
-        $landline = $request->landline;
-        $email = $request->email;
+        $checkduplicate = $request->checkduplicate;
+       
         //if ($request->has('header')) {
            // $data = Excel::load($path, function($reader) {})->get()->toArray();
         //} else {
@@ -189,12 +188,14 @@ class ImportController extends Controller
             return redirect()->back();
         }
 
-        return view('dashboard/newleads_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('mobile_num',$mobile_num) ->with('landline',$landline) ->with('email',$email);
+        return view('dashboard/newleads_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('checkduplicate',$checkduplicate);
 
     }
 
     public function processNewLeads(Request $request)
     {
+        
+        $checkduplicate = $request->checkduplicate;
         //$csv_data = json_decode($data->csv_data, true);
         //import csv start
         $data = CsvData::find($request->csv_data_file_id);
@@ -206,6 +207,7 @@ class ImportController extends Controller
             $csv_data = json_decode($data->csv_data, true);
         }
         $db_field = config('app.db_fields');
+            
         //empty Lead Washing table
         NewLeads::truncate();
         DuplicateLeads::truncate();
@@ -230,6 +232,12 @@ class ImportController extends Controller
                         if($dbf=="LandlineNum"){
                             $landline = intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
                         }
+                        if($dbf=="MobileNum"){
+                            $mobile = intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
+                        }
+                        if($dbf=="email"){
+                            $email = $row[$index];
+                        }
 
                         $contact->$dbf = $val;
 
@@ -239,7 +247,8 @@ class ImportController extends Controller
                 $contact->save();
                 */
                 //DB::enableQueryLog();
-                $checkcontact =Contact::select('id',          
+                if($checkduplicate==1){
+                    $checkcontact =Contact::select('id',          
                     'MobileNum',
                     'LandlineNum',
                     'PhoneCode',
@@ -250,7 +259,38 @@ class ImportController extends Controller
                     'City',
                     'State',
                     'Zip',
-                    'Email')->where('LandlineNum',$landline)->first();
+                    'Email')->where('MobileNum',$email)->first();
+                }
+                else if($checkduplicate==3){
+                    
+                    $checkcontact =Contact::select('id',          
+                    'MobileNum',
+                    'LandlineNum',
+                    'PhoneCode',
+                    'ListID',
+                    'FirstName',
+                    'LastName',
+                    'Address',
+                    'City',
+                    'State',
+                    'Zip',
+                    'Email')->where('Email',$email)->first();
+                }
+                else{
+                    $checkcontact =Contact::select('id',          
+                        'MobileNum',
+                        'LandlineNum',
+                        'PhoneCode',
+                        'ListID',
+                        'FirstName',
+                        'LastName',
+                        'Address',
+                        'City',
+                        'State',
+                        'Zip',
+                        'Email')->where('LandlineNum',$landline)->first();
+
+                }
                     //dd(DB::getQueryLog()); die();
                 // print_r($checkcontact);die();   
                 if($checkcontact){
@@ -266,9 +306,6 @@ class ImportController extends Controller
             }
         }
         
-        $mobile_num = $request->mobile_num;
-        $landline = $request->landline;
-        $email = $request->email;
         /*
         //DB::enableQueryLog();
         //$uniqueleads = NewLeads::select('new_leads.*')

@@ -23,7 +23,7 @@ class UniqueLeadsExport implements FromQuery, WithHeadings
 
     public function query()
     {
-        $landline =$this->landline;
+        /*$landline =$this->landline;
         $mobile_num =$this->mobile_num;
         $email =$this->email;
         $uniqueleads = DB::select( DB::raw("SELECT `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult` FROM        
@@ -44,12 +44,31 @@ class UniqueLeadsExport implements FromQuery, WithHeadings
             WHERE
                 checker = 1
             "));
-        return json_decode( json_encode($uniqueleads), true);
+            
+        return json_decode( json_encode($uniqueleads), true);*/
+        $uniqueleads =NewLeads::select('id',       
+            'MobileNum',
+            'LandlineNum',
+            'PhoneCode',
+            'ListID',
+            'FirstName',
+            'LastName',
+            'Address',
+            'City',
+            'State',
+            'Zip',
+            'Email',
+            'OptInWhere',
+            'OptInWhen',
+            'DateFirstImported',
+            'LastDNCWashing')->get();
+                
+        return $uniqueleads;
     }
 
     public function headings() : array
     {
-        return [            
+        return [ 'id',          
         'MobileNum',
         'LandlineNum',
         'PhoneCode',
