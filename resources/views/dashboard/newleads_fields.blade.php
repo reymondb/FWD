@@ -57,7 +57,7 @@
                     </form>
                 </div>
                 <div id="myProgress">
-                    <div id="myBar" style="color:#FFF">0 Loaded</div>
+                    <div id="myBar" style="color:#FFF">0 %</div>
                 </div>
                   Total Uploaded: <div id="counter" >0 Loaded</div>
             </div>
@@ -86,8 +86,8 @@
                 i = 0;
             } else {
                 width++;
-                elem.style.width = width + "Loaded";
-                elem.innerHTML = width  + "Loaded";
+                elem.style.width = ((width/totalrows)*100) + "%";
+                elem.innerHTML = ((width/totalrows)*100)  + "%";
                 document.getElementById("counter").innerHTML = width  + " upoaded";
                 
             }
