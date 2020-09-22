@@ -79,7 +79,7 @@
             i = 1;
             var elem = document.getElementById("myBar");
             var width = 10;
-            var id = setInterval(frame, 30);
+            var id = setInterval(frame, 200);
             function frame() {
             if (width >= totalrows) {
                 clearInterval(id);
@@ -87,6 +87,7 @@
             } else {
                 width++;
                 elem.style.width = width + "Loaded";
+                elem.innerHTML = width  + "Loaded";
                 document.getElementById("counter").innerHTML = width  + " upoaded";
                 
             }
