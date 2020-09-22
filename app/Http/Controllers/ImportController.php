@@ -8,7 +8,8 @@ use App\Models\CampaignUse;
 use App\Models\NewLeads;
 use App\Models\LeadBatch;
 use App\Models\LeadList;
-
+use App\Models\DuplicateLeads;
+use App\Models\UniqueLeads;
 use App\User;
 
 use App\CsvData;
@@ -20,7 +21,6 @@ use Auth;
 
 class ImportController extends Controller
 {
-
     public function getImport()
     {
         $campaigns=Campaigns::all();
@@ -208,12 +208,17 @@ class ImportController extends Controller
         $db_field = config('app.db_fields');
         //empty Lead Washing table
         NewLeads::truncate();
+        DuplicateLeads::truncate();
+        UniqueLeads::truncate(); 
         $x=1;
         foreach ($csv_data as $row) {
-            $contact = new NewLeads();
+           
+            
             if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
+                $contact = new NewLeads();
                 foreach($request->fields as $index => $field){
                     if(isset($field) || $field!=""){
+                       
                         $dbf = $db_field[$field];
                         //echo $db_field[$field] ." == ".$row[$index];
                         if($dbf=="MobileNum" || $dbf=="LandlineNum"){
@@ -222,10 +227,42 @@ class ImportController extends Controller
                         else{
                             $val = $row[$index];
                         }
-                        $contact->$dbf = $val;;
+                        if($dbf=="LandlineNum"){
+                            $landline = intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
+                        }
+
+                        $contact->$dbf = $val;
+
                     }
                 }
+                /*
                 $contact->save();
+                */
+                //DB::enableQueryLog();
+                $checkcontact =Contact::select('id',          
+                    'MobileNum',
+                    'LandlineNum',
+                    'PhoneCode',
+                    'ListID',
+                    'FirstName',
+                    'LastName',
+                    'Address',
+                    'City',
+                    'State',
+                    'Zip',
+                    'Email')->where('LandlineNum',$landline)->first();
+                    //dd(DB::getQueryLog()); die();
+                // print_r($checkcontact);die();   
+                if($checkcontact){
+                    //DB::enableQueryLog(); 
+                    $checkcontactz = $checkcontact->toArray();
+                    DuplicateLeads::insert($checkcontactz);
+                    //dd(DB::getQueryLog()); die();
+                }
+                else{
+                    //$zzz = $contact->toArray();
+                    $contact->save();
+                }
             }
         }
         
@@ -401,7 +438,7 @@ class ImportController extends Controller
     "));
             //dd($duplicateleadsz->count());
             //dd(DB::getQueryLog());die();
-            $duplicateleads = $duplicateleadsz[0]->totalduplicate; //$uniqueleadsz[0]['totalduplicate'];//$duplicateleadsz->count();
+    $duplicateleads = $duplicateleadsz[0]->totalduplicate; //$uniqueleadsz[0]['totalduplicate'];//$duplicateleadsz->count();
         return view('dashboard/new_leads_report')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads)
         ->with('mobile_num',$mobile_num)
         ->with('landline',$landline) 

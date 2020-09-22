@@ -26,35 +26,25 @@ class UniqueLeadsExport implements FromQuery, WithHeadings
         $landline =$this->landline;
         $mobile_num =$this->mobile_num;
         $email =$this->email;
-        $uniqueleads = NewLeads::select('new_leads.MobileNum',
-                                'new_leads.LandlineNum',
-                                'new_leads.PhoneCode',
-                                'new_leads.ListID',
-                                'new_leads.FirstName',
-                                'new_leads.LastName',
-                                'new_leads.Address',
-                                'new_leads.City',
-                                'new_leads.State',
-                                'new_leads.Zip',
-                                'new_leads.Email',
-                                'new_leads.OptInWhere',
-                                'new_leads.OptInWhen',
-                                'new_leads.DateFirstImported',
-                                'new_leads.LastDNCWashing',
-                                'new_leads.LastDNCResult')
-            ->leftJoin('contacts', function($join)use($mobile_num,$landline,$email){
-                if($mobile_num==1){
-                    $join->orOn('contacts.MobileNum','=','new_leads.MobileNum');
-                }
-                if($landline==1){
-                    $join->orOn('contacts.LandlineNum','=','new_leads.LandlineNum');
-                }
-                if($email==1){
-                    $join->orOn('contacts.Email','=','new_leads.Email');
-                }
-            })
-        ->whereNull('contacts.id')->get();
-        return $uniqueleads;
+        $uniqueleads = DB::select( DB::raw("SELECT `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult` FROM        
+                (SELECT 
+                    *
+                FROM
+                    (SELECT `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
+                        '1' AS checker
+                FROM
+                    new_leads a UNION SELECT 
+                    `MobileNum`, `LandlineNum`, `PhoneCode`, `ListID`, `FirstName`, `LastName`, `Address`, `City`, `State`, `Zip`, `Email`, `OptInWhere`, `OptInWhen`, `DateFirstImported`, `LastDNCWashing`, `LastDNCResult`,
+                        '2' AS checker
+                FROM
+                    contacts b) AS z
+                GROUP BY LandlineNum
+                HAVING COUNT(*) <= 1
+                ORDER BY checker ASC) AS d
+            WHERE
+                checker = 1
+            "));
+        return json_decode( json_encode($uniqueleads), true);
     }
 
     public function headings() : array
