@@ -57,7 +57,7 @@
                             </tr>
                         </table>
 
-                        <button type="submit" class="btn btn-primary" onlclick="loading()">
+                        <button type="submit" class="btn btn-primary"  onclick="move()" >
                             Import Data
                         </button> <br><br>
                     </form>

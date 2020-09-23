@@ -75,6 +75,10 @@
                                         </label>
                                     </div>
                                 </td>
+                                
+                                <td style="vertical-align: middle;">
+                                    <input type="submit" name="filter_leads" value="Search" class="btn btn-primary" style="font-size:14px" />
+                                </td>
                             </tr>
                         </table>
                     </form>
