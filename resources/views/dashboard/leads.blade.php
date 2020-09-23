@@ -18,16 +18,26 @@
                                 <td>
                                     <select name="supplier_id" class="form-control filter_inputs">
                                         <option value="">Select Supplier</option>
+                                        @foreach ($User as $u)
+                                            <option value="{{$u->id}}">{{$u->name}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td>
                                     <select name="batch_id" class="form-control filter_inputs">
                                         <option value="">Select batch</option>
+                                        @foreach ($LeadBatch as $l)
+                                            <option value="{{$l->id}}">{{$l->BatchDescription}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td>
                                     <select name="campaign_id" class="form-control filter_inputs">
                                         <option value="">Select Campaign</option>
+                                        @foreach ($Campaigns as $c)
+                                            <option value="{{$c->id}}">{{$c->CampaignName}}</option>
+                                        @endforeach
+                                        
                                     </select>
                                 </td>
                                 <td style="vertical-align: middle;">
@@ -82,18 +92,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($contacts as $d)
-                                <tr>
-                                    <td>{{$d->id}}</td>
-                                    <td>{{$d->MobileNum}}</td>
-                                    <td>{{$d->LandlineNum}}</td>
-                                    <td>{{$d->FirstName}}</td>
-                                    <td>{{$d->LastName}}</td>
-                                    <td>{{$d->Address}}</td>
-                                    <td>{{$d->Email}}</td>
-                                    <td>{{$d->CampaignName}}</td>                                        
-                                </tr>
-                            @endforeach
+                           
                         </tbody>
                     </table>
                 </div>

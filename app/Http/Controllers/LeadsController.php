@@ -6,6 +6,8 @@ use App\Contact;
 use App\Models\Campaigns;
 use App\Models\CampaignUse;
 use App\Models\NewLeads;
+use App\Models\LeadBatch;
+use App\User;
 use App\CsvData;
 use App\Http\Requests\CsvImportRequest;
 use Illuminate\Http\Request;
@@ -23,14 +25,18 @@ class LeadsController extends Controller
     
     public function index()
     {
+        $LeadBatch = LeadBatch::all();
+        $User = User::all();
+        $Campaigns = Campaigns::all();
+        
         //DB::enableQueryLog(); // Enable query log
-        $contacts = Contact::select('contacts.*','campaign.CampaignName')->leftjoin("campaign_use",'campaign_use.ContactID','contacts.id')
+       /* $contacts = Contact::select('contacts.*','campaign.CampaignName')->leftjoin("campaign_use",'campaign_use.ContactID','contacts.id')
         ->leftjoin("campaign",'campaign.id','campaign_use.CampaignID')
         ->groupBy('contacts.id')
         ->limit(1000)
-        ->get();
-        //dd(DB::getQueryLog()); // Show results of log
-        return view('dashboard/leads')->with('contacts',$contacts);
+        ->get();*/
+        //dd(DB::getQueryLog()); // Show results of log 
+        return view('dashboard/leads')->with('LeadBatch',$LeadBatch)->with('User',$User)->with('Campaigns',$Campaigns);
     }
 
     public function contacts()

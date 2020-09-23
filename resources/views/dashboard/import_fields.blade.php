@@ -10,7 +10,7 @@
             <p class="warning">*Warning: This file might have already been uploaded.</p>
         @endif
         <div class="card mb-4">
-            <div class="card-header">CSV Import</div>
+            <div class="card-header">CSV Import ({{$totalrows}})</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <form class="form-horizontal" method="POST" action="{{ route('import_process') }}" style="font-size:14px">
@@ -59,9 +59,13 @@
 
                         <button type="submit" class="btn btn-primary" onlclick="loading()">
                             Import Data
-                        </button> <div class="loading" ><img src="images/blue loading.gif" height="100">Exporting...</div><br><br>
+                        </button> <br><br>
                     </form>
                 </div>
+                <div id="myProgress">
+                    <div id="myBar" style="color:#FFF"></div>
+                </div>
+                  Total Uploaded: <div id="counter" >0 Loaded</div>
             </div>
         </div>
     </div>
@@ -83,6 +87,42 @@
 @stop
 
 @section('js')
-
+<script>
+    console.log("{{$totalrows}}")
+    var i = 0;
+    var totalrows={{$totalrows}};
+    function move() {
+        if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("myBar");
+            var width = 10;
+            var id = setInterval(frame, 80);
+            function frame() {
+            if (width >= totalrows) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = Math.round((width/totalrows)*100) + "%";
+                elem.innerHTML ="  "+ Math.round((width/totalrows)*100)  + " %";
+                document.getElementById("counter").innerHTML = width  + " upoaded";
+                
+            }
+            }
+        }
+    }
+</script>
 @stop
-    
+<style>
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+}
+
+</style>
