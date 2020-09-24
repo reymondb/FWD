@@ -12,8 +12,7 @@
             <div class="card-header"><i class="fas fa-table mr-1"></i>Contact Leads</div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <form id="contact_filter" action="/leads" method="GET">
-                        {{ csrf_field() }}
+                    <form id="contact_filter" method="POST">
                         <table id="contact_filter_table" class="table" style="background-color:rgba(0, 0, 0, 0.03)">
                             <tr>
                                 <td>
@@ -93,7 +92,6 @@
                                 <th>LastName</th>
                                 <th>Address</th>
                                 <th>Email</th>
-                                <th>Campaign Name Used</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -105,14 +103,12 @@
                                     <td>{{$d->FirstName}}</td>
                                     <td>{{$d->LastName}}</td>
                                     <td>{{$d->Address}}</td>
-                                    <td>{{$d->Email}}</td>  
-                                    <td>{{$d->CampaignName}}</td>                                     
+                                    <td>{{$d->Email}}</td>                                     
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <b>TOTAL: {{$contacts->total()}}</b>
-                    {{ $contacts->appends(request()->query())->links() }}
+                    {{ $contacts->links() }}
                 </div>
             </div>
         </div>
@@ -125,7 +121,7 @@
  
 <script>
     $(document).ready(function() {
-        /*$('#contacts_all').DataTable( {
+     /*   $('#contacts_all').DataTable( {
             dom: 'Bfrtip',
             buttons: [
                 'excelHtml5',
@@ -133,13 +129,11 @@
                 'pdfHtml5'
             ]
         });
-        */
-        
+       */ 
        
     });
 </script>
 <style>
-    .table-responsive nav{ float:right },
     .filter_inputs{
         font-size:14px;
     }
