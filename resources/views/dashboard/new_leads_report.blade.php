@@ -38,7 +38,7 @@
                     <div class="col-md-2">
                         <a href="/leadwashing/exportduplicate/" id="downloadLink2" class="btn btn-primary" download>Export Duplicates</a>
                     </div>
-                    <div class="loading2 col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
+                    <div class="loading col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
                 </div>
             </div>
         </div>
@@ -75,11 +75,6 @@
 
     $('#downloadLink').click(function() {
         $(".loading").hide();
-        setCookie('downloadStarted', 0, 100); //Expiration could be anything... As long as we reset the value
-        setTimeout(checkDownloadCookie, 1000); //Initiate the loop to check the cookie.
-    });
-    $('#downloadLink2').click(function() {
-        $(".loading2").show();
         setCookie('downloadStarted', 0, 100); //Expiration could be anything... As long as we reset the value
         setTimeout(checkDownloadCookie, 1000); //Initiate the loop to check the cookie.
     });

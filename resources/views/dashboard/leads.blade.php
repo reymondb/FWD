@@ -118,6 +118,22 @@
                     </table>
                     <b>TOTAL: {{$contacts->total()}}</b>
                     {{ $contacts->appends(request()->query())->links() }}
+                    <br><br>
+                    <form  action="/downloadleads" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="supplier_id" id="supplier_id" value="{{$supplier_id}}">
+                        <input type="hidden" name="batch_id" id="batch_id" value="{{$batch_id}}">
+                        <input type="hidden" name="campaign_id" id="campaign_id" value="{{$campaign_id}}">
+                        <input type="hidden" name="mobile_num" id="mobile_num" value="{{$mobile_num}}">
+                        <input type="hidden" name="landline" id="landline" value="{{$landline}}">
+                        <input type="hidden" name="email" id="supplier_id" value="{{$email}}">
+                        <input type="hidden" name="first_name" id="first_name" value="{{$first_name}}">
+                        <input type="hidden" name="last_name" id="last_name" value="{{$last_name}}">
+                        @if($contacts->total() > 0)
+                            <input type="submit" id="downloadLink" value="Download Leads" name="download" class="btn btn-primary" />
+                        @endif
+                        <div class="loading2 col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -127,22 +143,49 @@
 @stop
 
 @section('js')
- 
 <script>
     $(document).ready(function() {
-        /*$('#contacts_all').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5'
-            ]
-        });
-        */
-        
-       
+        $(".loading").hide();
+        $(".loading2").hide();
     });
+
+    var setCookie = function(name, value, expiracy) {
+        var exdate = new Date();
+        exdate.setTime(exdate.getTime() + expiracy * 1000);
+        var c_value = escape(value) + ((expiracy == null) ? "" : "; expires=" + exdate.toUTCString());
+        document.cookie = name + "=" + c_value + '; path=/';
+    };
+
+    var getCookie = function(name) {
+        var i, x, y, ARRcookies = document.cookie.split(";");
+        for (i = 0; i < ARRcookies.length; i++) {
+            x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+            y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+            x = x.replace(/^\s+|\s+$/g, "");
+            if (x == name) {
+            return y ? decodeURI(unescape(y.replace(/\+/g, ' '))) : y; //;//unescape(decodeURI(y));
+            }
+        }
+    };
+
+    $('#downloadLink').click(function() {
+        $(".loading").hide();
+        setCookie('downloadStarted', 0, 100); //Expiration could be anything... As long as we reset the value
+        setTimeout(checkDownloadCookie, 1000); //Initiate the loop to check the cookie.
+    });
+    var downloadTimeout;
+    var checkDownloadCookie = function() {
+        if (getCookie("downloadStarted") == 1) {
+            setCookie("downloadStarted", "false", 100); //Expiration could be anything... As long as we reset the value
+            $(".loading2").hide();
+            $(".loading").hide();
+        } else {
+            downloadTimeout = setTimeout(checkDownloadCookie, 1000); //Re-run this function in 1 second.
+        }
+    };
+        
 </script>
+
 <style>
     .table-responsive nav{ float:right },
     .filter_inputs{

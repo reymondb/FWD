@@ -18,7 +18,7 @@ use DB;
 use App\Exports\UniqueLeadsExport;
 use App\Exports\DuplicateLeadsExport;
 use App\Exports\UniqueExport;
-
+use App\Exports\LeadsExport;
 
 class LeadsController extends Controller
 {
@@ -26,8 +26,7 @@ class LeadsController extends Controller
     {
         $supplier_id = $request->supplier_id;
         $batch_id = $request->batch_id;
-        $campaign_id = $request->campaign_id; 
-        
+        $campaign_id = $request->campaign_id;         
         $mobile_num = $request->mobile_num; 
         $landline = $request->landline; 
         $email = $request->email; 
@@ -78,34 +77,31 @@ class LeadsController extends Controller
         ->with('last_name',$last_name)
         ->with('contacts',$contacts);
     }
-    public function filter_leads(Request $request)
+   
+    public function exportLeads(Request $request)
     {
+        setCookie("downloadStarted", 1, time() + 20, '/', "", false, false);
         $supplier_id = $request->supplier_id;
+        if(!isset($supplier_id)){ $supplier_id = 0; }
         $batch_id = $request->batch_id;
+        if(!isset($batch_id)){ $batch_id = 0; }
         $campaign_id = $request->campaign_id;
-        //DB::enableQueryLog(); // Enable query log
-        $contacts = Contact::where('supplier_id',1)->paginate(15);
-        #$contacts = LeadList::where('batch_id')
-        //dd(DB::getQueryLog()); // Show results of log 
-        $LeadBatch = LeadBatch::all();
-        $User = User::all();
-        $Campaigns = Campaigns::all();
-        return view('dashboard/filter_leads')->with('LeadBatch',$LeadBatch)->with('User',$User)->with('Campaigns',$Campaigns)
-        ->with('supplier_id',$supplier_id)->with('batch_id',$batch_id)->with('campaign_id',$campaign_id)
-        ->with('contacts',$contacts);
-        
+        if(!isset($campaign_id)){ $campaign_id = 0; }         
+        $mobile_num = $request->mobile_num;
+        if(!isset($mobile_num)){ $mobile_num = 0; } 
+        $landline = $request->landline;
+        if(!isset($landline)){ $landline = 0; } 
+        $email = $request->email; 
+        if(!isset($email)){ $email = 0; }
+        $first_name = $request->first_name;
+        if(!isset($first_name)){ $first_name = 0; } 
+        $last_name = $request->last_name;
+        if(!isset($last_name)){ $last_name = 0; }
+        $type ="csv";
+        $datetime=date("Y-m-d H:i:s");
+        return Excel::download(new LeadsExport($mobile_num, $landline, $email, $supplier_id, $batch_id, $campaign_id, $first_name, $last_name), "Leads.csv");
     }
 
-    public function contacts()
-    {
-       // DB::enableQueryLog(); // Enable query log
-        $contacts = Contact::select('contacts.*')->with('campaign')
-        ->limit(1000)
-        ->get();
-        //dd(DB::getQueryLog()); // Show results of log
-        return view('dashboard/contacts')->with('contacts',$contacts);
-    }
-    
     public function exportUniqueLeads(Request $request)
     {
         $mobile_num = $request->mobile_num;
