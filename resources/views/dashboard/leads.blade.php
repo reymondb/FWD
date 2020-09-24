@@ -43,38 +43,43 @@
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="mobile_num" value="1" checked  /> Mobile number
+                                        <label style="margin-bottom: 0;">
+                                            <input type="checkbox" name="mobile_num" value="1" @if($mobile_num==1) checked @endif  /> Mobile number
                                         </label>
                                     </div>
+                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="landline" value="1" checked  /> Landline
+                                        <label style="margin-bottom: 0;"> 
+                                            <input type="checkbox" name="landline" value="1"  @if($landline==1) checked @endif  /> Landline
                                         </label>
                                     </div>
+                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="email" value="1" checked  /> Email
+                                        <label style="margin-bottom: 0;">
+                                            <input type="checkbox" name="email" value="1" @if($email==1) checked @endif   /> Email
                                         </label>
                                     </div>
+                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="first_name" value="1" checked  /> First Name
+                                        <label style="margin-bottom: 0;"> 
+                                            <input type="checkbox" name="first_name" value="1"  @if($first_name==1) checked @endif  /> First Name
                                         </label>
                                     </div>
+                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="last_name" value="1" checked  /> Last  Name
+                                        <label style="margin-bottom: 0;">
+                                            <input type="checkbox" name="last_name" value="1"  @if($last_name==1) checked @endif  /> Last  Name
                                         </label>
                                     </div>
+                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 
                                 <td style="vertical-align: middle;">

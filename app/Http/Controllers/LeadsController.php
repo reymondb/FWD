@@ -28,11 +28,16 @@ class LeadsController extends Controller
         $batch_id = $request->batch_id;
         $campaign_id = $request->campaign_id; 
         
+        $mobile_num = $request->mobile_num; 
+        $landline = $request->landline; 
+        $email = $request->email; 
+        $first_name = $request->first_name; 
+        $last_name = $request->last_name;
         //DB::enableQueryLog(); // Enable query log
         $contacts = LeadList::select('contacts.*','CampaignName')
         ->leftjoin("contacts",'lead_list.ContactID','contacts.id')
         ->leftjoin("campaign",'lead_list.CampaignID','campaign.id')
-        ->where(function ($query) use ($batch_id,$supplier_id,$campaign_id) {
+        ->where(function ($query) use ($batch_id,$supplier_id,$campaign_id, $mobile_num, $landline, $email, $first_name, $last_name) {
             if($batch_id){
                 $query->where('BatchID',$batch_id);
             }
@@ -42,6 +47,21 @@ class LeadsController extends Controller
             if($campaign_id){
                 $query->where('CampaignID',$campaign_id);
             }
+            if($mobile_num==1){
+                $query->where('MobileNum', '=' ,null);
+            }
+            if($landline==1){
+                $query->where('LandlineNum', '=' ,null);
+            }
+            if($email==1){
+                $query->where('Email', '=' ,null);
+            }
+            if($first_name==1){
+                $query->where('FirstName', '=' ,null);
+            }
+            if($last_name==1){
+                $query->where('LastName', '=' ,null);
+            }
         })
         ->paginate(15);
         //dd(DB::getQueryLog());
@@ -50,7 +70,12 @@ class LeadsController extends Controller
         $Campaigns = Campaigns::all();
       
         return view('dashboard/leads')->with('LeadBatch',$LeadBatch)->with('User',$User)->with('Campaigns',$Campaigns)
-        ->with('supplier_id',$supplier_id)->with('batch_id',$batch_id)->with('campaign_id',$campaign_id)
+        ->with('supplier_id',$supplier_id)->with('batch_id',$batch_id)->with('campaign_id',$campaign_id)        
+        ->with('mobile_num',$mobile_num)
+        ->with('landline',$landline)
+        ->with('email',$email)
+        ->with('first_name',$first_name)
+        ->with('last_name',$last_name)
         ->with('contacts',$contacts);
     }
     public function filter_leads(Request $request)
