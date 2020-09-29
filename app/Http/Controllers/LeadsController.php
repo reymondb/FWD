@@ -32,6 +32,11 @@ class LeadsController extends Controller
         $email = $request->email; 
         $first_name = $request->first_name; 
         $last_name = $request->last_name;
+        if(!isset($mobile_num)){ $mobile_num=2; }
+        if(!isset($landline)){ $landline=2; }
+        if(!isset($email)){ $email=2; }
+        if(!isset($first_name)){ $first_name=2; }
+        if(!isset($last_name)){ $last_name=2; }
         //DB::enableQueryLog(); // Enable query log
         $contacts = LeadList::select('contacts.*','CampaignName')
         ->leftjoin("contacts",'lead_list.ContactID','contacts.id')
@@ -47,18 +52,33 @@ class LeadsController extends Controller
                 $query->where('CampaignID',$campaign_id);
             }
             if($mobile_num==1){
+                $query->where('MobileNum', '!=' ,null);
+            }
+            elseif($mobile_num==0){
                 $query->where('MobileNum', '=' ,null);
             }
             if($landline==1){
+                $query->where('LandlineNum', '!=' ,null);
+            }
+            elseif($landline==0){
                 $query->where('LandlineNum', '=' ,null);
             }
             if($email==1){
+                $query->where('Email', '!=' ,null);
+            }
+            elseif($email==0){
                 $query->where('Email', '=' ,null);
             }
             if($first_name==1){
+                $query->where('FirstName', '!=' ,null);
+            }
+            elseif($first_name==0){
                 $query->where('FirstName', '=' ,null);
             }
             if($last_name==1){
+                $query->where('LastName', '!=' ,null);
+            }
+            elseif($last_name==0){
                 $query->where('LastName', '=' ,null);
             }
         })

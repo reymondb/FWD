@@ -38,50 +38,64 @@
                                         @foreach ($Campaigns as $c)
                                             <option @if($campaign_id==$c->id) selected @endif value="{{$c->id}}">{{$c->CampaignName}}</option>
                                         @endforeach
-                                        
                                     </select>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
                                         <label style="margin-bottom: 0;">
-                                            <input type="checkbox" name="mobile_num" value="1" @if($mobile_num==1) checked @endif  /> Mobile number
+                                            <select name="mobile_num" >
+                                                <option value="2" @if($mobile_num==2) selected @endif>exclude</option>
+                                                <option value="1" @if($mobile_num==1) selected @endif>w/</option>
+                                                <option value="0" @if($mobile_num==0) selected @endif>w/o</option>
+                                            </select>
+                                            Mobile number
                                         </label>
                                     </div>
-                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
                                         <label style="margin-bottom: 0;"> 
-                                            <input type="checkbox" name="landline" value="1"  @if($landline==1) checked @endif  /> Landline
+                                            <select name="landline" >
+                                                <option value="2" @if($landline==2) selected @endif>exclude</option>
+                                                <option value="1" @if($landline==1) selected @endif>w/</option>
+                                                <option value="0" @if($landline==0) selected @endif>w/o</option>
+                                            </select> Landline
                                         </label>
                                     </div>
-                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
                                         <label style="margin-bottom: 0;">
-                                            <input type="checkbox" name="email" value="1" @if($email==1) checked @endif   /> Email
+                                            <select name="email" >
+                                                <option value="1" @if($email==1) selected @endif>w/</option>
+                                                <option value="0" @if($email==0) selected @endif>w/o</option>
+                                                <option value="2" @if($email==2) selected @endif>exclude</option>
+                                            </select> Email
                                         </label>
                                     </div>
-                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
                                         <label style="margin-bottom: 0;"> 
-                                            <input type="checkbox" name="first_name" value="1"  @if($first_name==1) checked @endif  /> First Name
+                                            <select name="first_name" >
+                                                <option value="2" @if($first_name==2) selected @endif>exclude</option>
+                                                <option value="1" @if($first_name==1) selected @endif>w/</option>
+                                                <option value="0" @if($first_name==0) selected @endif>w/o</option>
+                                            </select> First Name
                                         </label>
                                     </div>
-                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <div class="checkbox">
                                         <label style="margin-bottom: 0;">
-                                            <input type="checkbox" name="last_name" value="1"  @if($last_name==1) checked @endif  /> Last  Name
+                                            <select name="last_name" >
+                                                <option value="2" @if($last_name==2) selected @endif>exclude</option>
+                                                <option value="1" @if($last_name==1) selected @endif>w/</option>
+                                                <option value="0" @if($last_name==0) selected @endif>w/o</option>
+                                            </select> Last  Name
                                         </label>
                                     </div>
-                                    <span style="color:red;font-size:10px;">*check if null</span>
                                 </td>
-                                
                                 <td style="vertical-align: middle;">
                                     <input type="submit" name="filter_leads" value="Search" class="btn btn-primary" style="font-size:14px" />
                                 </td>
