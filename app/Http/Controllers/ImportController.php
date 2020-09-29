@@ -205,6 +205,9 @@ class ImportController extends Controller
         UniqueLeads::truncate(); 
         $x=1;
         foreach ($csv_data as $row) {
+            $landline="";
+            $mobile="";
+            $email="";
             if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
                 $contact = new NewLeads();
                 foreach($request->fields as $index => $field){
@@ -248,7 +251,7 @@ class ImportController extends Controller
                     'City',
                     'State',
                     'Zip',
-                    'Email')->where('MobileNum',$email)->first();
+                    'Email')->where('MobileNum',$mobile)->first();
                 }
                 else if($checkduplicate==3){                    
                     $checkcontact =Contact::select('id',          
