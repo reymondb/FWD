@@ -53,6 +53,7 @@ Route::post('/createsupplier', 'SupplierController@createSupplier')->name('creat
 Route::get('/deletesupplier/{id}', 'SupplierController@deleteSupplier')->name('deleteSupplier');
 Route::post('/editsupplier', 'SupplierController@editSupplier')->name('editSupplier');
 
+Route::get('/reports', 'ReportsController@fetchReport')->name('fetchReport');
 
 /**
  * middleware('App\Http\Middleware\AdminMiddleware')->
