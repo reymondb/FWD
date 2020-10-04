@@ -63,6 +63,8 @@
         </main>
 
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
+          <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js" charset="utf-8"></script>
+          
 
         <script>
             var url = "{{url('leadschart')}}";
@@ -87,7 +89,24 @@
 
                             // These labels appear in the legend and in the tooltips when hovering different arcs
                             labels: Labels
+                        },                   
+                        options: {
+                            legend: {
+                                display: true,
+                                position: 'left',
+                            },
+                            tooltips: {
+                                enabled: false
+                            },
+                            plugins: {
+                                labels: {
+                                    render: 'percentage',
+                                    fontColor: '#FFFFFF',
+                                    precision: 2
+                                }
+                            }
                         }
+
                       
                     });
                 });
@@ -96,12 +115,15 @@
             var url2 = "{{url('blankchart')}}";
             var BlankTotals = new Array();
             var BlankLabels = new Array();
+            var BlankPercentage = new Array();
+            
             $(document).ready(function(){
                 $.get(url2, function(response){
                     response.forEach(function(data){
                         console.log(data);
                         BlankTotals.push(data.totals);
                         BlankLabels.push(data.Label);
+                        BlankPercentage.push(data.percentage);
                     });
                     var ctx = document.getElementById("blanktotals").getContext('2d');
                     var myPieChart = new Chart(ctx, {
@@ -114,6 +136,22 @@
 
                             // These labels appear in the legend and in the tooltips when hovering different arcs
                             labels: BlankLabels
+                        },                        
+                        options: {
+                            legend: {
+                                display: true,
+                                position: 'left',
+                            },
+                            tooltips: {
+                                enabled: false
+                            },
+                            plugins: {
+                                labels: {
+                                    render: 'percentage',
+                                    fontColor: '#FFFFFF',
+                                    precision: 2
+                                }
+                            }
                         }
                       
                     });
@@ -143,6 +181,22 @@
 
                             // These labels appear in the legend and in the tooltips when hovering different arcs
                             labels: supplierLabels
+                        },                        
+                        options: {
+                            legend: {
+                                display: true,
+                                position: 'left',
+                            },
+                            tooltips: {
+                                enabled: false
+                            },
+                            plugins: {
+                                labels: {
+                                    render: 'percentage',
+                                    fontColor: '#FFFFFF',
+                                    precision: 2
+                                }
+                            }
                         }
                       
                     });
