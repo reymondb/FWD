@@ -21,6 +21,18 @@
                             <tr>
                                 <td>Campaign Name</td>
                                 <td><input type="text" name="name" id="name" required  autocomplete="off" ></td>
+                                <td>Database Url(IP address)</td>
+                                <td><input type="text" name="MySQL_url" required  autocomplete="off" ></td>
+                            </tr>
+                            <tr>
+                                <td>Mysql Database</td>
+                                <td><input type="text" name="Mysql_db"  required  autocomplete="off" ></td>
+                                <td>Database Username</td>
+                                <td><input type="text" name="Mysql_username" required  autocomplete="off" ></td>
+                            </tr>
+                            <tr>
+                                <td>Mysql Password</td>
+                                <td><input type="text" name="Mysql_password"  required  autocomplete="off" ></td>
                                 <td ><input type="submit" class="btn btn-primary" value="Create Campaign"  style="font-size:14px"></td>
                             </tr>
                         </table>
@@ -46,7 +58,7 @@
                             <tr>
                                 <td>{{$c->id}}</td>
                                 <td>{{$c->CampaignName}}</td>
-                                <td><a onclick="editcampaign('{{$c->id}}','{{addslashes($c->CampaignName)}}')" href="#ex1" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></a></td>
+                                <td><a onclick="editcampaign('{{$c->id}}','{{addslashes($c->CampaignName)}}','{{$c->MySQL_url}}','{{$c->Mysql_db}}','{{$c->Mysql_username}}','{{$c->Mysql_password}}')" href="#ex1" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></a></td>
                                 <td><a href="/deletecampaign/{{$c->id}}" onclick="return confirm('Are you sure?')"class="delete"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             @endforeach
@@ -80,7 +92,19 @@
                                     <table class="table table-condensed table-bordered table-striped " style="margin-top: 20px ">
                                         <tr>
                                             <td>Campaign Name</td>
-                                            <td><input type="text" name="editname" id="editname" required  autocomplete="off" ></td>                                            
+                                            <td><input type="text" name="editname" id="editname" required  autocomplete="off" ></td>
+                                            <td>Database Url(IP address)</td>
+                                            <td><input type="text" name="MySQL_url" id="MySQL_url" required  autocomplete="off" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mysql Database</td>
+                                            <td><input type="text" name="Mysql_db" id="Mysql_db" required  autocomplete="off" ></td>
+                                            <td>Database Username</td>
+                                            <td><input type="text" name="Mysql_username" id="Mysql_username" required  autocomplete="off" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mysql Password</td>
+                                            <td><input type="text" name="Mysql_password" id="Mysql_password" required  autocomplete="off" ></td>
                                             <td ><input type="submit" value="Update Campaign" class="btn btn-primary" style="font-size:14px"></td>
                                         </tr>
                                     </table>
@@ -111,9 +135,13 @@
         } );
     });
 
-    function editcampaign(id,name){
+    function editcampaign(id,name,MySQL_url,Mysql_db,Mysql_username,Mysql_password){
         $("#id").val(id);
         $("#editname").val(name);
+        $("#MySQL_url").val(MySQL_url);
+        $("#Mysql_db").val(Mysql_db);
+        $("#Mysql_username").val(Mysql_username);
+        $("#Mysql_password").val(Mysql_password);
         
     }
     

@@ -55,31 +55,31 @@ class LeadsController extends Controller
                 $query->where('MobileNum', '!=' ,null);
             }
             elseif($mobile_num==0){
-                $query->where('MobileNum', '=' ,null);
+                $query->where('MobileNum', '=' ,null)->orwhere('LastName', '=' ,"");
             }
             if($landline==1){
                 $query->where('LandlineNum', '!=' ,null);
             }
             elseif($landline==0){
-                $query->where('LandlineNum', '=' ,null);
+                $query->where('LandlineNum', '=' ,null)->orwhere('LastName', '=' ,"");
             }
             if($email==1){
                 $query->where('Email', '!=' ,null);
             }
             elseif($email==0){
-                $query->where('Email', '=' ,null);
+                $query->where('Email', '=' ,null)->orwhere('LastName', '=' ,"");
             }
             if($first_name==1){
                 $query->where('FirstName', '!=' ,null);
             }
             elseif($first_name==0){
-                $query->where('FirstName', '=' ,null);
+                $query->where('FirstName', '=' ,null)->orwhere('LastName', '=' ,"");
             }
             if($last_name==1){
                 $query->where('LastName', '!=' ,null);
             }
             elseif($last_name==0){
-                $query->where('LastName', '=' ,null);
+                $query->where('LastName', '=' ,null)->orwhere('LastName', '=' ,"");
             }
         })
         ->paginate(15);

@@ -40,7 +40,7 @@ class ReportsController extends Controller
         config(['database.connections.mysql_external.database' => $source->Mysql_db]);
         config(['database.connections.mysql_external.username' => $source->Mysql_username]);
         config(['database.connections.mysql_external.password' => $source->Mysql_password]);
-        https://188.166.215.132/
+        #https://188.166.215.132/
 
         $data = DB::connection('mysql_external')
             ->table('vicidial_list')

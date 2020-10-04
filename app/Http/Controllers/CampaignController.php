@@ -33,6 +33,10 @@ class CampaignController extends Controller
        
             $campaign = new Campaigns;
             $campaign->CampaignName = $_POST['name'];
+            $campaign->MySQL_url = $_POST['MySQL_url'];
+            $campaign->Mysql_db = $_POST['Mysql_db'];
+            $campaign->Mysql_username = $_POST['Mysql_username'];
+            $campaign->Mysql_password = $_POST['Mysql_password'];
             $campaign->save();
 
             return redirect('/campaigns')->with('status', 'saved');

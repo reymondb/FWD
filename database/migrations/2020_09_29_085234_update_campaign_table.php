@@ -16,8 +16,8 @@ class UpdateCampaignTable extends Migration
         
         if (Schema::hasTable('campaign')) {
             Schema::table('campaign', function (Blueprint $table) {
-                $table->string('MySQL_host')->after('CampaignName')->nullable();
-                $table->string('Mysql_db')->after('MySQL_host')->nullable(); 
+                $table->string('MySQL_url')->after('CampaignName')->nullable();
+                $table->string('Mysql_db')->after('MySQL_url')->nullable(); 
                 $table->string('Mysql_username')->after('Mysql_db')->nullable(); 
                 $table->string('Mysql_password')->after('Mysql_username')->nullable(); 
             });
@@ -33,7 +33,7 @@ class UpdateCampaignTable extends Migration
     {
         if (Schema::hasTable('campaign')) {
             Schema::table('campaign', function (Blueprint $table) {
-                $table->dropColumn('MySQL_host');
+                $table->dropColumn('MySQL_url');
                 $table->dropColumn('Mysql_db');
                 $table->dropColumn('Mysql_username');
                 $table->dropColumn('Mysql_password');
