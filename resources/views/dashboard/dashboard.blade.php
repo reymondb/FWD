@@ -30,10 +30,25 @@
                         <div class="col-md-6">    
                             <!-- Pie CHART -->
                             <div class="card card-primary">
-                                <div class="card-header">Campaignszz</div>
+                                <div class="card-header">From Supplier</div>
                                 <div class="card-body">
                                 <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="campaigntotalsz" height="280" width="600"></canvas>
+                                    <canvas id="supplierchart" height="280" width="600"></canvas>
+                                </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>      
+                    </div>
+                    <div class="row" style="padding-top:20px;">
+                        <div class="col-md-6">    
+                            <!-- Pie CHART -->
+                            <div class="card card-primary">
+                                <div class="card-header">Total Blanks</div>
+                                <div class="card-body">
+                                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <canvas id="blanktotals" height="280" width="600"></canvas>
                                 </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -42,6 +57,7 @@
                         </div>      
                     </div>
                 </div>
+                
                   <!-- /.row -->
             </section>
         </main>
@@ -62,7 +78,7 @@
                     });
                     var ctx = document.getElementById("campaigntotals").getContext('2d');
                     var myPieChart = new Chart(ctx, {
-                        type: 'pie',
+                        type: 'doughnut',
                         data:{
                             datasets: [{
                                 data: Totals,
@@ -76,6 +92,63 @@
                     });
                 });
             });
+
+            var url2 = "{{url('blankchart')}}";
+            var BlankTotals = new Array();
+            var BlankLabels = new Array();
+            $(document).ready(function(){
+                $.get(url2, function(response){
+                    response.forEach(function(data){
+                        console.log(data);
+                        BlankTotals.push(data.totals);
+                        BlankLabels.push(data.Label);
+                    });
+                    var ctx = document.getElementById("blanktotals").getContext('2d');
+                    var myPieChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data:{
+                            datasets: [{
+                                data: BlankTotals,
+                                backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                            }],
+
+                            // These labels appear in the legend and in the tooltips when hovering different arcs
+                            labels: BlankLabels
+                        }
+                      
+                    });
+                });
+            });
+
+            
+            var url3 = "{{url('supplierchart')}}";
+            console.log(url);
+            var supplierTotals = new Array();
+            var supplierLabels = new Array();
+            $(document).ready(function(){
+                $.get(url3, function(response){
+                    response.forEach(function(data){
+                        console.log(data);
+                        supplierTotals.push(data.totals);
+                        supplierLabels.push(data.supplier);
+                    });
+                    var ctx = document.getElementById("supplierchart").getContext('2d');
+                    var myPieChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data:{
+                            datasets: [{
+                                data: supplierTotals,
+                                backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                            }],
+
+                            // These labels appear in the legend and in the tooltips when hovering different arcs
+                            labels: supplierLabels
+                        }
+                      
+                    });
+                });
+            });
+            
 
 
         </script>

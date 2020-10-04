@@ -46,4 +46,43 @@ class DashboardController extends Controller
         return response()->json($leads);
     }
 
+    public function blankchart()
+    {
+        //DB::enableQueryLog();
+        
+        $mobile=Contact::select(DB::raw('count(id) as total'))
+        ->whereNull('LandlineNum')
+        ->orwhere('LandlineNum',"=","")->get();
+        $landline=Contact::select(DB::raw('count(id) as total'))
+        ->whereNull('MobileNum')
+        ->orwhere('MobileNum',"=","")->get();
+        $email=Contact::select(DB::raw('count(id) as total'))
+        ->whereNull('Email')
+        ->orwhere('Email',"=","")->get();
+        $firstname=Contact::select(DB::raw('count(id) as total'))
+        ->whereNull('FirstName')
+        ->orwhere('FirstName',"=","")->get();
+        $lastname=Contact::select(DB::raw('count(id) as total'))
+        ->whereNull('LastName')
+        ->orwhere('LastName',"=","")->get();
+        $data=array();
+        $data[0] = array('Label' => 'No Mobile','totals' =>$mobile[0]->total);
+        $data[1] = array('Label' => 'No Landline','totals' => $landline[0]->total);
+        $data[2] = array('Label' => 'No Email','totals' => $email[0]->total);
+        $data[3] = array('Label' => 'No Firstname','totals' => $firstname[0]->total);
+        $data[4] = array('Label' => 'No Lastname','totals' => $lastname[0]->total);
+        
+        //dd(DB::getQueryLog());
+        return response()->json($data);
+    }
+
+    public function supplierchart()
+    {
+        //DB::enableQueryLog();
+        $leads=Contact::select('users.name AS supplier',DB::raw('count(contacts.id) as totals'))
+        ->leftjoin('users','contacts.supplier_id','users.id')->get();
+        //dd(DB::getQueryLog());
+        return response()->json($leads);
+    }
+
 }

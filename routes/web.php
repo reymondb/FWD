@@ -19,7 +19,10 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
 
 Route::get('/home', 'DashboardController@index')->name('dashboard')->middleware('auth');
-Route::get('/leadschart','DashboardController@leadschart')->name('leadschart');;
+Route::get('/leadschart','DashboardController@leadschart')->name('leadschart');
+Route::get('/blankchart','DashboardController@blankchart')->name('blankchart');
+
+Route::get('/supplierchart','DashboardController@supplierchart')->name('supplierchart');
 
 
 Route::get('/import', 'ImportController@getImport')->name('import');
