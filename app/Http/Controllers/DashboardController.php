@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use App\Models\Content;
+use App\Contact;
+use App\Models\Campaigns;
+use App\Models\CampaignUse;
 use Auth;
 use DB;
 
@@ -29,37 +31,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $total=Contact::select(DB::raw('count(id) as total'))->get();
         
         $data=[];
-            return view('dashboard/dashboard')->with('data', $data);
-        //}elseif(Gate::allows('tpl-only', auth()->user())){
-        //   return redirect('/thirdparty/dashboard');
-        //}
-            
-       
-
+        return view('dashboard/dashboard')->with('total', $total);  
     }
 
-    public function getContents()
+    public function leadschart()
     {
-        $data = Content::all();
-
-        return view('dashboard/content')->with('data', $data);
-    }
-
-    public function editContent(Request $request){
-        
-        $content = Content::where('id', $_POST['id'])->first();
-        
-            $content->title = $_POST['title'];
-            $content->content = $_POST['content'];
-            
-            
-            $content->save();
-
-           
-            return redirect('/content')->with('status', 'saved');
-        
+        //DB::enableQueryLog();
+        $leads=CampaignUse::select('campaign.CampaignName',DB::raw('count(campaign_use.id) as total'))
+        ->leftjoin('campaign','campaign_use.CampaignID','campaign.id')->get();
+        //dd(DB::getQueryLog());
+        return response()->json($leads);
     }
 
 }

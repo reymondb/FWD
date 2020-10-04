@@ -16,13 +16,11 @@
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('/dashboard', function() {
-    return view('dashboard/dashboard');
-})->name('dashboard')->middleware('auth');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
 
-Route::get('/home', function() {
-    return view('dashboard/dashboard');
-})->name('home')->middleware('auth');
+Route::get('/home', 'DashboardController@index')->name('dashboard')->middleware('auth');
+Route::get('/leadschart','DashboardController@leadschart')->name('leadschart');;
+
 
 Route::get('/import', 'ImportController@getImport')->name('import');
 Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
