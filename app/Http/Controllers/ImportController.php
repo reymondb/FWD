@@ -217,15 +217,25 @@ class ImportController extends Controller
                         //echo $db_field[$field] ." == ".$row[$index];
                         if($dbf=="MobileNum" || $dbf=="LandlineNum"){
                             $val=intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
+                            if($val==0){
+                                $val="";
+                            }
                         }
                         else{
                             $val = $row[$index];
                         }
                         if($dbf=="LandlineNum"){
                             $landline = intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
+                            if($landline==0){
+                                $landline="";
+                            }
+                            
                         }
                         if($dbf=="MobileNum"){
                             $mobile = intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
+                            if($mobile==0){
+                                $mobile="";
+                            }
                         }
                         if($dbf=="email"){
                             $email = $row[$index];

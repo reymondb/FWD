@@ -100,6 +100,13 @@
                                     <input type="submit" name="filter_leads" value="Search" class="btn btn-primary" style="font-size:14px" />
                                 </td>
                             </tr>
+                            <tr>
+                                <td><input type="text" name="search_mobile" placeholder="Mobile Number" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_landline" placeholder="Landline Number" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_email" placeholder="Email" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_firstname" placeholder="First Name" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_lastname" placeholder="Last Name" class="form-control filter_inputs" /></td>
+                            </tr>
                         </table>
                     </form>
                     <table id="contacts_all" class="table table-condensed table-bordered table-striped " style="margin-top: 20px ">
