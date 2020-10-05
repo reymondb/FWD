@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Campaigns;
+use App\Models\LeadList;
+use App\Models\LeadBatch;
+
 
 class CampaignController extends Controller
 {
@@ -59,6 +62,28 @@ class CampaignController extends Controller
         return redirect('/campaigns')->with('status', 'saved');
 
     }
+
+    public function fetchBatches(Request $request){
+
+        $batches = LeadBatch::where('campaign_id', $_POST['campaign'])->get();
+        $options="";
+        foreach($batches as $batch){
+            $options.="<option value='".$batch->id."'>".$batch->BatchDescription."</option>";
+        }
+        return $options;
+
+    }
+    
+    public function search_campaign(Request $request){
+
+        $campaign = Campaigns::where('id', $_POST['id'])->first();
+        $campaign->CampaignName = $_POST['editname'];
+        $campaign->save();
+
+        return redirect('/campaigns')->with('status', 'saved');
+
+    }
+    
     
 
 

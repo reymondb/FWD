@@ -92,20 +92,22 @@
                                                 <option value="2" @if($last_name==2) selected @endif>exclude</option>
                                                 <option value="1" @if($last_name==1) selected @endif>w/</option>
                                                 <option value="0" @if($last_name==0) selected @endif>w/o</option>
-                                            </select> Last  Name
+                                            </select> Last Name
                                         </label>
                                     </div>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="search_mobile" placeholder="Mobile Number" value="{{$search_mobile}}" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_landline" placeholder="Landline Number" value="{{$search_landline}}" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_email" placeholder="Email" value="{{$search_email}}" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_firstname" placeholder="First Name" value="{{$search_mobile}}" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_lastname" placeholder="Last Name" value="{{$search_mobile}}" class="form-control filter_inputs" /></td>
+                                <td></td>
+                                <td></td>
                                 <td style="vertical-align: middle;">
                                     <input type="submit" name="filter_leads" value="Search" class="btn btn-primary" style="font-size:14px" />
                                 </td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="search_mobile" placeholder="Mobile Number" class="form-control filter_inputs" /></td>
-                                <td><input type="text" name="search_landline" placeholder="Landline Number" class="form-control filter_inputs" /></td>
-                                <td><input type="text" name="search_email" placeholder="Email" class="form-control filter_inputs" /></td>
-                                <td><input type="text" name="search_firstname" placeholder="First Name" class="form-control filter_inputs" /></td>
-                                <td><input type="text" name="search_lastname" placeholder="Last Name" class="form-control filter_inputs" /></td>
                             </tr>
                         </table>
                     </form>
@@ -152,8 +154,9 @@
                         <input type="hidden" name="last_name" id="last_name" value="{{$last_name}}">
                         @if($contacts->total() > 0)
                             <input type="submit" id="downloadLink" value="Download Leads" name="download" class="btn btn-primary" />
+                        
+                            <div class="loading2 col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
                         @endif
-                        <div class="loading2 col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
                     </form>
                 </div>
             </div>

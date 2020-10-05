@@ -17,23 +17,21 @@
                 <div class="table-responsive">
                     <form id="createcampaign" action="/createcampaign" enctype="multipart/form-data" method="post">
                         @csrf
-                        <table class="table table-condensed table-bordered table-striped col-md-4" style="margin-top: 20px ">
+                        <table class="table table-condensed table-bordered table-striped col-md-9" style="margin-top: 20px ">
                             <tr>
                                 <td>Campaign Name</td>
                                 <td><input type="text" name="name" id="name" required  autocomplete="off" ></td>
                                 <td>Database Url(IP address)</td>
                                 <td><input type="text" name="MySQL_url" required  autocomplete="off" ></td>
-                            </tr>
-                            <tr>
                                 <td>Mysql Database</td>
                                 <td><input type="text" name="Mysql_db"  required  autocomplete="off" ></td>
-                                <td>Database Username</td>
-                                <td><input type="text" name="Mysql_username" required  autocomplete="off" ></td>
                             </tr>
                             <tr>
+                                <td>Database Username</td>
+                                <td><input type="text" name="Mysql_username" required  autocomplete="off" ></td>
                                 <td>Mysql Password</td>
                                 <td><input type="text" name="Mysql_password"  required  autocomplete="off" ></td>
-                                <td ><input type="submit" class="btn btn-primary" value="Create Campaign"  style="font-size:14px"></td>
+                                <td colspan="2" ><input type="submit" class="btn btn-primary" value="Create Campaign"  style="font-size:14px"></td>
                             </tr>
                         </table>
                     </form>
@@ -67,6 +65,41 @@
                     </table>
                 </div>
             </div>
+            
+        <div class="card mb-4">
+            <div class="card-header">View/Delete Campaign Leads</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form id="search_campaign_leads" action="/search_campaign" method="post" target="campaign_container">
+                        @csrf
+                        <table class="table table-condensed table-bordered table-striped col-md-3" style="margin-top: 20px ">
+                            <tr>
+                                <td>Campaign Name</td>
+                                <td>
+                                    <select name="campaign_search" id="campaign_search" onchange="fetchBatches()" required  >
+                                        <option></option>
+                                        @foreach($campaigns as $c)
+                                        <option value="{{$c->id}}">{{$c->CampaignName}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </td>
+                                <td>Batch</td>
+                                <td>
+                                    <select name="batches_search" required  >
+                                        <option></option>
+                                    </select>
+
+                                </td>
+                            </tr>
+                        </table>
+                        
+                   
+                    </form>
+                    <iframe name="campaign_container" id="campaign_container"></iframe>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 </main>
@@ -145,6 +178,26 @@
         
     }
     
+    function fetchBatches(){
+        console.log("waaa"+$("#campaign_search").val());
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $('input[name=_token]').val()
+            }
+        });
+        $.ajax({
+            url: "/fetchBatches",
+            type: 'POST',
+            data: {campaign:$("#campaign_search").val()},
+            contentType: false, // The content type used when sending data to the server.
+            cache: false, // To unable request pages to be cached
+            processData: false,
+            success: function (data) {
+                $("#batches_search").html(data); 
+            return false;
+            }            
+        });
+    }
 
 </script>
 @stop

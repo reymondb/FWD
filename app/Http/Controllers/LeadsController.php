@@ -32,16 +32,43 @@ class LeadsController extends Controller
         $email = $request->email; 
         $first_name = $request->first_name; 
         $last_name = $request->last_name;
+        $search_mobile = $request->search_mobile;
+        $search_landline = $request->search_landline;
+        $search_email = $request->search_email;
+        $search_firstname = $request->search_firstname;
+        $search_lastname = $request->search_lastname;
+        
+        if(!isset($search_mobile)){ $search_mobile=""; }
+        if(!isset($search_landline)){ $search_landline=""; }
+        if(!isset($search_email)){ $search_email=""; }
+        if(!isset($search_firstname)){ $search_firstname=""; }
+        if(!isset($search_lastname)){ $search_lastname=""; }
         if(!isset($mobile_num)){ $mobile_num=2; }
         if(!isset($landline)){ $landline=2; }
         if(!isset($email)){ $email=2; }
         if(!isset($first_name)){ $first_name=2; }
         if(!isset($last_name)){ $last_name=2; }
+        
         //DB::enableQueryLog(); // Enable query log
         $contacts = LeadList::select('contacts.*','CampaignName')
         ->leftjoin("contacts",'lead_list.ContactID','contacts.id')
         ->leftjoin("campaign",'lead_list.CampaignID','campaign.id')
-        ->where(function ($query) use ($batch_id,$supplier_id,$campaign_id, $mobile_num, $landline, $email, $first_name, $last_name) {
+        ->where(function ($query) use ($batch_id,$supplier_id,$campaign_id, $mobile_num, $landline, $email, $first_name, $last_name, $search_mobile,$search_landline,$search_email, $search_firstname, $search_lastname) {
+            if($search_mobile){
+                $query->where('MobileNum',"=",$search_mobile);
+            }
+            if($search_landline){
+                $query->where('LandlineNum',"=",$search_landline);
+            }
+            if($search_email){
+                $query->where('Email',"=",$search_email);
+            } 
+            if($search_firstname){
+                $query->where('FirstName',"=",$search_firstname);
+            }
+            if($search_lastname){
+                $query->where('LastName',"=",$search_lastname);
+            }
             if($batch_id){
                 $query->where('BatchID',$batch_id);
             }
@@ -78,7 +105,7 @@ class LeadsController extends Controller
                 });
                 #$query->where('Email', '=' ,null)->orwhere('LastName', '=' ,"");
             }
-            if($first_name==1){
+            if($first_name==1){ 
                 $query->where('FirstName', '!=' ,null);
             }
             elseif($first_name==0){
@@ -102,7 +129,6 @@ class LeadsController extends Controller
         $LeadBatch = LeadBatch::all();
         $User = User::all();
         $Campaigns = Campaigns::all();
-      
         return view('dashboard/leads')->with('LeadBatch',$LeadBatch)->with('User',$User)->with('Campaigns',$Campaigns)
         ->with('supplier_id',$supplier_id)->with('batch_id',$batch_id)->with('campaign_id',$campaign_id)        
         ->with('mobile_num',$mobile_num)
@@ -110,7 +136,12 @@ class LeadsController extends Controller
         ->with('email',$email)
         ->with('first_name',$first_name)
         ->with('last_name',$last_name)
-        ->with('contacts',$contacts);
+        ->with('contacts',$contacts)
+        ->with('search_mobile',$search_mobile)
+        ->with('search_landline',$search_landline)
+        ->with('search_email',$search_email)
+        ->with('search_firstname',$search_firstname)
+        ->with('search_lastname',$search_lastname);
     }
    
     public function exportLeads(Request $request)
@@ -132,9 +163,22 @@ class LeadsController extends Controller
         if(!isset($first_name)){ $first_name = 0; } 
         $last_name = $request->last_name;
         if(!isset($last_name)){ $last_name = 0; }
+        
+        $search_mobile = $request->search_mobile;
+        $search_landline = $request->search_landline;
+        $search_email = $request->search_email;
+        $search_firstname = $request->search_firstname;
+        $search_lastname = $request->search_lastname;
+        
+        if(!isset($search_mobile)){ $search_mobile=""; }
+        if(!isset($search_landline)){ $search_landline=""; }
+        if(!isset($search_email)){ $search_email=""; }
+        if(!isset($search_firstname)){ $search_firstname=""; }
+        if(!isset($search_lastname)){ $search_lastname=""; }
+
         $type ="csv";
         $datetime=date("Y-m-d H:i:s");
-        return Excel::download(new LeadsExport($mobile_num, $landline, $email, $supplier_id, $batch_id, $campaign_id, $first_name, $last_name), "Leads.csv");
+        return Excel::download(new LeadsExport($mobile_num, $landline, $email, $supplier_id, $batch_id, $campaign_id, $first_name, $last_name,$search_mobile,$search_landline, $search_email,$search_lastname), "Leads.csv");
     }
 
     public function exportUniqueLeads(Request $request)

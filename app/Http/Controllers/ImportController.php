@@ -89,6 +89,7 @@ class ImportController extends Controller
         $lb->BatchDescription = $batchdesc;
         $lb->FileName = $request->filename;
         $lb->supplier_id =$supplier_id;
+        $lb->campaign_id =$campaignid;
         $lb->save();
         $batch_id = $lb->id;
         //import csv start
@@ -203,7 +204,10 @@ class ImportController extends Controller
         NewLeads::truncate();
         DuplicateLeads::truncate();
         UniqueLeads::truncate(); 
-        $x=1;
+        $x=1;        
+        $duplicatedata=[];
+        
+        $newdata=[];
         foreach ($csv_data as $row) {
             $landline="";
             $mobile="";
@@ -297,7 +301,9 @@ class ImportController extends Controller
                 if($checkcontact){
                     //DB::enableQueryLog(); 
                     $checkcontactz = $checkcontact->toArray();
-                    DuplicateLeads::insert($checkcontactz);
+                     
+                    $duplicatedata[]=$checkcontactz;
+                    //DuplicateLeads::insert($checkcontactz);
                     //dd(DB::getQueryLog()); die();
                 }
                 else{
@@ -306,6 +312,7 @@ class ImportController extends Controller
                 }
             }
         }
+        DuplicateLeads::insert($duplicatedata);
         return redirect('/new_leads_report');
     }
    
