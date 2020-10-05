@@ -17,7 +17,7 @@
                         <div class="col-md-6">
                             <!-- Pie CHART -->
                             <div class="card card-primary">
-                                <div class="card-header">Campaigns</div>
+                                <div class="card-header">Campaigns (Total: <span id="campaign_total">0</span>)</div>
                                 <div class="card-body">
                                 <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                                     <canvas id="campaigntotals" height="280" width="600"></canvas>
@@ -30,7 +30,7 @@
                         <div class="col-md-6">    
                             <!-- Pie CHART -->
                             <div class="card card-primary">
-                                <div class="card-header">From Supplier</div>
+                                <div class="card-header">From Supplier (Total: <span id="supplier_total">0</span>)</div>
                                 <div class="card-body">
                                 <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                                     <canvas id="supplierchart" height="280" width="600"></canvas>
@@ -45,7 +45,7 @@
                         <div class="col-md-6">    
                             <!-- Pie CHART -->
                             <div class="card card-primary">
-                                <div class="card-header">Total Blanks</div>
+                                <div class="card-header">Total Blanks (Total: <span id="blank_total">0</span>)</div>
                                 <div class="card-body">
                                 <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                                     <canvas id="blanktotals" height="280" width="600"></canvas>
@@ -71,13 +71,16 @@
             console.log(url);
             var Totals = new Array();
             var Labels = new Array();
+            var campaigntotals=0;
             $(document).ready(function(){
                 $.get(url, function(response){
                     response.forEach(function(data){
                         console.log(data);
                         Totals.push(data.total);
                         Labels.push(data.CampaignName);
+                        campaigntotals = campaigntotals + data.total;
                     });
+                    $("#campaign_total").html(campaigntotals);
                     var ctx = document.getElementById("campaigntotals").getContext('2d');
                     var myPieChart = new Chart(ctx, {
                         type: 'doughnut',
@@ -116,7 +119,7 @@
             var BlankTotals = new Array();
             var BlankLabels = new Array();
             var BlankPercentage = new Array();
-            
+            var blank_total = 0;
             $(document).ready(function(){
                 $.get(url2, function(response){
                     response.forEach(function(data){
@@ -124,7 +127,9 @@
                         BlankTotals.push(data.totals);
                         BlankLabels.push(data.Label);
                         BlankPercentage.push(data.percentage);
+                        blank_total = blank_total + data.totals;
                     });
+                    $("#blank_total").html(blank_total);
                     var ctx = document.getElementById("blanktotals").getContext('2d');
                     var myPieChart = new Chart(ctx, {
                         type: 'doughnut',
@@ -163,13 +168,16 @@
             console.log(url);
             var supplierTotals = new Array();
             var supplierLabels = new Array();
+            var supplier_total = 0;
             $(document).ready(function(){
                 $.get(url3, function(response){
                     response.forEach(function(data){
                         console.log(data);
                         supplierTotals.push(data.totals);
                         supplierLabels.push(data.supplier);
+                        supplier_total = supplier_total + data.totals;
                     });
+                    $("#supplier_total").html(supplier_total);
                     var ctx = document.getElementById("supplierchart").getContext('2d');
                     var myPieChart = new Chart(ctx, {
                         type: 'doughnut',

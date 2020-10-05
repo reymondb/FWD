@@ -42,14 +42,14 @@ class DashboardController extends Controller
         //DB::enableQueryLog();
         $leads=CampaignUse::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(campaign_use.id),")") as CampaignName'),DB::raw('count(campaign_use.id) as total'))
         ->leftjoin('campaign','campaign_use.CampaignID','campaign.id')->groupby('campaign_use.CampaignID')->get();
+        
         //dd(DB::getQueryLog());
         return response()->json($leads);
     }
 
     public function blankchart()
     {
-        //DB::enableQueryLog();
-        
+        //DB::enableQueryLog();        
         $mobile=Contact::select(DB::raw('count(id) as total'))
         ->whereNull('LandlineNum')
         ->orwhere('LandlineNum',"=","")->get();
