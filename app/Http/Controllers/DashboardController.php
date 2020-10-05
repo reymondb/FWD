@@ -50,10 +50,10 @@ class DashboardController extends Controller
     public function blankchart()
     {
         //DB::enableQueryLog();        
-        $mobile=Contact::select(DB::raw('count(id) as total'))
+        $landline=Contact::select(DB::raw('count(id) as total'))
         ->whereNull('LandlineNum')
         ->orwhere('LandlineNum',"=","")->get();
-        $landline=Contact::select(DB::raw('count(id) as total'))
+        $mobile=Contact::select(DB::raw('count(id) as total'))
         ->whereNull('MobileNum')
         ->orwhere('MobileNum',"=","")->get();
         $email=Contact::select(DB::raw('count(id) as total'))
