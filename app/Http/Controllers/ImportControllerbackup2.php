@@ -243,13 +243,13 @@ class ImportController extends Controller
                             }
                             
                         }
-                         if($dbf=="MobileNum"){
+                        else if($dbf=="MobileNum"){
                             $mobile = intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
                             if($mobile==0){
                                 $mobile="";
                             }
                         }
-                         if($dbf=="email"){
+                        else if($dbf=="email"){
                             $email = $row[$index];
                         }
                         
@@ -258,25 +258,80 @@ class ImportController extends Controller
 
                     }
                 }
+                /*
+                $contact->save();
+                */
+                //DB::enableQueryLog();
                 if($checkduplicate==1){
-                    $checkcontact =Contact::select('contacts.id')->where('campaign_id',$campaignid)->where('MobileNum',$mobile)->first();
-                    
+                    $checkcontact =Contact::where('campaign_id',$campaignid)->where('MobileNum',$mobile)->select('contacts.id')->first();
+                    /*
+                    Contact::select('id',          
+                    'MobileNum',
+                    'LandlineNum',
+                    'PhoneCode',
+                    'ListID',
+                    'FirstName',
+                    'LastName',
+                    'Address',
+                    'City',
+                    'State',
+                    'Zip',
+                    'Email')->leftjoin('lead_list')->where('MobileNum',$mobile)->first();*/
                 }
                 else if($checkduplicate==3){                    
-                    $checkcontact =Contact::select('contacts.id')->where('campaign_id',$campaignid)->where('Email',$email)->first();
-                }
-                else{              
-                    $checkcontact =Contact::select('contacts.id')->where('campaign_id',$campaignid)->where('LandlineNum',$landline)->first();
-                  
-                }
-                if($checkcontact){
-                    $duplicated->save();
+                    /*$checkcontact =Contact::select('id',          
+                    'MobileNum',
+                    'LandlineNum',
+                    'PhoneCode',
+                    'ListID',
+                    'FirstName',
+                    'LastName',
+                    'Address',
+                    'City',
+                    'State',
+                    'Zip',
+                    'Email')->where('Email',$email)->first();*/
+                    $checkcontact =LeadList::where('CampaignID',$campaignid)->leftjoin('contacts','lead_list.ContactID','contacts.id')->where('Email',$email)
+                    ->select('contacts.id')->first();
                 }
                 else{
+                   /* $checkcontact =Contact::select('id',          
+                        'MobileNum',
+                        'LandlineNum',
+                        'PhoneCode',
+                        'ListID',
+                        'FirstName',
+                        'LastName',
+                        'Address',
+                        'City',
+                        'State',
+                        'Zip',
+                        'Email')->where('LandlineNum',$landline)->first();
+                        */
+                        
+                    $checkcontact =LeadList::where('CampaignID',$campaignid)->leftjoin('contacts','lead_list.ContactID','contacts.id')->where('Email',$email)
+                    ->select('contacts.id')->first();
+                }
+                //dd(DB::getQueryLog()); die();
+                // print_r($checkcontact);die();   
+                if($checkcontact){
+                    //DB::enableQueryLog(); 
+                    //$checkcontactz = $checkcontact->toArray();
+                     //$duplicatedata[]=$checkcontactz;
+                    //DuplicateLeads::insert($checkcontactz);
+                    //dd(DB::getQueryLog()); die();
+                    //$duplicated['id'] = $checkcontact->id;
+                    //$duplicatedata[] = $duplicated;
+                    $duplicated->save();
+                    
+                }
+                else{
+                    //$zzz = $contact->toArray();
                     $contact->save();
                 }
             }
         }
+        DuplicateLeads::insert($duplicatedata);
         return redirect('/new_leads_report');
     }
    

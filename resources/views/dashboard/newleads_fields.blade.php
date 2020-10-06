@@ -81,7 +81,7 @@
             i = 1;
             var elem = document.getElementById("myBar");
             var width = 10;
-            var id = setInterval(frame, 80);
+            var id = setInterval(frame, 30);
             function frame() {
             if (width >= totalrows) {
                 clearInterval(id);

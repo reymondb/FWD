@@ -18,7 +18,7 @@ class CampaignController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -36,7 +36,7 @@ class CampaignController extends Controller
        
             $campaign = new Campaigns;
             $campaign->CampaignName = $_POST['name'];
-            $campaign->MySQL_url = $_POST['MySQL_url'];
+            $campaign->MySQL_host = $_POST['MySQL_host'];
             $campaign->Mysql_db = $_POST['Mysql_db'];
             $campaign->Mysql_username = $_POST['Mysql_username'];
             $campaign->Mysql_password = $_POST['Mysql_password'];
