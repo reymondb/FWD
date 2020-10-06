@@ -15,7 +15,10 @@ class AddColumnContacts extends Migration
     {
         if (Schema::hasTable('contacts')) {
             Schema::table('contacts', function (Blueprint $table) {
-                $table->string('campaign_id')->after('supplier_id')->default(1)->nullable();
+                $table->index('MobileNum');
+                $table->index('LandlineNum');
+                $table->index('Email');
+                $table->index('campaign_id');
             });
         }
     }
@@ -29,7 +32,10 @@ class AddColumnContacts extends Migration
     {
         if (Schema::hasTable('contacts')) {
             Schema::table('contacts', function (Blueprint $table) {
-                $table->dropColumn('campaign_id');
+                $table->dropIndex('campaign_id');
+                $table->dropIndex('LandlineNum');
+                $table->dropIndex('Email');
+                $table->dropIndex('campaign_id');
             });
         }
     }
