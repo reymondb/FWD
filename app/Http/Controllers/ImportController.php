@@ -270,6 +270,7 @@ class ImportController extends Controller
                   
                 }
                 if($checkcontact){
+                    $duplicated['id'] = $checkcontact->id;
                     $duplicated->save();
                 }
                 else{
