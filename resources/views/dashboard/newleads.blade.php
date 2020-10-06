@@ -39,6 +39,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="campaign" class="col-md-4 control-label">Campaign</label>
+                            <div class="col-md-6">
+                                <select id="campaignid"  class="form-control" name="campaign" required>
+                                    @foreach($campaigns as $c)
+                                        <option value="{{$c->id}}">{{$c->CampaignName}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group{{ $errors->has('csv_file') ? ' has-error' : '' }}">
                             <label for="csv_file" class="col-md-4 control-label">CSV file to import</label>
 

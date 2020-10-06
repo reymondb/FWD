@@ -154,11 +154,6 @@ class ImportController extends Controller
     }
 
 
-    public function getNewLeads()
-    {   
-        return view('dashboard/newleads');
-    }
-
     public function parseNewLeads(CsvImportRequest $request)
     {
         $path = $request->file('csv_file')->getRealPath();
@@ -217,6 +212,7 @@ class ImportController extends Controller
         foreach ($csv_data as $row) {
             if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
                 $contact = new NewLeads();
+                $duplicate = new DuplicateLeads();
                 foreach($request->fields as $index => $field){
                     if(isset($field) || $field!=""){
                        
@@ -239,6 +235,7 @@ class ImportController extends Controller
                         }
                         
                         $contact->$dbf = $val;
+                        $duplicate->$dbf = $val;
 
                     }
                 }
@@ -294,8 +291,9 @@ class ImportController extends Controller
                 // print_r($checkcontact);die();   
                 if($checkcontact){
                     //DB::enableQueryLog(); 
-                    $checkcontactz = $checkcontact->toArray();
-                    DuplicateLeads::insert($checkcontactz);
+                    //$checkcontactz = $checkcontact->toArray();
+                    //DuplicateLeads::insert($checkcontactz);
+                    $duplicate->save();
                     //dd(DB::getQueryLog()); die();
                 }
                 else{

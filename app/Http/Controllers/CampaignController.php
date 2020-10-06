@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Campaigns;
 use App\Models\LeadList;
 use App\Models\LeadBatch;
-
+use Response;
 
 class CampaignController extends Controller
 {
@@ -66,11 +66,11 @@ class CampaignController extends Controller
     public function fetchBatches(Request $request){
 
         $batches = LeadBatch::where('campaign_id', $_POST['campaign'])->get();
-        $options="";
+        $options="<option></option>";
         foreach($batches as $batch){
             $options.="<option value='".$batch->id."'>".$batch->BatchDescription."</option>";
         }
-        return $options;
+        return response()->json(array('optionz' => $options));
 
     }
     

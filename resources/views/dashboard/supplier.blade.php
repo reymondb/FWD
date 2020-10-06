@@ -6,8 +6,8 @@
 <main>
     <div class="container-fluid">
         @if(isset($status))
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">New Supplier Created</li>
+            <ol class="breadcrumb mb-4" style="background: orange;">
+                <li class="breadcrumb-item active" style="color:#FFFFFF">New Supplier Created</li>
             </ol>
         @endif
         <h1 class="mt-4">Suppliers</h1>

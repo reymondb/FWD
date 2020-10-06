@@ -14,6 +14,8 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="csv_data_file_id" value="{{ $csv_data_file->id }}" />
                         <input type="hidden" name="checkduplicate" value="{{ $checkduplicate }}" />
+                        <input type="hidden" name="campaignid" value="{{ $campaignid }}" />
+                        
 
                         <table class="table">
                             @if (isset($csv_header_fields))
@@ -88,7 +90,7 @@
                 width++;
                 elem.style.width = Math.round((width/totalrows)*100) + "%";
                 elem.innerHTML ="  "+ Math.round((width/totalrows)*100)  + " %";
-                document.getElementById("counter").innerHTML = width  + " upoaded";
+                document.getElementById("counter").innerHTML = width  + " washed";
                 
             }
             }

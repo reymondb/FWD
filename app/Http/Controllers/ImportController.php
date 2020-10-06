@@ -143,17 +143,20 @@ class ImportController extends Controller
         }
         return view('dashboard/import_success')->with('totalcount',$x);
     }
-
-
+    
     public function getNewLeads()
     {   
-        return view('dashboard/newleads');
+        $campaigns = Campaigns::all();
+        
+        return view('dashboard/newleads')->with('campaigns',$campaigns);
     }
+
 
     public function parseNewLeads(CsvImportRequest $request)
     {
         $path = $request->file('csv_file')->getRealPath();
         $checkduplicate = $request->checkduplicate;
+        $campaignid = $request->campaignid;
        
         //if ($request->has('header')) {
            // $data = Excel::load($path, function($reader) {})->get()->toArray();
@@ -180,7 +183,7 @@ class ImportController extends Controller
             return redirect()->back();
         }
 
-        return view('dashboard/newleads_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('checkduplicate',$checkduplicate)->with('totalrows',$total);
+        return view('dashboard/newleads_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('checkduplicate',$checkduplicate)->with('totalrows',$total)->with('campaignid',$campaignid);
 
     }
 
@@ -188,6 +191,7 @@ class ImportController extends Controller
     {
         
         $checkduplicate = $request->checkduplicate;
+        $campaignid = $request->checkduplicate;
         //$csv_data = json_decode($data->csv_data, true);
         //import csv start
         $data = CsvData::find($request->csv_data_file_id);
@@ -214,6 +218,7 @@ class ImportController extends Controller
             $email="";
             if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
                 $contact = new NewLeads();
+                $duplicated = array();
                 foreach($request->fields as $index => $field){
                     if(isset($field) || $field!=""){
                        
@@ -246,6 +251,7 @@ class ImportController extends Controller
                         }
                         
                         $contact->$dbf = $val;
+                        $duplicated[$dbf] = $val;
 
                     }
                 }
@@ -254,7 +260,10 @@ class ImportController extends Controller
                 */
                 //DB::enableQueryLog();
                 if($checkduplicate==1){
-                    $checkcontact =Contact::select('id',          
+                    $checkcontact =LeadList::where('CampaignID',$campaignid)->leftjoin('contacts','lead_list.ContactID','contacts.id')->where('MobileNum',$mobile)
+                    ->select('contacts.id')->first();
+                    /*
+                    Contact::select('id',          
                     'MobileNum',
                     'LandlineNum',
                     'PhoneCode',
@@ -265,10 +274,10 @@ class ImportController extends Controller
                     'City',
                     'State',
                     'Zip',
-                    'Email')->where('MobileNum',$mobile)->first();
+                    'Email')->leftjoin('lead_list')->where('MobileNum',$mobile)->first();*/
                 }
                 else if($checkduplicate==3){                    
-                    $checkcontact =Contact::select('id',          
+                    /*$checkcontact =Contact::select('id',          
                     'MobileNum',
                     'LandlineNum',
                     'PhoneCode',
@@ -279,10 +288,12 @@ class ImportController extends Controller
                     'City',
                     'State',
                     'Zip',
-                    'Email')->where('Email',$email)->first();
+                    'Email')->where('Email',$email)->first();*/
+                    $checkcontact =LeadList::where('CampaignID',$campaignid)->leftjoin('contacts','lead_list.ContactID','contacts.id')->where('Email',$email)
+                    ->select('contacts.id')->first();
                 }
                 else{
-                    $checkcontact =Contact::select('id',          
+                   /* $checkcontact =Contact::select('id',          
                         'MobileNum',
                         'LandlineNum',
                         'PhoneCode',
@@ -294,17 +305,23 @@ class ImportController extends Controller
                         'State',
                         'Zip',
                         'Email')->where('LandlineNum',$landline)->first();
-
+                        */
+                        
+                    $checkcontact =LeadList::where('CampaignID',$campaignid)->leftjoin('contacts','lead_list.ContactID','contacts.id')->where('Email',$email)
+                    ->select('contacts.id')->first();
                 }
                 //dd(DB::getQueryLog()); die();
                 // print_r($checkcontact);die();   
                 if($checkcontact){
                     //DB::enableQueryLog(); 
-                    $checkcontactz = $checkcontact->toArray();
-                     
-                    $duplicatedata[]=$checkcontactz;
+                    //$checkcontactz = $checkcontact->toArray();
+                     //$duplicatedata[]=$checkcontactz;
                     //DuplicateLeads::insert($checkcontactz);
                     //dd(DB::getQueryLog()); die();
+                    $duplicated['id'] = $checkcontact->id;
+                    $duplicatedata[] = $duplicated;
+                    //$duplicated->save();
+                    
                 }
                 else{
                     //$zzz = $contact->toArray();

@@ -6,8 +6,8 @@
 <main>
     <div class="container-fluid">
         @if(isset($status))
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">New Campaign Created</li>
+            <ol class="breadcrumb mb-4" style="background: orange;">
+                <li class="breadcrumb-item active" style="color:#FFFFFF">New Campaign Created</li>
             </ol>
         @endif
         <h1 class="mt-4">Campaigns</h1>
@@ -86,17 +86,17 @@
                                 </td>
                                 <td>Batch</td>
                                 <td>
-                                    <select name="batches_search" required  >
+                                    <select name="batches_search" id="batches_search" required  >
                                         <option></option>
                                     </select>
-
                                 </td>
+                                <td><input type="submit" name="view" value="View" class="btn btn-primary"></td>
                             </tr>
                         </table>
                         
                    
                     </form>
-                    <iframe name="campaign_container" id="campaign_container"></iframe>
+                    <iframe name="campaign_container" id="campaign_container" width="100%" height="500px" style="border:0"></iframe>
                 </div>
             </div>
         </div>
@@ -179,7 +179,7 @@
     }
     
     function fetchBatches(){
-        console.log("waaa"+$("#campaign_search").val());
+        
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': $('input[name=_token]').val()
@@ -188,12 +188,11 @@
         $.ajax({
             url: "/fetchBatches",
             type: 'POST',
+            dataType: "json",
             data: {campaign:$("#campaign_search").val()},
-            contentType: false, // The content type used when sending data to the server.
-            cache: false, // To unable request pages to be cached
-            processData: false,
             success: function (data) {
-                $("#batches_search").html(data); 
+                console.log("dri = "+data.optionz);
+                $("#batches_search").html(data.optionz); 
             return false;
             }            
         });
