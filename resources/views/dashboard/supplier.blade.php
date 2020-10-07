@@ -17,12 +17,14 @@
                 <div class="table-responsive">
                     <form id="createsupplier" action="/createsupplier" enctype="multipart/form-data" method="post">
                         @csrf
-                        <table class="table table-condensed table-bordered table-striped col-md-4" style="margin-top: 20px ">
+                        <table class="table table-condensed table-bordered table-striped col-md-6" style="margin-top: 20px ">
                             <tr>
                                 <td>Supplier Name</td>
                                 <td><input type="text" name="name" id="name" required  autocomplete="off"></td>
                                 <td>Email</td>
                                 <td><input type="text" name="email" id="email" required  autocomplete="off"></td>
+                                <td>Role</td>
+                                <td><select name="role"><option value="1">Admin</option><option value="2">User</option><option value="3">Supplier</option></select></td>
                                 <td>Password</td>
                                 <td><input type="text" name="password" id="password" required  autocomplete="off"></td>
                                 <td ><input type="submit" class="btn btn-primary" value="Create Supplier" style="font-size:14px"></td>
@@ -52,7 +54,7 @@
                                 <td>{{$c->id}}</td>
                                 <td>{{$c->name}}</td>
                                 <td>{{$c->email}}</td>
-                                <td><a onclick="editsupplier('{{$c->id}}','{{addslashes($c->name)}}','{{addslashes($c->email)}}')" href="#ex1" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></a></td>
+                                <td><a onclick="editsupplier('{{$c->id}}','{{addslashes($c->name)}}','{{addslashes($c->email)}}','{{addslashes($c->role)}}')" href="#ex1" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></a></td>
                                 <td><a href="/deletesupplier/{{$c->id}}" onclick="return confirm('Are you sure?')"class="delete"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             @endforeach
@@ -95,15 +97,22 @@
                                             </div>
                                         </div> 
                                         <div class="form-group">
+                                            <label for="campaign" class="col-md-4 control-label">Role</label>
+                                            <div class="col-md-6">
+                                                <select name="editrole" id="editrole"><option value="1">Admin</option><option value="2">User</option><option value="3">Supplier</option></select>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="form-group">
                                             <label for="campaign" class="col-md-4 control-label">New Password</label>
                                             <div class="col-md-6">
-                                                <input type="password" id="editpassword"  class="form-control" name="editpassword" required />
+                                                <input type="password" id="editpassword"  class="form-control" name="editpassword"  />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="campaign" class="col-md-4 control-label">Confirm Password</label>
                                             <div class="col-md-6">
-                                                <input type="password" id="confirm_password"  class="form-control" name="confirm_password" required />
+                                                <input type="password" id="confirm_password"  class="form-control" name="confirm_password"  />
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -135,7 +144,7 @@
     , confirm_password = document.getElementById("confirm_password");
 
     function validatePassword(){
-        if(password.value != confirm_password.value) {
+        if(password.value != confirm_password.value && password.value!='') {
             confirm_password.setCustomValidity("Passwords Don't Match");
         } else {
             confirm_password.setCustomValidity('');
@@ -154,11 +163,13 @@
         } );
     });
 
-    function editsupplier(id,name,email){
+    function editsupplier(id,name,email,role){
         console.log("here"+name);
         $("#id").val(id);
         $("#editname").val(name);
         $("#editemail").val(email);
+        $("#editrole").val(role);
+        
     }
 
 </script>

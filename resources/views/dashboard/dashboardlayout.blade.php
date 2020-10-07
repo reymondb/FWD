@@ -54,24 +54,35 @@
                     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #3368e8;">
                         <div class="sb-sidenav-menu">
                             <div class="nav">
+                                
+                                @if(Auth::user()->role ==1 || Auth::user()->role ==2)
                                 <a class="nav-link" href="/dashboard"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                    Dashboard
+                                    Dashboard 
                                 </a>
+                                @endif
+                                @if(Auth::user()->role ==1 || Auth::user()->role ==2)
                                 <a class="nav-link" href="/campaigns"><div class="sb-nav-link-icon"><i class="fas fa-headset"></i></div>
                                     Campaigns
                                 </a>
+                                @endif
+                                @if(Auth::user()->role ==1 || Auth::user()->role ==2)
                                 <a class="nav-link" href="/leads"><div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                     Leads
                                 </a>
+                                @endif
+                                @if( Auth::user()->role ==1)
                                 <a class="nav-link" href="/import"><div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
                                     Migrate Leads
                                 </a>
+                                @endif
                                 <a class="nav-link" href="/newleads"><div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
                                     Lead Washing
                                 </a>
+                                @if( Auth::user()->role ==1)
                                 <a class="nav-link" href="/supplier"><div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
-                                    Supplier
+                                    Users
                                 </a>
+                                @endif
                             </div>
                         </div>
                         <div class="sb-sidenav-footer">

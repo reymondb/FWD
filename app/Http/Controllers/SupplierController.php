@@ -36,6 +36,8 @@ class SupplierController extends Controller
         $supplier = new User;
         $supplier->name = $_POST['name'];
         $supplier->email = $_POST['email'];
+        $supplier->role = $_POST['role'];
+        
         $supplier->password = Hash::make($_POST['password']);
         $supplier->save();
 
@@ -49,6 +51,7 @@ class SupplierController extends Controller
         $supplier = User::where('id',$request->id)->first();
         $supplier->name = $request->editname;
         $supplier->email = $request->editemail;
+        $supplier->role = $request->editrole;
         
         if($request['editpassword'] != null || $request['editpassword'] != ''){
             $supplier->password = Hash::make($request['editpassword']);
@@ -59,15 +62,9 @@ class SupplierController extends Controller
 
     }
     public function deletesupplier($id){
-        
         $supplier = User::where('id',$id)->delete();
-        
-
         return redirect('/supplier')->with('status', 'deleted');
-
     }
-
-    
 
     public function deleteCampaign($id)
     {

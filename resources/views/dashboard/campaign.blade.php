@@ -47,8 +47,10 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Campaign name</th>
+                                @if( Auth::user()->role ==1)
                                 <th class="actions">Edit</th>
                                 <th class="actions">Delete</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -56,8 +58,10 @@
                             <tr>
                                 <td>{{$c->id}}</td>
                                 <td>{{$c->CampaignName}}</td>
+                                @if( Auth::user()->role ==1)
                                 <td><a onclick="editcampaign('{{$c->id}}','{{addslashes($c->CampaignName)}}','{{$c->MySQL_url}}','{{$c->Mysql_db}}','{{$c->Mysql_username}}','{{$c->Mysql_password}}')" href="#ex1" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></a></td>
                                 <td><a href="/deletecampaign/{{$c->id}}" onclick="return confirm('Are you sure?')"class="delete"><i class="fas fa-trash-alt"></i></a></td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>
