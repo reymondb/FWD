@@ -1,4 +1,15 @@
-
+<!DOCTYPE html>
+<!--  This site was created in Webflow. http://www.webflow.com  -->
+<!--  Last Published: Wed May 20 2020 16:50:31 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5ec29d102100e50acf8345d8" data-wf-site="5ec29d102100e54eaf8345d7">
+    <head>
+    <meta content="@yield('og')" property="og:title">
+    <meta content="@yield('twitter')" property="twitter:title">  
+    <meta charset="utf-8">
+    <title>@yield('title')</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Webflow" name="generator">
+    
     <link href="/css/fwd.webflow.css" rel="stylesheet" type="text/css">
     <script src="https://use.typekit.net/cmh4dsx.js" type="text/javascript"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -11,6 +22,10 @@
     <link href="/css/custom.css" rel="stylesheet" />
     <script src="//code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    
+    @yield('css')
+    </head>
+    <body class="sb-nav-fixed">
 <main>
     <div class="container-fluid">
         <div class="card mb-4">
@@ -117,3 +132,5 @@
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
 
     
+</body>
+</html>
