@@ -54,6 +54,7 @@ Route::get('/deletecampaign/{id}', 'CampaignController@deleteCampaign')->name('d
 Route::post('/editcampaign', 'CampaignController@editCampaign')->name('editCampaign');
 Route::get('/search_campaign', 'CampaignController@search_campaign')->name('search_campaign');
 Route::post('/fetchBatches', 'CampaignController@fetchBatches')->name('fetchBatches');
+Route::get('/deletebatch/{batch_id}', 'CampaignController@deleteBatch')->name('deletebatch');
 
 
 Route::get('/supplier', 'SupplierController@supplier')->name('supplier');

@@ -13,54 +13,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 <main>
     <div class="container-fluid">
-        <div class="card mb-4">
-            <div class="card-header"><i class="fas fa-table mr-1"></i>Contact Leads <b>(TOTAL: {{$contacts->total()}})</b> @if(isset($batch_id)) <a href="/deletebatch/{{$batch_id}}" id="confirmation" class="btn btn-danger">Delete Batch</a>@endif</div>
-            <div class="card-body">
-                <div class="table-responsive">                    
-                    <table id="batch_leads" class="table table-condensed table-bordered table-striped " >
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>MobileNum</th>
-                                <th>Landline</th>
-                                <th>FirstName</th>
-                                <th>LastName</th>
-                                <th>Address</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($contacts as $d)
-                                <tr>
-                                    <td>{{$d->id}}</td>
-                                    <td>{{$d->MobileNum}}</td>
-                                    <td>{{$d->LandlineNum}}</td>
-                                    <td>{{$d->FirstName}}</td>
-                                    <td>{{$d->LastName}}</td>
-                                    <td>{{$d->Address}}</td>
-                                    <td>{{$d->Email}}</td>                                  
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <b>TOTAL: {{$contacts->total()}}</b>
-                    {{ $contacts->appends(request()->query())->links() }}
-                </div>
-            </div>
-        </div>
+        <h1>{{$message}}</h1>
     </div>
     
 </main>
-<style>
-    #batch_leads td,#batch_leads th {
-        font-size:12px;
-    }
-</style>
-<script type="text/javascript">
-    $('#confirmation').on('click', function () {
-        return confirm('Are you sure?');
-    });
-</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/scripts.js"></script>
     

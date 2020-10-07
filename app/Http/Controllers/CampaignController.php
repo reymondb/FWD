@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Contact;
 use App\Models\Campaigns;
 use App\Models\LeadList;
 use App\Models\LeadBatch;
+use App\Models\CampaignUse;
 use Response;
 
 class CampaignController extends Controller
@@ -26,9 +27,9 @@ class CampaignController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request){
         $campaigns=Campaigns::all();
+        
         return view('dashboard/campaign')->with('campaigns',$campaigns);
     }
 
@@ -80,11 +81,24 @@ class CampaignController extends Controller
         ->leftjoin("contacts",'lead_list.ContactID','contacts.id')
         ->where('BatchID',$batches_search)
         ->paginate(15);
+        if(!$contacts){
+            return view('dashboard/batchmessage')->with('message','Batch has no leads.');
+        }
         return view('dashboard/batchleads')->with('contacts',$contacts)->with('batch_id',$batches_search);
 
     }
     
     
+    public function deleteBatch($batchid){
+        $contactsfirst = LeadList::select('ContactID')->orderby('id','asc')->where('BatchID',$batchid)->first();
+        $contactslast = LeadList::select('ContactID')->orderby('id','desc')->where('BatchID',$batchid)->first();
+        LeadBatch::find($batchid)->delete();
+        LeadList::where('BatchID',$batchid)->delete();
+        CampaignUse::whereBetween('ContactID', [$contactsfirst->ContactID, $contactslast->ContactID])->delete();
+        Contact::whereBetween('id', [$contactsfirst->ContactID, $contactslast->ContactID])->delete();
 
+        return view('dashboard/batchmessage')->with('message','Batch Has been deleted');
+
+    }
 
 }
