@@ -52,7 +52,7 @@ Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
 Route::post('/createcampaign', 'CampaignController@createCampaign')->name('createCampaign');
 Route::get('/deletecampaign/{id}', 'CampaignController@deleteCampaign')->name('deleteCampaign');
 Route::post('/editcampaign', 'CampaignController@editCampaign')->name('editCampaign');
-Route::post('/search_campaign', 'CampaignController@search_campaign')->name('search_campaign');
+Route::get('/search_campaign', 'CampaignController@search_campaign')->name('search_campaign');
 Route::post('/fetchBatches', 'CampaignController@fetchBatches')->name('fetchBatches');
 
 

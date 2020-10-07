@@ -124,13 +124,7 @@
         <link rel='stylesheet' href='/css/spectrum.css' />
         <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
         
-        <script>
-            $(document).ready(function(){
-                $( "input.date-picker" ).datepicker({changeMonth: true,changeYear: true    });
-                $('input.timepicker').timepicker({});
-            });
-
-        </script> 
+        
         @yield('js')
     </body>
 </html>

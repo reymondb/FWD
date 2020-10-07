@@ -65,16 +65,17 @@
                     </table>
                 </div>
             </div>
+        </div>
             
         <div class="card mb-4">
             <div class="card-header">View/Delete Campaign Leads</div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <form id="search_campaign_leads" action="/search_campaign" method="post" target="campaign_container">
+                    <form id="search_campaign_leads" action="/search_campaign" method="get" target="campaign_container">
                         @csrf
-                        <table class="table table-condensed table-bordered table-striped col-md-3" style="margin-top: 20px ">
+                        <table class="table table-condensed table-bordered table-striped col-md-6">
                             <tr>
-                                <td>Campaign Name</td>
+                                <td><b>Campaign Name</b></td>
                                 <td>
                                     <select name="campaign_search" id="campaign_search" onchange="fetchBatches()" required  >
                                         <option></option>
@@ -84,7 +85,7 @@
                                     </select>
 
                                 </td>
-                                <td>Batch</td>
+                                <td><b>Batch</b></td>
                                 <td>
                                     <select name="batches_search" id="batches_search" required  >
                                         <option></option>
@@ -99,7 +100,6 @@
                     <iframe name="campaign_container" id="campaign_container" width="100%" height="500px" style="border:0"></iframe>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </main>

@@ -36,7 +36,7 @@ class CampaignController extends Controller
        
             $campaign = new Campaigns;
             $campaign->CampaignName = $_POST['name'];
-            $campaign->MySQL_host = $_POST['MySQL_host'];
+            $campaign->MySQL_host = $_POST['MySQL_url'];
             $campaign->Mysql_db = $_POST['Mysql_db'];
             $campaign->Mysql_username = $_POST['Mysql_username'];
             $campaign->Mysql_password = $_POST['Mysql_password'];
@@ -75,12 +75,12 @@ class CampaignController extends Controller
     }
     
     public function search_campaign(Request $request){
-
-        $campaign = Campaigns::where('id', $_POST['id'])->first();
-        $campaign->CampaignName = $_POST['editname'];
-        $campaign->save();
-
-        return redirect('/campaigns')->with('status', 'saved');
+        $batches_search = $request['batches_search'];
+        $contacts = LeadList::select('contacts.*')
+        ->leftjoin("contacts",'lead_list.ContactID','contacts.id')
+        ->where('BatchID',$batches_search)
+        ->paginate(15);
+        return view('dashboard/batchleads')->with('contacts',$contacts)->with('batch_id',$batches_search);
 
     }
     
