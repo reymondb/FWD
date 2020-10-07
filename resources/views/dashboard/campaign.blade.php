@@ -97,7 +97,7 @@
                         
                    
                     </form>
-                    <iframe name="campaign_container" id="campaign_container" width="100%" height="500px" style="border:0"></iframe>
+                    <iframe name="campaign_container" id="campaign_container" width="100%" height="800px" style="border:0" src="https://188.166.215.132/search_campaign?_token=Cthf6hKY9y5IW0gXuMWay4eZ2iJvMyMkSRX0EqzU&campaign_search=1&batches_search=8&view=View"></iframe>
                 </div>
             </div>
         </div>
