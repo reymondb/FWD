@@ -58,6 +58,16 @@ class SupplierController extends Controller
         return redirect('/supplier')->with('status', 'saved');
 
     }
+    public function deletesupplier($id){
+        
+        $supplier = User::where('id',$id)->delete();
+        
+
+        return redirect('/supplier')->with('status', 'deleted');
+
+    }
+
+    
 
     public function deleteCampaign($id)
     {
