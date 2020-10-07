@@ -33,11 +33,26 @@ class SupplierController extends Controller
     
     public function createSupplier(Request $request){
         
-        $email=$_POST['name']."@mail.com";
         $supplier = new User;
         $supplier->name = $_POST['name'];
-        $supplier->email = $email;
-        $supplier->password = Hash::make($email);
+        $supplier->email = $_POST['email'];
+        $supplier->password = Hash::make($_POST['password']);
+        $supplier->save();
+
+        return redirect('/supplier')->with('status', 'saved');
+
+    }
+
+    
+    public function editSupplier(Request $request){
+        
+        $supplier = User::where('id',$request->id)->first();
+        $supplier->name = $request->editname;
+        $supplier->email = $request->editemail;
+        
+        if($request['editpassword'] != null || $request['editpassword'] != ''){
+            $supplier->password = Hash::make($request['editpassword']);
+        }
         $supplier->save();
 
         return redirect('/supplier')->with('status', 'saved');
