@@ -37,7 +37,6 @@ class SupplierController extends Controller
         $supplier->name = $_POST['name'];
         $supplier->email = $_POST['email'];
         $supplier->role = $_POST['role'];
-        
         $supplier->password = Hash::make($_POST['password']);
         $supplier->save();
 
