@@ -36,8 +36,8 @@ class OptimizerController extends Controller
          $chart2=Charts::select('created_at')->where('chart_type',2)->first();
          $chart3=Charts::select('created_at')->where('chart_type',3)->first();
         
-         return view('dashboard/charts')->with('chart1',$chart1)->with('chart2',$chart2)->with('chart3',$chart3);
-         //return view('dashboard/charts')->with('chart1',date("M d,Y h:i:s A",strtotime($chart1->created_at)))->with('chart2',date("M d,Y h:i:s A",strtotime($chart2->created_at)))->with('chart3',date("M d,Y h:i:s A",strtotime($chart3->created_at)));
+         //return view('dashboard/charts')->with('chart1',$chart1)->with('chart2',$chart2)->with('chart3',$chart3);
+         return view('dashboard/charts')->with('chart1',date("M d,Y h:i:s A",strtotime($chart1->created_at)))->with('chart2',date("M d,Y h:i:s A",strtotime($chart2->created_at)))->with('chart3',date("M d,Y h:i:s A",strtotime($chart3->created_at)));
 
     }
 
