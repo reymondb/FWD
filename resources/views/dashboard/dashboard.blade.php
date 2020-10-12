@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <h1 class="mt-4">Dashboard</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Total Number Of Lead Rows: <b>{{$total[0]->total}}</b></li>
+                    <li class="breadcrumb-item active">Total Number Of Lead Rows: <b>{{number_format($total[0]->total)}}</b></li>
                 </ol>
                
             </div>
@@ -67,6 +67,9 @@
           
 
         <script>
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
             var url = "{{url('leadschart')}}";
             console.log(url);
             var Totals = new Array();
@@ -80,7 +83,7 @@
                         Labels.push(data.CampaignName);
                         campaigntotals = campaigntotals + data.total;
                     });
-                    $("#campaign_total").html(campaigntotals);
+                    $("#campaign_total").html(numberWithCommas(campaigntotals));
                     var ctx = document.getElementById("campaigntotals").getContext('2d');
                     var myPieChart = new Chart(ctx, {
                         type: 'doughnut',
@@ -129,7 +132,7 @@
                         BlankPercentage.push(data.percentage);
                         blank_total = blank_total + data.totals;
                     });
-                    $("#blank_total").html(blank_total);
+                    $("#blank_total").html(numberWithCommas(blank_total));
                     var ctx = document.getElementById("blanktotals").getContext('2d');
                     var myPieChart = new Chart(ctx, {
                         type: 'doughnut',
@@ -177,7 +180,7 @@
                         supplierLabels.push(data.supplier);
                         supplier_total = supplier_total + data.totals;
                     });
-                    $("#supplier_total").html(supplier_total);
+                    $("#supplier_total").html(numberWithCommas(supplier_total));
                     var ctx = document.getElementById("supplierchart").getContext('2d');
                     var myPieChart = new Chart(ctx, {
                         type: 'doughnut',

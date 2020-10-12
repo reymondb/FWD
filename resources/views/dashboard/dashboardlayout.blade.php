@@ -83,6 +83,12 @@
                                     Users
                                 </a>
                                 @endif
+                                
+                                @if(Auth::user()->role ==1 )
+                                <a class="nav-link" href="/optimize"><div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
+                                    Manage Charts
+                                </a>
+                                @endif
                             </div>
                         </div>
                         <div class="sb-sidenav-footer">

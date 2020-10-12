@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Contact;
 use App\Models\Campaigns;
 use App\Models\CampaignUse;
+use App\Models\Charts;
 use Auth;
 use DB;
 
@@ -40,17 +41,18 @@ class DashboardController extends Controller
     public function leadschart()
     {
         //DB::enableQueryLog();
-        $leads=CampaignUse::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(campaign_use.id),")") as CampaignName'),DB::raw('count(campaign_use.id) as total'))
+        /*$leads=CampaignUse::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(campaign_use.id),")") as CampaignName'),DB::raw('count(campaign_use.id) as total'))
         ->leftjoin('campaign','campaign_use.CampaignID','campaign.id')->groupby('campaign_use.CampaignID')->get();
-        
+        */
         //dd(DB::getQueryLog());
-        return response()->json($leads);
+        $data=Charts::where('chart_type',1)->orderBy('label')->select(DB::raw('label as CampaignName'),'total')->get();
+        return response()->json($data);
     }
 
     public function blankchart()
     {
         //DB::enableQueryLog();        
-        $landline=Contact::select(DB::raw('count(id) as total'))
+        /*$landline=Contact::select(DB::raw('count(id) as total'))
         ->whereNull('LandlineNum')
         ->orwhere('LandlineNum',"=","")->get();
         $mobile=Contact::select(DB::raw('count(id) as total'))
@@ -73,16 +75,20 @@ class DashboardController extends Controller
         $data[4] = array('Label' => 'No Lastname ('.$lastname[0]->total.')','totals' => $lastname[0]->total);
         
         //dd(DB::getQueryLog());
+        */
+        $data=Charts::where('chart_type',3)->orderBy('label')->select(DB::raw('label as Label'),DB::raw('total as totals'))->get();
         return response()->json($data);
     }
 
     public function supplierchart()
     {
         //DB::enableQueryLog();
-        $leads=Contact::select(DB::raw('CONCAT(users.name,"(",count(contacts.id),")") as supplier'),DB::raw('count(contacts.id) as totals'))
+        /*$leads=Contact::select(DB::raw('CONCAT(users.name,"(",count(contacts.id),")") as supplier'),DB::raw('count(contacts.id) as totals'))
         ->leftjoin('users','contacts.supplier_id','users.id')->groupby('contacts.supplier_id')->get();
         //dd(DB::getQueryLog());
-        return response()->json($leads);
+        return response()->json($leads);*/
+        $data=Charts::where('chart_type',2)->orderBy('label')->select(DB::raw('label as supplier'),DB::raw('total as totals'))->get();
+        return response()->json($data);
     }
 
 }

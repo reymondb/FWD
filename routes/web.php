@@ -14,6 +14,7 @@
 
 
 Auth::routes();
+Route::get('/', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
@@ -63,6 +64,10 @@ Route::get('/deletesupplier/{id}', 'SupplierController@deleteSupplier')->name('d
 Route::post('/editsupplier', 'SupplierController@editSupplier')->name('editSupplier');
 
 Route::get('/reports', 'ReportsController@fetchReport')->name('fetchReport');
+Route::get('/optimize', 'OptimizerController@index')->name('optimize');
+Route::get('/optimizeChart1', 'OptimizerController@leadschart')->name('optimize1');
+Route::get('/optimizeChart2', 'OptimizerController@supplierchart')->name('optimize2');
+Route::get('/optimizeChart3', 'OptimizerController@blankchart')->name('optimize3');
 
 /**
  * middleware('App\Http\Middleware\AdminMiddleware')->
