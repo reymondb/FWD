@@ -32,10 +32,18 @@ class OptimizerController extends Controller
      */
     public function index()
     {
-         $chart1=Charts::select('created_at')->where('chart_type',1)->first();
-         $chart2=Charts::select('created_at')->where('chart_type',2)->first();
-         $chart3=Charts::select('created_at')->where('chart_type',3)->first();
-
+        $chart1=Charts::select('created_at')->where('chart_type',1)->first();
+        $chart2=Charts::select('created_at')->where('chart_type',2)->first();
+        $chart3=Charts::select('created_at')->where('chart_type',3)->first();
+        if($charts1){
+            $chart1=date("M d,Y h:i:s A",strtotime($chart1->created_at));
+        }
+        if($charts2){
+            $chart2=date("M d,Y h:i:s A",strtotime($chart2->created_at));
+        }
+        if($charts3){
+            $chart3=date("M d,Y h:i:s A",strtotime($chart3->created_at));
+        }
          return view('dashboard/charts')->with('chart1',$chart1)->with('chart2',$chart2)->with('chart3',$chart3);
          //return view('dashboard/charts')->with('chart1',date("M d,Y h:i:s A",strtotime($chart1->created_at)))->with('chart2',date("M d,Y h:i:s A",strtotime($chart2->created_at)))->with('chart3',date("M d,Y h:i:s A",strtotime($chart3->created_at)));
 
