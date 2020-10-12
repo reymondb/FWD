@@ -36,7 +36,8 @@ class OptimizerController extends Controller
          $chart2=Charts::select('created_at')->where('chart_type',2)->first();
          $chart3=Charts::select('created_at')->where('chart_type',3)->first();
 
-         return view('dashboard/charts')->with('chart1',date("M d,Y h:i:s A",strtotime($chart1->created_at)))->with('chart2',date("M d,Y h:i:s A",strtotime($chart2->created_at)))->with('chart3',date("M d,Y h:i:s A",strtotime($chart3->created_at)));
+         return view('dashboard/charts')->with('chart1',$chart1)->with('chart2',$chart2)->with('chart3',$chart3);
+         //return view('dashboard/charts')->with('chart1',date("M d,Y h:i:s A",strtotime($chart1->created_at)))->with('chart2',date("M d,Y h:i:s A",strtotime($chart2->created_at)))->with('chart3',date("M d,Y h:i:s A",strtotime($chart3->created_at)));
 
     }
 
@@ -55,7 +56,7 @@ class OptimizerController extends Controller
         }
         
         //dd(DB::getQueryLog());
-        $date=date("M d,Y h:i:s A",strtotime($chart->created_at));
+        $date=date("M d,Y H:i:s",strtotime($chart->created_at));
         return $date;
     }
 
@@ -113,7 +114,7 @@ class OptimizerController extends Controller
         $chart->save();
 
         //dd(DB::getQueryLog());
-        $date=date("M d,Y h:i:s A",strtotime($chart->created_at));
+        $date=date("M d,Y H:i:s",strtotime($chart->created_at));
         return $date;
     }
 
@@ -131,7 +132,7 @@ class OptimizerController extends Controller
             $chart->chart_type=2 ;
             $chart->save();
         }
-        $date=date("M d,Y h:i:s A",strtotime($chart->created_at));
+        $date=date("M d,Y H:i:s",strtotime($chart->created_at));
         return $date;
     }
 
