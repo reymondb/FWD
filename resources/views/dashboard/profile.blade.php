@@ -33,6 +33,7 @@
                         <div class="form-group">
                             <label for="campaign" class="col-md-4 control-label">New Password</label>
                             <div class="col-md-6">
+                                <span style="font-style: italic;font-size:12px">*Leave the field blank if you don't want to change password</span>
                                 <input type="password" id="password"  class="form-control" name="password" required />
                             </div>
                         </div>
