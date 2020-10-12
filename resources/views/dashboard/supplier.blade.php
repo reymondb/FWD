@@ -10,6 +10,12 @@
                 <li class="breadcrumb-item active" style="color:#FFFFFF">New Supplier Created</li>
             </ol>
         @endif
+        @if(isset($error))
+            <ol class="breadcrumb mb-4 bg-danger" >
+                <li class="breadcrumb-item active r" style="color:#FFFFFF">Email Already Exist.</li>
+            </ol>
+        @endif
+        
         <h1 class="mt-4">Suppliers</h1>
         <div class="card mb-4">
             <div class="card-header">Create a Supplier</div>

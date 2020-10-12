@@ -32,30 +32,40 @@ class SupplierController extends Controller
     }
     
     public function createSupplier(Request $request){
-        
-        $supplier = new User;
-        $supplier->name = $_POST['name'];
-        $supplier->email = $_POST['email'];
-        $supplier->role = $_POST['role'];
-        $supplier->password = Hash::make($_POST['password']);
-        $supplier->save();
+        try {
+            $supplier = new User;
+            $supplier->name = $_POST['name'];
+            $supplier->email = $_POST['email'];
+            $supplier->role = $_POST['role'];
+            $supplier->password = Hash::make($_POST['password']);
+            $supplier->save();
+        } catch (\Illuminate\Database\QueryException $e) {
+            $suppliers=User::where('id','!=','1')->get();
+            return view('dashboard/supplier')->with('suppliers',$suppliers)->with('error',"Email already exist.");
+        }
 
-        return redirect('/supplier')->with('status', 'saved');
+        
+        $suppliers=User::where('id','!=','1')->get();
+        return view('dashboard/supplier')->with('suppliers',$suppliers)->with('status',"success");
 
     }
 
     
     public function editSupplier(Request $request){
-        
-        $supplier = User::where('id',$request->id)->first();
-        $supplier->name = $request->editname;
-        $supplier->email = $request->editemail;
-        $supplier->role = $request->editrole;
-        
-        if($request['editpassword'] != null || $request['editpassword'] != ''){
-            $supplier->password = Hash::make($request['editpassword']);
+        try {
+            $supplier = User::where('id',$request->id)->first();
+            $supplier->name = $request->editname;
+            $supplier->email = $request->editemail;
+            $supplier->role = $request->editrole;
+            
+            if($request['editpassword'] != null || $request['editpassword'] != ''){
+                $supplier->password = Hash::make($request['editpassword']);
+            }
+            $supplier->save();
+        } catch (\Illuminate\Database\QueryException $e) {
+            $suppliers=User::where('id','!=','1')->get();
+            return view('dashboard/supplier')->with('suppliers',$suppliers)->with('error',"Email already exist.");
         }
-        $supplier->save();
 
         return redirect('/supplier')->with('status', 'saved');
 

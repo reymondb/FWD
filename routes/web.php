@@ -60,8 +60,10 @@ Route::get('/deletebatch/{batch_id}', 'CampaignController@deleteBatch')->name('d
 
 Route::get('/supplier', 'SupplierController@supplier')->name('supplier');
 Route::post('/createsupplier', 'SupplierController@createSupplier')->name('createSupplier');
+Route::get('/createsupplier', 'SupplierController@supplier')->name('createSupplierz');
 Route::get('/deletesupplier/{id}', 'SupplierController@deleteSupplier')->name('deleteSupplier');
 Route::post('/editsupplier', 'SupplierController@editSupplier')->name('editSupplier');
+Route::get('/editsupplier', 'SupplierController@supplier')->name('editSupplierz');
 
 Route::get('/reports', 'ReportsController@fetchReport')->name('fetchReport');
 Route::get('/optimize', 'OptimizerController@index')->name('optimize');
