@@ -178,7 +178,7 @@ class LeadsController extends Controller
 
         $type ="csv";
         $datetime=date("Y-m-d H:i:s");
-        return Excel::download(new LeadsExport($mobile_num, $landline, $email, $supplier_id, $batch_id, $campaign_id, $first_name, $last_name,$search_mobile,$search_landline, $search_email,$search_lastname), "Leads.csv");
+        return Excel::download(new LeadsExport($mobile_num, $landline, $email, $supplier_id, $batch_id, $campaign_id, $first_name, $last_name,$search_mobile,$search_landline, $search_email,$search_firstname,$search_lastname), "Leads.csv");
     }
 
     public function exportUniqueLeads(Request $request)

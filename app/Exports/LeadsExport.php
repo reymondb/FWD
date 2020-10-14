@@ -43,11 +43,11 @@ class LeadsExport implements FromQuery, WithHeadings
         $email =$this->email;
         $first_name =$this->first_name;
         $last_name =$this->last_name;
-        $search_mobile = $request->search_mobile;
-        $search_landline = $request->search_landline;
-        $search_email = $request->search_email;
-        $search_firstname = $request->search_firstname;
-        $search_lastname = $request->search_lastname;
+        $search_mobile = $this->search_mobile;
+        $search_landline = $this->search_landline;
+        $search_email = $this->search_email;
+        $search_firstname = $this->search_firstname;
+        $search_lastname = $this->search_lastname;
         
         if(!isset($search_mobile)){ $search_mobile=""; }
         if(!isset($search_landline)){ $search_landline=""; }
