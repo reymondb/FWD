@@ -14,7 +14,7 @@ class LeadsExport implements FromQuery, WithHeadings
 {
     use Exportable;
 
-    public function __construct(int $mobile_num,int $landline,int $email,int $supplier_id,int $batch_id,int $campaign_id,int $first_name,int $last_name, $search_mobile,$search_landline, $search_email,$search_lastname)
+    public function __construct(int $mobile_num,int $landline,int $email,int $supplier_id,int $batch_id,int $campaign_id,int $first_name,int $last_name, $search_mobile,$search_landline, $search_email,$search_firstname,$search_lastname)
     {
         $this->supplier_id = $supplier_id;
         $this->batch_id = $batch_id;
