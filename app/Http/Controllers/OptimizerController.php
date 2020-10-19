@@ -143,11 +143,11 @@ class OptimizerController extends Controller
     public function notblankchart()
     {
         Charts::where('chart_type',4)->delete();
-        //DB::enableQueryLog();        
-        $landline=Contact::select(DB::raw('count(id) as total'))
+        DB::enableQueryLog();        
+        $landline=Contact::IndexRaw('FORCE INDEX (contacts_landlinenum_index)')->select(DB::raw('count(id) as total'))
         ->whereNotNull('LandlineNum')
         ->orwhere('LandlineNum',"!=","")->get();
-        
+        dd(DB::getQueryLog());die();
         $chart=new Charts();
         $chart->label = 'Landline ('.$landline[0]->total.')';
         $chart->total = $landline[0]->total;
@@ -193,7 +193,7 @@ class OptimizerController extends Controller
         $chart->chart_type = 4 ;
         $chart->save();
 
-        //dd(DB::getQueryLog());
+        
         $date=date("M d,Y H:i:s",strtotime($chart->created_at));
         return $date;
     }
