@@ -44,8 +44,11 @@ class OptimizerController extends Controller
     public function leadschart()
     {
         //DB::enableQueryLog();
-        $leads=CampaignUse::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(campaign_use.id),")") as CampaignName'),DB::raw('count(campaign_use.id) as total'))
-        ->leftjoin('campaign','campaign_use.CampaignID','campaign.id')->groupby('campaign_use.CampaignID')->get();
+        /*$leads=CampaignUse::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(campaign_use.id),")") as CampaignName'),DB::raw('count(campaign_use.id) as total'))
+        ->leftjoin('campaign','campaign_use.CampaignID','campaign.id')->groupby('campaign_use.CampaignID')->get();*/
+        $leads=Contact::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(contacts.id),")") as CampaignName'),DB::raw('count(contacts.id) as total'))
+        ->leftjoin('campaign','contacts.campaign_id','campaign.id')->groupby('campaign_use.CampaignID')->get();
+
         Charts::where('chart_type',1)->delete();
         foreach($leads as $lead){
             $chart=new Charts();
