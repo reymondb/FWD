@@ -77,6 +77,7 @@ class DashboardController extends Controller
         //dd(DB::getQueryLog());
         */
         $data=Charts::where('chart_type',3)->orderBy('label')->select(DB::raw('label as Label'),DB::raw('total as totals'))->get();
+        
         return response()->json($data);
     }
 
