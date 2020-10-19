@@ -26,7 +26,7 @@ Route::post('/edit_profile', 'HomeController@edit_profile')->name('edit_profile'
 
 Route::get('/leadschart','DashboardController@leadschart')->name('leadschart');
 Route::get('/blankchart','DashboardController@blankchart')->name('blankchart');
-
+Route::get('/noblankchart','DashboardController@noblankchart')->name('noblankchart');
 Route::get('/supplierchart','DashboardController@supplierchart')->name('supplierchart');
 
 
@@ -70,6 +70,7 @@ Route::get('/optimize', 'OptimizerController@index')->name('optimize');
 Route::get('/optimizeChart1', 'OptimizerController@leadschart')->name('optimize1');
 Route::get('/optimizeChart2', 'OptimizerController@supplierchart')->name('optimize2');
 Route::get('/optimizeChart3', 'OptimizerController@blankchart')->name('optimize3');
+Route::get('/optimizeChart4', 'OptimizerController@notblankchart')->name('optimize4');
 
 /**
  * middleware('App\Http\Middleware\AdminMiddleware')->

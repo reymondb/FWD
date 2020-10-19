@@ -85,6 +85,29 @@
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
+                        </div>    
+                        <div class="col-md-6">    
+                            <!-- Pie CHART -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <div style="display: inline;">
+                                        Total No Blanks (Total: <span id="noblank_total">0</span>)
+                                    </div>
+                                    @if( Auth::user()->role ==1)
+                                    <div style="display: inline-block"">
+                                        <button class="btn-primary btn" onclick="refreshChart4()" style="font-size: 12px;">Refresh Data</button>
+                                        <img src="images/blue loading.gif" class="loading4"  height="30">
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="card-body">
+                                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <canvas id="noblanktotals" height="280" width="600"></canvas>
+                                </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
                         </div>      
                     </div>
                 </div>
@@ -105,13 +128,14 @@
             loadChart1();
             loadChart2();
             loadChart3();
+            loadChart4();
             
             $(".loading1").hide();
             $(".loading2").hide();
             $(".loading3").hide();
+            $(".loading4").hide();
             function refreshChart1(){
                 $(".loading1").show();
-                
                 $.ajax({
                     url: "/optimizeChart1",
                     type: 'GET',
@@ -161,6 +185,25 @@
                     }
                 });
             }
+            
+            function refreshChart4(){
+                $(".loading4").show();
+                
+                $.ajax({
+                    url: "/optimizeChart4",
+                    type: 'GET',
+                    contentType: false, // The content type used when sending data to the server.
+                    cache: false, // To unable request pages to be cached
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                        $("#updated4").html(data);
+                        loadChart4();
+                        $(".loading4").hide();                
+                    }
+                });
+            }
+
             function loadChart1(){
                 var url = "{{url('leadschart')}}";
                 var Totals = new Array();
@@ -286,6 +329,56 @@
 
                                 // These labels appear in the legend and in the tooltips when hovering different arcs
                                 labels: supplierLabels
+                            },                        
+                            options: {
+                                legend: {
+                                    display: true,
+                                    position: 'left',
+                                },
+                                tooltips: {
+                                    enabled: false
+                                },
+                                plugins: {
+                                    labels: {
+                                        render: 'percentage',
+                                        fontColor: '#FFFFFF',
+                                        precision: 2
+                                    }
+                                }
+                            }
+                        
+                        });
+                    });
+                });
+            }
+
+            function loadChart4(){
+                var url2 = "{{url('noblankchart')}}";
+                var noBlankTotals = new Array();
+                var noBlankLabels = new Array();
+                var noBlankPercentage = new Array();
+                var noblank_total = 0;
+                $(document).ready(function(){
+                    $.get(url2, function(response){
+                        response.forEach(function(data){
+                            console.log(data);
+                            noBlankTotals.push(data.totals);
+                            noBlankLabels.push(data.Label);
+                            noBlankPercentage.push(data.percentage);
+                            noblank_total = noblank_total + data.totals;
+                        });
+                        $("#noblank_total").html(numberWithCommas(noblank_total));
+                        var ctx = document.getElementById("noblanktotals").getContext('2d');
+                        var myPieChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data:{
+                                datasets: [{
+                                    data: noBlankTotals,
+                                    backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                                }],
+
+                                // These labels appear in the legend and in the tooltips when hovering different arcs
+                                labels: noBlankLabels
                             },                        
                             options: {
                                 legend: {

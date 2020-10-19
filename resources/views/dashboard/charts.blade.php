@@ -28,7 +28,7 @@
                             <td id="updated1">{{$chart1}}</td>
                             <td style="height: 60px">
                                 <button class="btn-primary btn" onclick="refreshChart1()">Refresh Data</button>
-                                <img src="images/blue loading.gif" class="loading1"  height="50">
+                                <img src="images/blue loading.gif" class="loading1 loader"  height="50">
                             </td>
                         </tr>
                         <tr>
@@ -37,7 +37,7 @@
                             <td>
                                 <button class="btn-primary btn" onclick="refreshChart2()">Refresh Data</button>
                                 
-                                <img src="images/blue loading.gif" class="loading2" height="50">
+                                <img src="images/blue loading.gif" class="loading2 loader" height="50">
                             </td>
                         </tr>
                         <tr>
@@ -45,7 +45,16 @@
                             <td id="updated3">{{$chart3}}</td>
                             <td>
                                 <button class="btn-primary btn" onclick="refreshChart3()">Refresh Data</button>
-                                <img src="images/blue loading.gif" class="loading3" height="50">
+                                <img src="images/blue loading.gif" class="loading3 loader" height="50">
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Total Not Blanks  </td>
+                            <td id="updated4"></td>
+                            <td>
+                                <button class="btn-primary btn" onclick="refreshChart4()">Refresh Data</button>
+                                <img src="images/blue loading.gif" class="loading4 loader" height="50">
                             </td>
                         </tr>
                     </table>
@@ -64,6 +73,7 @@
     $(".loading1").hide();
     $(".loading2").hide();
     $(".loading3").hide();
+    $(".loading4").hide();
     function refreshChart1(){
         $(".loading1").show();
         
@@ -110,6 +120,22 @@
                 console.log(data);
                 $("#updated3").html(data);
                 $(".loading3").hide();                
+            }
+        });
+    }
+    function refreshChart4(){
+        $(".loading4").show();
+        
+        $.ajax({
+            url: "/optimizeChart4",
+            type: 'GET',
+            contentType: false, // The content type used when sending data to the server.
+            cache: false, // To unable request pages to be cached
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                $("#updated4").html(data);
+                $(".loading4").hide();                
             }
         });
     }

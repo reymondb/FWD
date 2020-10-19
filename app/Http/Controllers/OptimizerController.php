@@ -35,6 +35,7 @@ class OptimizerController extends Controller
          $chart1=Charts::select('created_at')->where('chart_type',1)->first();
          $chart2=Charts::select('created_at')->where('chart_type',2)->first();
          $chart3=Charts::select('created_at')->where('chart_type',3)->first();
+         $chart4=Charts::select('created_at')->where('chart_type',4)->first();
         
          //return view('dashboard/charts')->with('chart1',$chart1)->with('chart2',$chart2)->with('chart3',$chart3);
          return view('dashboard/charts')->with('chart1',date("M d,Y h:i:s A",strtotime($chart1->created_at)))->with('chart2',date("M d,Y h:i:s A",strtotime($chart2->created_at)))->with('chart3',date("M d,Y h:i:s A",strtotime($chart3->created_at)));
@@ -135,6 +136,64 @@ class OptimizerController extends Controller
             $chart->chart_type=2 ;
             $chart->save();
         }
+        $date=date("M d,Y H:i:s",strtotime($chart->created_at));
+        return $date;
+    }
+
+    public function notblankchart()
+    {
+        Charts::where('chart_type',4)->delete();
+        //DB::enableQueryLog();        
+        $landline=Contact::select(DB::raw('count(id) as total'))
+        ->whereNotNull('LandlineNum')
+        ->orwhere('LandlineNum',"!=","")->get();
+        
+        $chart=new Charts();
+        $chart->label = 'Landline ('.$landline[0]->total.')';
+        $chart->total = $landline[0]->total;
+        $chart->chart_type = 4 ;
+        $chart->save();
+
+        $mobile=Contact::select(DB::raw('count(id) as total'))
+        ->whereNotNull('MobileNum')
+        ->orwhere('MobileNum',"!=","")->get();
+
+        $chart=new Charts();
+        $chart->label = 'Mobile ('.$mobile[0]->total.')';
+        $chart->total = $mobile[0]->total;
+        $chart->chart_type = 4 ;
+        $chart->save();
+
+        $email=Contact::select(DB::raw('count(id) as total'))
+        ->whereNotNull('Email')
+        ->orwhere('Email',"!=","")->get();
+
+        $chart=new Charts();
+        $chart->label = 'Email ('.$email[0]->total.')';
+        $chart->total = $email[0]->total;
+        $chart->chart_type = 4 ;
+        $chart->save();
+
+        $firstname=Contact::select(DB::raw('count(id) as total'))
+        ->whereNotNull('FirstName')
+        ->orwhere('FirstName',"!=","")->get();
+        $chart=new Charts();
+        $chart->label = 'Firstname ('.$firstname[0]->total.')';
+        $chart->total = $firstname[0]->total;
+        $chart->chart_type = 4 ;
+        $chart->save();
+
+        $lastname=Contact::select(DB::raw('count(id) as total'))
+        ->whereNotNull('LastName')
+        ->orwhere('LastName',"!=","")->get();
+        
+        $chart=new Charts();
+        $chart->label = 'Lastname ('.$lastname[0]->total.')';
+        $chart->total = $lastname[0]->total;
+        $chart->chart_type = 4 ;
+        $chart->save();
+
+        //dd(DB::getQueryLog());
         $date=date("M d,Y H:i:s",strtotime($chart->created_at));
         return $date;
     }

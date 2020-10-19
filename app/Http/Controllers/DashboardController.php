@@ -91,4 +91,11 @@ class DashboardController extends Controller
         return response()->json($data);
     }
 
+    public function noblankchart()
+    {
+        $data=Charts::where('chart_type',4)->orderBy('label')->select(DB::raw('label as Label'),DB::raw('total as totals'))->get();
+        return response()->json($data);
+    }
+    
+
 }
