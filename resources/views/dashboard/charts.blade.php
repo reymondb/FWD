@@ -50,7 +50,7 @@
                         </tr>
                         
                         <tr>
-                            <td>Total Not Blanks  </td>
+                            <td>Total Records Containing</td>
                             <td id="updated4">{{$chart4}}</td>
                             <td>
                                 <button class="btn-primary btn" onclick="refreshChart4()">Refresh Data</button>
