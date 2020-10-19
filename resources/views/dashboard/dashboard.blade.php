@@ -91,7 +91,7 @@
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <div style="display: inline;">
-                                        Total No Blanks (Total: <span id="noblank_total">0</span>)
+                                        Total Records Containing (Total: <span id="noblank_total">0</span>)
                                     </div>
                                     @if( Auth::user()->role ==1)
                                     <div style="display: inline-block"">
