@@ -51,7 +51,7 @@
                         
                         <tr>
                             <td>Total Not Blanks  </td>
-                            <td id="updated4"></td>
+                            <td id="updated4">{{$chart4}}</td>
                             <td>
                                 <button class="btn-primary btn" onclick="refreshChart4()">Refresh Data</button>
                                 <img src="images/blue loading.gif" class="loading4 loader" height="50">
