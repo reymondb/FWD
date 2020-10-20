@@ -58,12 +58,13 @@ class DashboardController extends Controller
         */
         //dd(DB::getQueryLog());
 
-        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") || $campaignid!="undefined"){
-            $data=Contact::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(contacts.id),")") as CampaignName'),DB::raw('count(contacts.id) as total'))
-                ->leftjoin('campaign','contacts.campaign_id','campaign.id')->where('contacts.campaign_id',"$campaignid")->groupby('contacts.campaign_id')->get();
+        if($campaignid==0 || !isset($campaignid) || $campaignid=="undefined"){
+            $data=Charts::where('chart_type',1)->orderBy('label')->select(DB::raw('label as CampaignName'),'total')->get();
         }
         else{
-            $data=Charts::where('chart_type',1)->orderBy('label')->select(DB::raw('label as CampaignName'),'total')->get();
+            $data=Contact::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(contacts.id),")") as CampaignName'),DB::raw('count(contacts.id) as total'))
+                ->leftjoin('campaign','contacts.campaign_id','campaign.id')->where('contacts.campaign_id',"$campaignid")->groupby('contacts.campaign_id')->get();
+           
         }
         
         return response()->json($data);
@@ -97,7 +98,11 @@ class DashboardController extends Controller
         
         //dd(DB::getQueryLog());
         */
-        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") || $campaignid!="undefined"){
+        if($campaignid==0 || !isset($campaignid) || $campaignid=="undefined"){
+            
+            $data=Charts::where('chart_type',3)->orderBy('label')->select(DB::raw('label as Label'),DB::raw('total as totals'))->get();
+        }
+        else{
             $landline=Contact::select(DB::raw('count(id) as total'))
                 ->where(function($q) {
                     $q->whereNull('LandlineNum')
@@ -138,9 +143,6 @@ class DashboardController extends Controller
             $data[3] = array('Label' => 'No Firstname ('.$firstname[0]->total.')','totals' => $firstname[0]->total);
             $data[4] = array('Label' => 'No Lastname ('.$lastname[0]->total.')','totals' => $lastname[0]->total);
         }
-        else{
-            $data=Charts::where('chart_type',3)->orderBy('label')->select(DB::raw('label as Label'),DB::raw('total as totals'))->get();
-        }
         return response()->json($data);
     }
 
@@ -153,12 +155,12 @@ class DashboardController extends Controller
         //dd(DB::getQueryLog());
         return response()->json($leads);*/
         
-        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") || $campaignid!="undefined"){
-            $data=Contact::select(DB::raw('CONCAT(users.name,"(",count(contacts.id),")") as supplier'),DB::raw('count(contacts.id) as totals'))
-                ->leftjoin('users','contacts.supplier_id','users.id')->where('contacts.campaign_id',"$campaignid")->groupby('contacts.supplier_id')->get();
+        if($campaignid==0 || !isset($campaignid) || $campaignid=="undefined"){
+            $data=Charts::where('chart_type',2)->orderBy('label')->select(DB::raw('label as supplier'),DB::raw('total as totals'))->get();
         }
         else{
-            $data=Charts::where('chart_type',2)->orderBy('label')->select(DB::raw('label as supplier'),DB::raw('total as totals'))->get();
+            $data=Contact::select(DB::raw('CONCAT(users.name,"(",count(contacts.id),")") as supplier'),DB::raw('count(contacts.id) as totals'))
+                ->leftjoin('users','contacts.supplier_id','users.id')->where('contacts.campaign_id',"$campaignid")->groupby('contacts.supplier_id')->get();
         }
         return response()->json($data);
     }
@@ -167,7 +169,10 @@ class DashboardController extends Controller
     {
         
         $campaignid = $_REQUEST['campaignid'];
-        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") || $campaignid!="undefined"){
+        if($campaignid==0 || !isset($campaignid) || $campaignid=="undefined"){
+            $data=Charts::where('chart_type',4)->orderBy('label')->select(DB::raw('label as Label'),DB::raw('total as totals'))->get();            
+        }
+        else{
             $landline=Contact::IndexRaw('FORCE INDEX (contacts_landlinenum_index)')->select(DB::raw('count(id) as total'))
                     ->where(function($q) {
                         $q->whereNotNull('LandlineNum')
@@ -205,10 +210,6 @@ class DashboardController extends Controller
             $data[2] = array('Label' => 'Email ('.$email[0]->total.')','totals' => $email[0]->total);
             $data[3] = array('Label' => 'Firstname ('.$firstname[0]->total.')','totals' => $firstname[0]->total);
             $data[4] = array('Label' => 'Lastname ('.$lastname[0]->total.')','totals' => $lastname[0]->total);
-            
-        }
-        else{
-            $data=Charts::where('chart_type',4)->orderBy('label')->select(DB::raw('label as Label'),DB::raw('total as totals'))->get();
         }
         return response()->json($data);
     }
