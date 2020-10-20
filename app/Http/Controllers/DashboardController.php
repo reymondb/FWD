@@ -48,7 +48,7 @@ class DashboardController extends Controller
             $overalltotal=Contact::select(DB::raw('count(id) as total'))->get();
             $total=Contact::select(DB::raw('count(id) as total'))->where('contacts.campaign_id',"$campaignid")->get();
         }
-        return $total[0]->total."/".$overalltotal[0]->total;
+        return $total[0]->total;
     }
     public function leadschart()
     {
