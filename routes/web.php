@@ -28,6 +28,7 @@ Route::get('/leadschart','DashboardController@leadschart')->name('leadschart');
 Route::get('/blankchart','DashboardController@blankchart')->name('blankchart');
 Route::get('/noblankchart','DashboardController@noblankchart')->name('noblankchart');
 Route::get('/supplierchart','DashboardController@supplierchart')->name('supplierchart');
+Route::get('/getCampaignTotals','DashboardController@getCampaignTotals')->name('getCampaignTotals');
 
 
 Route::get('/import', 'ImportController@getImport')->name('import');

@@ -7,7 +7,15 @@
             <div class="container-fluid">
                 <h1 class="mt-4">Dashboard</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Total Number Of Lead Rows: <b>{{number_format($total[0]->total)}}</b></li>
+                    <li class="breadcrumb-item active">Total Number Of Lead Rows: <b id="totalz">{{number_format($total[0]->total)}}</b>
+                        @csrf
+                        <select name="campaignid" id="campaignid" onchange="refreshCharts()">
+                            <option value="">Select Campaign</option>
+                            @foreach ($campaigns as $c)
+                                <option value="{{$c->id}}">{{$c->CampaignName}}</option>
+                            @endforeach
+                        </select>
+                    </li>
                 </ol>
                
             </div>
@@ -129,11 +137,27 @@
             loadChart2();
             loadChart3();
             loadChart4();
-            
+
+            function refreshCharts(){
+                var campaignid = $("#campaignid").val();
+                console.log(campaignid);
+                loadChart1(campaignid);
+                loadChart2(campaignid);
+                loadChart3(campaignid);
+                loadChart4(campaignid);
+                getCampaignTotals(campaignid);
+            }
+
             $(".loading1").hide();
             $(".loading2").hide();
             $(".loading3").hide();
             $(".loading4").hide();
+            
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('input[name=_token]').val()
+                }
+            });
             function refreshChart1(){
                 $(".loading1").show();
                 $.ajax({
@@ -185,7 +209,7 @@
                     }
                 });
             }
-            
+
             function refreshChart4(){
                 $(".loading4").show();
                 
@@ -203,9 +227,28 @@
                     }
                 });
             }
+            
 
-            function loadChart1(){
-                var url = "{{url('leadschart')}}";
+            function getCampaignTotals(campaignids){
+                $(".loading3").show();
+                
+                $.ajax({
+                    url: "/getCampaignTotals?campaignid="+campaignids,
+                    type: 'GET',
+                    contentType: false, // The content type used when sending data to the server.
+                    cache: false, // To unable request pages to be cached
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                        $("#totalz").html(numberWithCommas(data));        
+                    }
+                });
+            }
+            
+
+            function loadChart1(campaignids){
+                $("#campaigntotals").html('<img src="images/blue loading.gif" height="100%">');
+                var url = "/leadschart?campaignid="+campaignids;
                 var Totals = new Array();
                 var Labels = new Array();
                 var campaigntotals=0;
@@ -253,8 +296,9 @@
                 });
             }
 
-            function loadChart2(){
-                var url2 = "{{url('blankchart')}}";
+            function loadChart2(campaignids){
+                $("#blanktotals").html('<img src="images/blue loading.gif" height="100%">');
+                var url2 = "/blankchart?campaignid="+campaignids;;
                 var BlankTotals = new Array();
                 var BlankLabels = new Array();
                 var BlankPercentage = new Array();
@@ -304,8 +348,9 @@
             }
 
             
-            function loadChart3(){
-                var url3 = "{{url('supplierchart')}}";
+            function loadChart3(campaignids){
+                $("#supplierchart").html('<img src="images/blue loading.gif" height="100%">');
+                var url3 = "/supplierchart?campaignid="+campaignids;
                 var supplierTotals = new Array();
                 var supplierLabels = new Array();
                 var supplier_total = 0;
@@ -352,8 +397,9 @@
                 });
             }
 
-            function loadChart4(){
-                var url2 = "{{url('noblankchart')}}";
+            function loadChart4(campaignids){
+                $("#noblanktotals").html('<img src="images/blue loading.gif" height="100%">');
+                var url2 = "/noblankchart?campaignid="+campaignids;
                 var noBlankTotals = new Array();
                 var noBlankLabels = new Array();
                 var noBlankPercentage = new Array();
