@@ -39,6 +39,7 @@ class ReportsController extends Controller
             echo "here";
             $num = $request->landline;
             $getcampaign=Contact::where('LandlineNum',$request->landline)->groupby('campaign_id')->get();
+            dd($getcampaign);
         }
         if(isset($request->mobilenum)){
             $num = $request->mobilenum;
