@@ -57,22 +57,22 @@ class ReportsController extends Controller
                 config(['database.connections.mysql_external.password' => $source->Mysql_password]);
                 #https://188.166.215.132/
 
-                $data2 = DB::connection('mysql_external')
+                $dataz = DB::connection('mysql_external')
                     ->table('vicidial_list')
                     ->select('phone_number','lead_id','vicidial_statuses.status_name','last_local_call_time')
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
                     ->where('phone_number',"$num")
-                    ->get()->toArray();
+                    ->get();
                 DB::disconnect('mysql_source');
                 
-                $data = array_merge($data, $data2);
+                $data[] = $dataz;
             }
            
         }
         else{
 
         }
-        return view('dashboard/reporting')->with('data',json_encode($data))->with("phonenumber",$num);
+        return view('dashboard/reporting')->with('data',$data)->with("phonenumber",$num);
         
     }
 
