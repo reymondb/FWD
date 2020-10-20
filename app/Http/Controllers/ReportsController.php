@@ -34,7 +34,6 @@ class ReportsController extends Controller
 
     public function fetchReport(Request $request)
     { 
-        echo "landline ". $request->landline;
         if(isset($request->landline)){
             echo "here";
             $num = $request->landline;
@@ -43,7 +42,7 @@ class ReportsController extends Controller
         }
         if(isset($request->mobilenum)){
             $num = $request->mobilenum;
-            $getcampaign=Contact::where('LandlineNum',$request->MobileNum)->groupby('campaign_id')->get();
+            $getcampaign=Contact::where('MobileNum',$request->mobile)->groupby('campaign_id')->get();
             
         }
 
