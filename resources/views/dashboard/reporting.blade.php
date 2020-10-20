@@ -20,18 +20,21 @@
                                 <thead>
                                     <tr>
                                         <th>lead_id</th>
-                                        <th>entry_date</th>
+                                        <th>Status</th>
+                                        <th>Last Call Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($data as $h)
                                     <tr>
                                         <td style="width:200px;">{{$h->lead_id}}</td>
-                                        <td>{{$h->entry_date}}</td>
+                                        <td>{{$h->status_name}}</td>
+                                        <td>{{$h->last_local_call_time}}</td>
                                        
                                     </tr>
                                     @endforeach
                                 </tbody>
+                        
                         
                             </table>
                         </div>

@@ -44,7 +44,9 @@ class ReportsController extends Controller
 
         $data = DB::connection('mysql_external')
             ->table('vicidial_list')
-            ->limit(10)
+            ->select('phone_number','lead_id','vicidial_statuses.status_name','last_local_call_time')
+            ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
+            ->where('phone_number',"476796947")
             ->get();
         DB::disconnect('mysql_source');
 
