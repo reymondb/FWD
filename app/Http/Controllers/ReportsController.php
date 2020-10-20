@@ -36,7 +36,6 @@ class ReportsController extends Controller
     {
         if(isset($request->landline)){
             $num = $request->landline;
-
             $getcampaign=Contact::where('LandlineNum',$request->landline)->groupby('campaign_id')->get();
         }
         if(isset($request->mobilenum)){
@@ -65,7 +64,7 @@ class ReportsController extends Controller
                 DB::disconnect('mysql_source');
                 $data = array_merge($data1, $data2);
             }
-
+            dd($$data);die();
            
         }
         else{
