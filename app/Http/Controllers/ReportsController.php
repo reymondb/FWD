@@ -72,7 +72,7 @@ class ReportsController extends Controller
         else{
 
         }
-        return view('dashboard/reporting')->with('data',json_encode($data));
+        return view('dashboard/reporting')->with('data',json_encode($data))->with("phonenumber",$num);
         
     }
 
