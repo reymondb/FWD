@@ -59,12 +59,11 @@ class ReportsController extends Controller
 
                 $dataz = DB::connection('mysql_external')
                     ->table('vicidial_list')
-                    ->select('phone_number','lead_id','vicidial_statuses.status_name','last_local_call_time')
+                    ->select('phone_number','lead_id','vicidial_statuses.status_name','last_local_call_time',DB::raw("$source->CampaignName as CampaignName"))
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
                     ->where('phone_number',"$num")
                     ->get();
                 DB::disconnect('mysql_source');
-                $dataz->CampaignName = $source->CampaignName;
                 $data[] = $dataz;
             }
            
