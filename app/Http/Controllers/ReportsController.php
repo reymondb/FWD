@@ -67,14 +67,12 @@ class ReportsController extends Controller
                 
                 $data = array_merge($data, $data2);
             }
-            print_r($data);
-            dd($data);die();
            
         }
         else{
 
         }
-        return view('dashboard/reporting')->with('data',$data);
+        return view('dashboard/reporting')->with('data',json_encode($data,true));
         
     }
 
