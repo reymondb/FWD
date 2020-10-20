@@ -64,7 +64,8 @@ class ReportsController extends Controller
                 DB::disconnect('mysql_source');
                 $data = array_merge($data1, $data2);
             }
-            dd($$data);die();
+            print_r($data);
+            dd($data);die();
            
         }
         else{
