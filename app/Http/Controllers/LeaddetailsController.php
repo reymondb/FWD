@@ -20,7 +20,7 @@ use App\Exports\DuplicateLeadsExport;
 use App\Exports\UniqueExport;
 use App\Exports\LeadsExport;
 
-class LeaddetailsController extends Controller
+class LeadDetailsController extends Controller
 {
     public function index(Request $request)
     {
@@ -32,7 +32,7 @@ class LeaddetailsController extends Controller
         password Mysql_password*/
     }
 
-    public function fetchDetails(Request $request,$landline)
+    public function fetchDetails($landline)
     {
         $source=Campaigns::where('id',1)->first();
         config(['database.connections.mysql_external.url' => $source->MySQL_url]);

@@ -36,7 +36,7 @@ Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse
 Route::post('/import_process', 'ImportController@processImport')->name('import_process');
 
 Route::get('/leads', 'LeadsController@Index')->name('contactszz');
-Route::get('/lead_details/{$landline}', 'LeaddetailsController@fetchDetails');
+Route::get('/lead_details/{$landline}', 'LeadDetailsController@fetchDetails');
 Route::post('/downloadleads', 'LeadsController@exportLeads')->name('exportLeads');
 #Route::post('/leadwashing/exportunique', 'LeadsController@exportUniqueLeads')->name('exportUniqueLeads');
 #Route::post('/leadwashing/exportduplicate', 'LeadsController@exportDuplicateLeads')->name('exportDuplicateLeads');
