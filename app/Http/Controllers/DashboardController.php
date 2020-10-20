@@ -99,24 +99,38 @@ class DashboardController extends Controller
         */
         if(($campaignid!=0 || isset($campaignid))&& $campaignid!="undefined"){
             $landline=Contact::select(DB::raw('count(id) as total'))
-                ->whereNull('LandlineNum')
-                ->orwhere('LandlineNum',"=","")->where('contacts.campaign_id',"$campaignid")->get();
+                ->where(function($q) {
+                    $q->whereNull('LandlineNum')
+                    ->orwhere('LandlineNum',"=","");
+                })
+                ->where('contacts.campaign_id',"$campaignid")->get();
 
             $mobile=Contact::select(DB::raw('count(id) as total'))
-                ->whereNull('MobileNum')
-                ->orwhere('MobileNum',"=","")->where('contacts.campaign_id',"$campaignid")->get();
+                ->where(function($q) {
+                    $q->whereNull('MobileNum')
+                    ->orwhere('MobileNum',"=","");
+                })
+                ->where('contacts.campaign_id',"$campaignid")->get();
 
             $email=Contact::select(DB::raw('count(id) as total'))
-                ->whereNull('Email')
-                ->orwhere('Email',"=","")->where('contacts.campaign_id',"$campaignid")->get();
+                ->where(function($q) {
+                    $q->whereNull('Email')
+                    ->orwhere('Email',"=","");
+                })
+                ->where('contacts.campaign_id',"$campaignid")->get();
 
             $firstname=Contact::select(DB::raw('count(id) as total'))
-                ->whereNull('FirstName')
-                ->orwhere('FirstName',"=","")->where('contacts.campaign_id',"$campaignid")->get();
+                ->where(function($q) {
+                    $q->whereNull('FirstName')
+                    ->orwhere('FirstName',"=","");
+                })
+                ->where('contacts.campaign_id',"$campaignid")->get();
 
             $lastname=Contact::select(DB::raw('count(id) as total'))
-                ->whereNull('LastName')
-                ->orwhere('LastName',"=","")->where('contacts.campaign_id',"$campaignid")->get();
+                ->where(function($q) {
+                    $q->whereNull('LastName')
+                    ->orwhere('LastName',"=","");
+                })->where('contacts.campaign_id',"$campaignid")->get();
             $data=array();
             $data[0] = array('Label' => 'No Mobile ('.$mobile[0]->total.')','totals' =>$mobile[0]->total);
             $data[1] = array('Label' => 'No Landline ('.$landline[0]->total.')','totals' => $landline[0]->total);
@@ -155,24 +169,36 @@ class DashboardController extends Controller
         $campaignid = $_REQUEST['campaignid'];
         if(($campaignid!=0 || isset($campaignid))&& $campaignid!="undefined"){
             $landline=Contact::IndexRaw('FORCE INDEX (contacts_landlinenum_index)')->select(DB::raw('count(id) as total'))
-                    ->whereNotNull('LandlineNum')
-                    ->orwhere('LandlineNum',"!=","")->where('contacts.campaign_id',"$campaignid")->get();
+                    ->where(function($q) {
+                        $q->whereNotNull('LandlineNum')
+                        ->orwhere('LandlineNum',"!=","");
+                    })->where('contacts.campaign_id',"$campaignid")->get();
 
             $mobile=Contact::select(DB::raw('count(id) as total'))
-                    ->whereNotNull('MobileNum')
-                    ->orwhere('MobileNum',"!=","")->where('contacts.campaign_id',"$campaignid")->get();
+                    ->where(function($q) {
+                        $q->whereNotNull('MobileNum')
+                        ->orwhere('MobileNum',"!=","");
+                    })
+                    ->where('contacts.campaign_id',"$campaignid")->get();
 
 
             $email=Contact::select(DB::raw('count(id) as total'))
-                    ->whereNotNull('Email')
-                    ->orwhere('Email',"!=","")->where('contacts.campaign_id',"$campaignid")->get();
+                    ->where(function($q) {
+                        $q->whereNotNull('Email')
+                        ->orwhere('Email',"!=","");
+                    })
+                    ->where('contacts.campaign_id',"$campaignid")->get();
             $firstname=Contact::select(DB::raw('count(id) as total'))
-                    ->whereNotNull('FirstName')
-                    ->orwhere('FirstName',"!=","")->where('contacts.campaign_id',"$campaignid")->get();
+                    ->where(function($q) {
+                        $q->whereNotNull('FirstName')
+                        ->orwhere('FirstName',"!=","");
+                    })->where('contacts.campaign_id',"$campaignid")->get();
            
             $lastname=Contact::select(DB::raw('count(id) as total'))
-                    ->whereNotNull('LastName')
-                    ->orwhere('LastName',"!=","")->where('contacts.campaign_id',"$campaignid")->get();
+                    ->where(function($q) {
+                        $q->whereNotNull('LastName')
+                        ->orwhere('LastName',"!=","");
+                    })->where('contacts.campaign_id',"$campaignid")->get();
             $data=array();
             $data[0] = array('Label' => 'Mobile ('.$mobile[0]->total.')','totals' =>$mobile[0]->total);
             $data[1] = array('Label' => 'Landline ('.$landline[0]->total.')','totals' => $landline[0]->total);

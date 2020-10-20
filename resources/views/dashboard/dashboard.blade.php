@@ -15,8 +15,10 @@
                                 <option value="{{$c->id}}">{{$c->CampaignName}}</option>
                             @endforeach
                         </select>
+                        <img src="images/blue loading.gif" class="loading5"  height="30">
                     </li>
                 </ol>
+                
                
             </div>
             <section class="content">
@@ -137,9 +139,17 @@
             loadChart2();
             loadChart3();
             loadChart4();
+            
+            $(".loading1").hide();
+            $(".loading2").hide();
+            $(".loading3").hide();
+            $(".loading4").hide();
+            $(".loading5").hide();
 
             function refreshCharts(){
                 var campaignid = $("#campaignid").val();
+                $(".loading5").show();
+                
                 console.log(campaignid);
                 loadChart1(campaignid);
                 loadChart2(campaignid);
@@ -148,10 +158,6 @@
                 getCampaignTotals(campaignid);
             }
 
-            $(".loading1").hide();
-            $(".loading2").hide();
-            $(".loading3").hide();
-            $(".loading4").hide();
             
             $.ajaxSetup({
                 headers: {
@@ -230,8 +236,6 @@
             
 
             function getCampaignTotals(campaignids){
-                $(".loading3").show();
-                
                 $.ajax({
                     url: "/getCampaignTotals?campaignid="+campaignids,
                     type: 'GET',
@@ -247,6 +251,7 @@
             
 
             function loadChart1(campaignids){
+                $(".loading1").show();
                 $("#campaigntotals").html('<img src="images/blue loading.gif" height="100%">');
                 var url = "/leadschart?campaignid="+campaignids;
                 var Totals = new Array();
@@ -292,11 +297,15 @@
 
                         
                         });
-                    });
+                    }).always(function (data) {
+                        $(".loading1").hide();
+                        });
+                    
                 });
             }
 
             function loadChart2(campaignids){
+                $(".loading2").show();
                 $("#blanktotals").html('<img src="images/blue loading.gif" height="100%">');
                 var url2 = "/blankchart?campaignid="+campaignids;;
                 var BlankTotals = new Array();
@@ -343,12 +352,15 @@
                             }
                         
                         });
-                    });
+                    }).always(function (data) {
+                        $(".loading2").hide();
+                        });;
                 });
             }
 
             
             function loadChart3(campaignids){
+                $(".loading3").show();
                 $("#supplierchart").html('<img src="images/blue loading.gif" height="100%">');
                 var url3 = "/supplierchart?campaignid="+campaignids;
                 var supplierTotals = new Array();
@@ -393,11 +405,15 @@
                             }
                         
                         });
-                    });
+                    }).always(function (data) {
+                        $(".loading3").hide();
+                        });
                 });
             }
 
             function loadChart4(campaignids){
+                $(".loading4").show();
+                $(".loading5").show();
                 $("#noblanktotals").html('<img src="images/blue loading.gif" height="100%">');
                 var url2 = "/noblankchart?campaignid="+campaignids;
                 var noBlankTotals = new Array();
@@ -444,8 +460,13 @@
                             }
                         
                         });
+                    }).always(function (data) {
+                        $(".loading4").hide();
+                        $(".loading5").hide();
                     });
                 });
+                
+                
             }
             
 
