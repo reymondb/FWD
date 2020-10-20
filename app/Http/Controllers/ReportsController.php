@@ -35,10 +35,8 @@ class ReportsController extends Controller
     public function fetchReport(Request $request)
     { 
         if(isset($request->landline)){
-            echo "here";
             $num = $request->landline;
             $getcampaign=Contact::where('LandlineNum',$request->landline)->groupby('campaign_id')->get();
-            dd($getcampaign);
         }
         if(isset($request->mobile)){
             $num = $request->mobile;
@@ -51,7 +49,7 @@ class ReportsController extends Controller
             $data=array();
             foreach($getcampaign as $k=>$c){
                 $source=Campaigns::where('id',$c->campaign_id)->first();
-                dd($source);
+                
                 config(['database.connections.mysql_external.url' => $source->MySQL_url]);
                 #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
                 config(['database.connections.mysql_external.database' => $source->Mysql_db]);
@@ -66,7 +64,7 @@ class ReportsController extends Controller
                     ->where('phone_number',"$num")
                     ->get()->toArray();
                 DB::disconnect('mysql_source');
-                print_r($data2);
+                
                 $data = array_merge($data, $data2);
             }
             print_r($data);
