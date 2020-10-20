@@ -64,7 +64,7 @@ class ReportsController extends Controller
                     ->where('phone_number',"$num")
                     ->get();
                 DB::disconnect('mysql_source');
-                
+                $dataz->CampaignName = $source->CampaignName;
                 $data[] = $dataz;
             }
            

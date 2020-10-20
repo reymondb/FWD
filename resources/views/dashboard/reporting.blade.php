@@ -17,7 +17,8 @@
                             <table id="host_all" class="table table-condensed table-bordered table-striped " style="margin-top: 20px ">
                                 <thead>
                                     <tr>
-                                        <th>lead_id</th>
+                                        <th>Campaign Name</th>
+                                        <th>Lead ID</th>
                                         <th>Status</th>
                                         <th>Last Call Time</th>
                                     </tr>
@@ -26,6 +27,7 @@
                                     @foreach($data as $z)
                                         @foreach($z as $h)
                                         <tr>
+                                            <td>{{$h->CampaignName}}</td>
                                             <td style="width:200px;">{{$h->lead_id}}</td>
                                             <td>{{$h->status_name}}</td>
                                             <td>{{date("M d,Y h:i:s A",strtotime($h->last_local_call_time))}}</td>
