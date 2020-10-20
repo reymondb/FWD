@@ -45,9 +45,11 @@ class ReportsController extends Controller
         }
 
         if($getcampaign){
+            
             $data=array();
             foreach($getcampaign as $k=>$c){
-                $source=Campaigns::where('id',1)->first();
+                $source=Campaigns::where('id',$c->campaign_id)->first();
+                dd($source);
                 config(['database.connections.mysql_external.url' => $source->MySQL_url]);
                 #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
                 config(['database.connections.mysql_external.database' => $source->Mysql_db]);
