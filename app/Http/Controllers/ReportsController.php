@@ -34,6 +34,7 @@ class ReportsController extends Controller
 
     public function fetchReport(Request $request)
     {
+        $num = $request->num;
         $source=Campaigns::where('id',1)->first();
         config(['database.connections.mysql_external.url' => $source->MySQL_url]);
         #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
@@ -46,7 +47,7 @@ class ReportsController extends Controller
             ->table('vicidial_list')
             ->select('phone_number','lead_id','vicidial_statuses.status_name','last_local_call_time')
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
-            ->where('phone_number',"476796947")
+            ->where('phone_number',"$num")
             ->get();
         DB::disconnect('mysql_source');
 
