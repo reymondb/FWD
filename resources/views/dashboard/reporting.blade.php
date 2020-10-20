@@ -4,7 +4,7 @@
 @section('content')
         <main>
             <div class="container-fluid">
-                <h2 class="mt-4">Lead Details For {{$data[0]->phone_number}}</h2>
+                <h2 class="mt-4">Lead Details For {{$data->phone_number}}</h2>
                 @if(isset($status))
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Content Updated</li>
