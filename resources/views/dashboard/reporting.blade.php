@@ -23,12 +23,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($data as $h)
-                                    <tr>
-                                        <td style="width:200px;">{{$h->lead_id}}</td>
-                                        <td>{{$h->status_name}}</td>
-                                        <td>{{$h->last_local_call_time}}</td>
-                                    </tr>
+                                    @foreach($data as $z)
+                                        @foreach($z as $h)
+                                        <tr>
+                                            <td style="width:200px;">{{$h->lead_id}}</td>
+                                            <td>{{$h->status_name}}</td>
+                                            <td>{{$h->last_local_call_time}}</td>
+                                        </tr>
+                                        @endforeach
                                     @endforeach
                                 </tbody>
                         
