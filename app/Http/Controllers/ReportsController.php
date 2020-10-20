@@ -60,10 +60,9 @@ class ReportsController extends Controller
                     ->select('phone_number','lead_id','vicidial_statuses.status_name','last_local_call_time')
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
                     ->where('phone_number',"$num")
-                    ->get();
+                    ->get()->toArray();
                 DB::disconnect('mysql_source');
-                $datas = json_decode(json_encode($data2), true);
-                $data = array_merge($data, $datas);
+                $data = array_merge($data, $data2);
             }
             print_r($data);
             dd($data);die();
