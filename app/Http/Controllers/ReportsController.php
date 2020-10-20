@@ -62,6 +62,7 @@ class ReportsController extends Controller
                     ->where('phone_number',"$num")
                     ->get()->toArray();
                 DB::disconnect('mysql_source');
+                print_r($data2);
                 $data = array_merge($data, $data2);
             }
             print_r($data);
