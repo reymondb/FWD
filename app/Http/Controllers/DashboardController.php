@@ -41,7 +41,7 @@ class DashboardController extends Controller
     public function getCampaignTotals()
     {
         $campaignid = $_REQUEST['campaignid'];
-        if(($campaignid!=0 || isset($campaignid)) && $campaignid!="undefined"){
+        if(($campaignid!=0 || isset($campaignid)) || $campaignid!="undefined"){
             $total=Contact::select(DB::raw('count(id) as total'))->where('contacts.campaign_id',"$campaignid")->get();
         }
         else{
@@ -58,7 +58,7 @@ class DashboardController extends Controller
         */
         //dd(DB::getQueryLog());
 
-        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") && $campaignid!="undefined"){
+        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") || $campaignid!="undefined"){
             $data=Contact::select(DB::raw('CONCAT(campaign.CampaignName,"(",count(contacts.id),")") as CampaignName'),DB::raw('count(contacts.id) as total'))
                 ->leftjoin('campaign','contacts.campaign_id','campaign.id')->where('contacts.campaign_id',"$campaignid")->groupby('contacts.campaign_id')->get();
         }
@@ -97,7 +97,7 @@ class DashboardController extends Controller
         
         //dd(DB::getQueryLog());
         */
-        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") && $campaignid!="undefined"){
+        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") || $campaignid!="undefined"){
             $landline=Contact::select(DB::raw('count(id) as total'))
                 ->where(function($q) {
                     $q->whereNull('LandlineNum')
@@ -153,7 +153,7 @@ class DashboardController extends Controller
         //dd(DB::getQueryLog());
         return response()->json($leads);*/
         
-        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") && $campaignid!="undefined"){
+        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") || $campaignid!="undefined"){
             $data=Contact::select(DB::raw('CONCAT(users.name,"(",count(contacts.id),")") as supplier'),DB::raw('count(contacts.id) as totals'))
                 ->leftjoin('users','contacts.supplier_id','users.id')->where('contacts.campaign_id',"$campaignid")->groupby('contacts.supplier_id')->get();
         }
@@ -167,7 +167,7 @@ class DashboardController extends Controller
     {
         
         $campaignid = $_REQUEST['campaignid'];
-        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") && $campaignid!="undefined"){
+        if(($campaignid!=0 || isset($campaignid)  || $campaignid !="") || $campaignid!="undefined"){
             $landline=Contact::IndexRaw('FORCE INDEX (contacts_landlinenum_index)')->select(DB::raw('count(id) as total'))
                     ->where(function($q) {
                         $q->whereNotNull('LandlineNum')
