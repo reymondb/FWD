@@ -62,7 +62,8 @@ class ReportsController extends Controller
                     ->where('phone_number',"$num")
                     ->get();
                 DB::disconnect('mysql_source');
-                $data = array_merge($data1, $data2);
+                $datas = json_decode(json_encode($data2), true);
+                $data = array_merge($data, $datas);
             }
             print_r($data);
             dd($data);die();
