@@ -20,7 +20,7 @@ use App\Exports\DuplicateLeadsExport;
 use App\Exports\UniqueExport;
 use App\Exports\LeadsExport;
 
-class LeadDetailsController extends Controller
+class DetailsController extends Controller
 {
     public function index(Request $request)
     {
