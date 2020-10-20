@@ -40,9 +40,9 @@
                                     @endif
                                 </div>
                                 <div class="card-body">
-                                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="campaigntotals" height="280" width="600"></canvas>
-                                </div>
+                                    <div class="chart" id="resetter1"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                        <canvas id="campaignstotals" height="280" width="600"></canvas>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -63,9 +63,9 @@
                                     @endif                                
                                 </div>
                                 <div class="card-body">
-                                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="supplierchart" height="280" width="600"></canvas>
-                                </div>
+                                    <div class="chart" id="resetter2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                        <canvas id="supplierchart" height="280" width="600"></canvas>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -88,9 +88,9 @@
                                     @endif
                                 </div>
                                 <div class="card-body">
-                                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="blanktotals" height="280" width="600"></canvas>
-                                </div>
+                                    <div class="chart" id="resetter3"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                            <canvas id="blanktotals" height="280" width="600"></canvas>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -111,9 +111,9 @@
                                     @endif
                                 </div>
                                 <div class="card-body">
-                                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="noblanktotals" height="280" width="600"></canvas>
-                                </div>
+                                    <div class="chart" id="resetter4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                        <canvas id="noblanktotals" height="280" width="600"></canvas>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -252,7 +252,8 @@
 
             function loadChart1(campaignids){
                 $(".loading1").show();
-                $("#campaigntotals").html('<img src="images/blue loading.gif" height="100%">');
+                $('#campaignstotals').remove(); 
+                $('#resetter1').append('<canvas id="campaignstotals" height="280" width="600"><canvas>');
                 var url = "/leadschart?campaignid="+campaignids;
                 var Totals = new Array();
                 var Labels = new Array();
@@ -266,7 +267,10 @@
                             campaigntotals = campaigntotals + data.total;
                         });
                         $("#campaign_total").html(numberWithCommas(campaigntotals));
-                        var ctx = document.getElementById("campaigntotals").getContext('2d');
+                        var ctx = document.getElementById("campaignstotals").getContext('2d');
+                        if(ctx){
+                            console.log("exist");
+                        }
                         var myPieChart = new Chart(ctx, {
                             type: 'doughnut',
                             data:{
@@ -306,7 +310,8 @@
 
             function loadChart2(campaignids){
                 $(".loading2").show();
-                $("#blanktotals").html('<img src="images/blue loading.gif" height="100%">');
+                $('#supplierchart').remove(); 
+                $('#resetter2').append('<canvas id="supplierchart" height="280" width="600"><canvas>');
                 var url2 = "/blankchart?campaignid="+campaignids;;
                 var BlankTotals = new Array();
                 var BlankLabels = new Array();
@@ -361,7 +366,8 @@
             
             function loadChart3(campaignids){
                 $(".loading3").show();
-                $("#supplierchart").html('<img src="images/blue loading.gif" height="100%">');
+                $('#blanktotals').remove(); 
+                $('#resetter3').append('<canvas id="blanktotals" height="280" width="600"><canvas>');
                 var url3 = "/supplierchart?campaignid="+campaignids;
                 var supplierTotals = new Array();
                 var supplierLabels = new Array();
@@ -414,7 +420,8 @@
             function loadChart4(campaignids){
                 $(".loading4").show();
                 $(".loading5").show();
-                $("#noblanktotals").html('<img src="images/blue loading.gif" height="100%">');
+                $('#noblanktotals').remove(); 
+                $('#resetter4').append('<canvas id="noblanktotals" height="280" width="600"><canvas>');
                 var url2 = "/noblankchart?campaignid="+campaignids;
                 var noBlankTotals = new Array();
                 var noBlankLabels = new Array();
