@@ -40,8 +40,8 @@ class ReportsController extends Controller
             $getcampaign=Contact::where('LandlineNum',$request->landline)->groupby('campaign_id')->get();
             dd($getcampaign);
         }
-        if(isset($request->mobilenum)){
-            $num = $request->mobilenum;
+        if(isset($request->mobile)){
+            $num = $request->mobile;
             $getcampaign=Contact::where('MobileNum',$request->mobile)->groupby('campaign_id')->get();
             
         }
