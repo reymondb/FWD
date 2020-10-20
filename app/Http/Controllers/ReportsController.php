@@ -72,6 +72,7 @@ class ReportsController extends Controller
         else{
 
         }
+        dd($data);
         return view('dashboard/reporting')->with('data',$data)->with("phonenumber",$num);
         
     }
