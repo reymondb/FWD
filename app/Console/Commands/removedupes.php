@@ -46,13 +46,15 @@ class removedupes extends Command
                             FirstName,
                             LastName,
                             COUNT(id) AS totals,
-                            Email
+                            Email,
+                            campaign_id
                     FROM
                         contacts
                     GROUP BY MobileNum , LandlineNum , FirstName , LastName,campaign_id
                     HAVING totals > 1) duplic ON duplic.MobileNum = contacts.MobileNum
                         AND duplic.FirstName = contacts.FirstName
                         AND duplic.LastName = contacts.LastName
+                        AND duplic.campaign_id = contacts.campaign_id 
                 WHERE
                     contacts.id < duplic.lastId;
                 ');
@@ -65,13 +67,15 @@ class removedupes extends Command
                             FirstName,
                             LastName,
                             COUNT(id) AS totals,
-                            Email
+                            Email,
+                            campaign_id
                     FROM
                         contacts
                     GROUP BY MobileNum , LandlineNum , FirstName , LastName,campaign_id
                     HAVING totals > 1) duplic ON duplic.LandlineNum = contacts.LandlineNum
                         AND duplic.FirstName = contacts.FirstName
                         AND duplic.LastName = contacts.LastName
+                        AND duplic.campaign_id = contacts.campaign_id 
                 WHERE
                     contacts.id < duplic.lastId;
                 ');
