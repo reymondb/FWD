@@ -72,7 +72,6 @@ class ReportsController extends Controller
         else{
 
         }
-        dd(json_encode($data));
         return view('dashboard/reporting')->with('data',json_encode($data));
         
     }
