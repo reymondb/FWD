@@ -52,6 +52,27 @@ class ReportsController extends Controller
 
         return view('dashboard/reporting')->with('data',$data);
     }
+
+    public function fetchDetails($landline)
+    {
+        $source=Campaigns::where('id',1)->first();
+        config(['database.connections.mysql_external.url' => $source->MySQL_url]);
+        #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
+        config(['database.connections.mysql_external.database' => $source->Mysql_db]);
+        config(['database.connections.mysql_external.username' => $source->Mysql_username]);
+        config(['database.connections.mysql_external.password' => $source->Mysql_password]);
+        #https://188.166.215.132/
+
+        $data = DB::connection('mysql_external')
+            ->table('vicidial_list')
+            ->select('phone_number','lead_id','vicidial_statuses.status_name','last_local_call_time')
+            ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
+            ->where('phone_number',"$landline")
+            ->get();
+        DB::disconnect('mysql_source');
+       // SELECT phone_number,vs.status_name,last_local_call_time FROM `vicidial_list` as list left JOIN vicidial_statuses as vs ON vs.status=list.status where phone_number=476796947 
+        return view('dashboard/lead_details')->with('data',$data);
+    }
    
     
 }
