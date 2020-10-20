@@ -41,13 +41,14 @@ class DashboardController extends Controller
     public function getCampaignTotals()
     {
         $campaignid = $_REQUEST['campaignid'];
-        if(($campaignid!=0 || isset($campaignid)) || $campaignid!="undefined"){
-            $total=Contact::select(DB::raw('count(id) as total'))->where('contacts.campaign_id',"$campaignid")->get();
-        }
-        else{
+        if($campaignid==0 || !isset($campaignid) || $campaignid=="undefined"){
             $total=Contact::select(DB::raw('count(id) as total'))->get();
         }
-        return $total[0]->total;
+        else{
+            $overalltotal=Contact::select(DB::raw('count(id) as total'))->get();
+            $total=Contact::select(DB::raw('count(id) as total'))->where('contacts.campaign_id',"$campaignid")->get();
+        }
+        return $total[0]->total."/".$overalltotal[0]->total;
     }
     public function leadschart()
     {
@@ -58,7 +59,7 @@ class DashboardController extends Controller
         */
         //dd(DB::getQueryLog());
 
-        if($campaignid==0 || !isset($campaignid) || $campaignid=="undefined"){
+       if($campaignid==0 || !isset($campaignid) || $campaignid=="undefined"){
             $data=Charts::where('chart_type',1)->orderBy('label')->select(DB::raw('label as CampaignName'),'total')->get();
         }
         else{
