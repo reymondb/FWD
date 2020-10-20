@@ -4,14 +4,12 @@
 @section('content')
         <main>
             <div class="container-fluid">
-                <h2 class="mt-4">Lead Details for {{$data[0]->phone_number}}</h2>
+                <h2 class="mt-4">Lead Details For {{$data[0]->phone_number}}</h2>
                 @if(isset($status))
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Content Updated</li>
                     </ol>
                 @endif
-                
-
                 <div class="card mb-4">
                     <div class="card-header"><i class="fas fa-table mr-1"></i>Existing Content</div>
                     <div class="card-body">
@@ -30,7 +28,6 @@
                                         <td style="width:200px;">{{$h->lead_id}}</td>
                                         <td>{{$h->status_name}}</td>
                                         <td>{{$h->last_local_call_time}}</td>
-                                       
                                     </tr>
                                     @endforeach
                                 </tbody>
