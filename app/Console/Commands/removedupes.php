@@ -49,7 +49,7 @@ class removedupes extends Command
                             Email
                     FROM
                         contacts
-                    GROUP BY MobileNum , LandlineNum , FirstName , LastName
+                    GROUP BY MobileNum , LandlineNum , FirstName , LastName,campaign_id
                     HAVING totals > 1) duplic ON duplic.MobileNum = contacts.MobileNum
                         AND duplic.FirstName = contacts.FirstName
                         AND duplic.LastName = contacts.LastName
@@ -68,7 +68,7 @@ class removedupes extends Command
                             Email
                     FROM
                         contacts
-                    GROUP BY MobileNum , LandlineNum , FirstName , LastName
+                    GROUP BY MobileNum , LandlineNum , FirstName , LastName,campaign_id
                     HAVING totals > 1) duplic ON duplic.LandlineNum = contacts.LandlineNum
                         AND duplic.FirstName = contacts.FirstName
                         AND duplic.LastName = contacts.LastName
