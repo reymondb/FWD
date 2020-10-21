@@ -38,9 +38,9 @@ class ReportsController extends Controller
     public function fetchLeadLists(Request $request)
     {
         
-        DB::enableQueryLog();
+        
         $source=Campaigns::where('id',$request->campaignid)->first();
-        dd(DB::getQueryLog());
+       
         config(['database.connections.mysql_external.url' => $source->MySQL_host]);
         #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
         config(['database.connections.mysql_external.database' => $source->Mysql_db]);
