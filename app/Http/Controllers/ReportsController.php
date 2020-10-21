@@ -58,7 +58,8 @@ class ReportsController extends Controller
                 #https://188.166.215.132/
 
                 $dataz = DB::connection('mysql_external')
-                    ->table('vicidial_list')
+                    #->table('vicidial_list')
+                    ->table('vicidial_log')
                     ->select('phone_number','lead_id','vicidial_statuses.status_name','last_local_call_time')
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
                     ->where('phone_number',"$num")
