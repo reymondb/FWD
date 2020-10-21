@@ -55,6 +55,17 @@ class ReportsController extends Controller
     }
 
     //SELECT list_id,status,count(status)as total FROM `vicidial_list` WHERE list_id=61626190000377 GROUP by status
+    /* SELECT list_id,status,count(status)as total,
+SUM(CASE WHEN vicidial_list.called_count = 1 THEN 1 ELSE 0 END) AS total1,
+SUM(CASE WHEN vicidial_list.called_count = 2 THEN 1 ELSE 0 END) AS total2,
+SUM(CASE WHEN vicidial_list.called_count = 3 THEN 1 ELSE 0 END) AS total3,
+SUM(CASE WHEN vicidial_list.called_count = 4 THEN 1 ELSE 0 END) AS total4,
+SUM(CASE WHEN vicidial_list.called_count = 5 THEN 1 ELSE 0 END) AS total5,
+SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
+           FROM `vicidial_list` WHERE list_id=61626190000377 GROUP by status */
+
+           
+           
     public function fetchLeadStats(Request $request)
     {
         $source=Campaigns::where('id',$request->campaignid)->first();
@@ -66,7 +77,13 @@ class ReportsController extends Controller
 
         $data = DB::connection('mysql_external')
             ->table('vicidial_list')
-            ->select('list_id','vicidial_list.status',DB::raw("count(vicidial_list.status)as total"),'status_name')
+            ->select('list_id','vicidial_list.status',DB::raw("count(vicidial_list.status)as total"),'status_name',
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 1 THEN 1 ELSE 0 END) AS total1"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 2 THEN 1 ELSE 0 END) AS total2"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 3 THEN 1 ELSE 0 END) AS total3"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 4 THEN 1 ELSE 0 END) AS total4"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 5 THEN 1 ELSE 0 END) AS total5"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
             ->where('list_id',$request->list_id)
             ->groupby('vicidial_list.status')
@@ -87,7 +104,13 @@ class ReportsController extends Controller
 
         $data = DB::connection('mysql_external')
             ->table('vicidial_log')
-            ->select('list_id','vicidial_log.status',DB::raw("count(vicidial_log.status)as total"),'status_name')
+            ->select('list_id','vicidial_log.status',DB::raw("count(vicidial_log.status)as total"),'status_name',
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 1 THEN 1 ELSE 0 END) AS total1"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 2 THEN 1 ELSE 0 END) AS total2"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 3 THEN 1 ELSE 0 END) AS total3"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 4 THEN 1 ELSE 0 END) AS total4"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 5 THEN 1 ELSE 0 END) AS total5"),
+            DB::raw("SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_log.status')
             ->where('list_id',$request->list_id)
             ->groupby('vicidial_log.status')
@@ -96,8 +119,5 @@ class ReportsController extends Controller
 
         return $data;
     }
-    
- 
-
-    
+        
 }

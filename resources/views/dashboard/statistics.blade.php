@@ -84,10 +84,12 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
-                    $("#reportholder").html("<table id='leadstatslists' class='table' style='width:50%'><tr><th colspan='2'>From vicidial_list</th></tr><tr><th style='width:100px'>Status</th><th style='width:100px'>Status Name</th><th style='width:200px'>Total Count</th></tr></table>");
+                    $("#reportholder").html("<table id='leadstatslists' class='table' style='width:50%'><tr><th colspan='8'>From vicidial_list</th></tr><tr><th style='width:50px'>Status</th><th style='width:100px'>Status Name</th><th style='width:200px'>Total Count</th><th>Dial Attempt Pass #1</th><th>Dial Attempt Pass #2</th><th>Dial Attempt Pass #3</th><th>Dial Attempt Pass #4</th><th>Dial Attempt Pass #5</th><th>Dial Attempt Pass > #5</th></tr></table>");
+                    
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
-                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td></tr>');
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+v.total1+'</td><td>'+v.total2+'</td><td>'+v.total3+'</td><td>'+v.total4+'</td><td>'+v.total5+'</td><td>'+v.total6+'</td></tr>');
+                        
                         //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
                 }
@@ -103,7 +105,7 @@
                 processData: false,
                 success: function (data) {
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
-                    $("#reportholderlogs").html("<table id='leadstatslogs' class='table' style='width:50%'><tr><th colspan='2'>From vicidial_logs</th></tr><tr><th style='width:100px'>Status</th><th style='width:100px'>Status Name</th><th style='width:200px'>Total Count</th></tr></table>");
+                    $("#reportholderlogs").html("<table id='leadstatslogs' class='table' style='width:50%'><tr><th colspan='8'>From vicidial_logs</th></tr><tr><th style='width:100px'>Status</th><th style='width:100px'>Status Name</th><th style='width:200px'>Total Count</th><th>Dial Attempt Pass #1</th><th>Dial Attempt Pass #2</th><th>Dial Attempt Pass #3</th><th>Dial Attempt Pass #4</th><th>Dial Attempt Pass #5</th><th>Dial Attempt Pass > #5</th></tr></table>");
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
                         $('#leadstatslogs').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td></tr>');
