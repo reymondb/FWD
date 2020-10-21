@@ -23,7 +23,7 @@
                         <div class="table-responsive" >
                             <table class='table table-bordered table-hover' id="leadstats">
                                 <thead>
-                                    <tr><th colspan='8'>From vicidial_list</th></tr>
+                                    <tr><th colspan='15'>From vicidial_list</th></tr>
                                     <tr>
                                         <th colspan=3></th>
                                         <th colspan='2'>Dial Attempt Pass #1</th>
@@ -61,7 +61,7 @@
                         <div class="table-responsive">
                             <table class='table table-bordered table-hover' id="reportholderlogs">
                                 <thead>
-                                    <tr><th colspan='8'>From vicidial_list</th></tr>
+                                    <tr><th colspan='15'>From vicidial_list</th></tr>
                                     <tr>
                                         <th colspan=3></th>
                                         <th colspan='2'>Dial Attempt Pass #1</th>
