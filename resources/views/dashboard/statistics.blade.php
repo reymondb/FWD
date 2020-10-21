@@ -68,6 +68,7 @@
                 $("#reportholder").html("");
                 $("#reportholderlogs").html("");
                 fetchLeadStatList();
+                fetchLeadStatLog();
             });
             
         });
@@ -99,7 +100,7 @@
                 processData: false,
                 success: function (data) {
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
-                    $("#reportholderlogs").html("<table id='leadstatslists' class='table' style='width:50%'><tr><th colspan='2'>From vicidial_list</th></tr><tr><th style='width:100px'>Status</th><th style='width:200px'>Total Count</th></tr></table>");
+                    $("#reportholderlogs").html("<table id='leadstatslists' class='table' style='width:50%'><tr><th colspan='2'>From vicidial_logs</th></tr><tr><th style='width:100px'>Status</th><th style='width:200px'>Total Count</th></tr></table>");
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
                         $('#reportholderlogs').append('<tr><td>'+v.status+'</td><td>'+v.total+'</td></tr>');
