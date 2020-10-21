@@ -8,7 +8,7 @@
                 
                 <div class="card mb-4">
                     <div class="card-header"><i class="fas fa-table mr-1"></i>Select Campaing: 
-                        @csfr
+                        @csrf
                         <select name="campaign_id" id="campaign">
                             <option value="">Select Capaign</option>
                             @foreach ($campaigns as $c)
