@@ -18,7 +18,7 @@
                         <select id="list_id" name="list_id"></select>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" id="reportholder">
                             
                         </div>
                     </div>
@@ -62,6 +62,7 @@
                 });
             });
             $("#list_id").on("change",function(){
+                $("#reportholder").html("");
                 fetchLeadStatList();
             });
             
@@ -75,13 +76,16 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
+                    $("#reportholder").html("<table id='leadstatslists'></table>");
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.total+'</td></tr>');
                         //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
                 }
             });
         }
+        
         function fetchLeadStatLog(){
             $.ajax({
                 url: "/getleadstatslogs?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
@@ -90,10 +94,12 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
+                    $("#reportholder").html("<table id=''></table>");
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
                         //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
+                    
                             
                 }
             });
