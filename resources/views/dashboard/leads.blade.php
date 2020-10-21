@@ -101,8 +101,8 @@
                                 <td><input type="text" name="search_mobile" placeholder="Mobile Number" value="{{$search_mobile}}" class="form-control filter_inputs" /></td>
                                 <td><input type="text" name="search_landline" placeholder="Landline Number" value="{{$search_landline}}" class="form-control filter_inputs" /></td>
                                 <td><input type="text" name="search_email" placeholder="Email" value="{{$search_email}}" class="form-control filter_inputs" /></td>
-                                <td><input type="text" name="search_firstname" placeholder="First Name" value="{{$search_mobile}}" class="form-control filter_inputs" /></td>
-                                <td><input type="text" name="search_lastname" placeholder="Last Name" value="{{$search_mobile}}" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_firstname" placeholder="First Name" value="{{$search_firstname}}" class="form-control filter_inputs" /></td>
+                                <td><input type="text" name="search_lastname" placeholder="Last Name" value="{{$search_lastname}}" class="form-control filter_inputs" /></td>
                                 <td></td>
                                 <td></td>
                                 <td style="vertical-align: middle;">

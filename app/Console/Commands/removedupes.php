@@ -79,7 +79,7 @@ class removedupes extends Command
                 WHERE
                     contacts.id < duplic.lastId;
                 ');
-        echo "Duplicated deleted";
+        echo "Duplicates deleted";
         return 0;
     }
 }
