@@ -51,7 +51,7 @@ class LeadDetailsController extends Controller
             foreach($getcampaign as $k=>$c){
                 $source=Campaigns::where('id',$c->campaign_id)->first();
                 
-                config(['database.connections.mysql_external.url' => $source->MySQL_host]);
+                config(['database.connections.mysql_external.host' => $source->MySQL_host]);
                 #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
                 config(['database.connections.mysql_external.database' => $source->Mysql_db]);
                 config(['database.connections.mysql_external.username' => $source->Mysql_username]);

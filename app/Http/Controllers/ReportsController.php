@@ -41,7 +41,7 @@ class ReportsController extends Controller
         
         $source=Campaigns::where('id',$request->campaignid)->first();
        
-        config(['database.connections.mysql_external.url' => $source->MySQL_host]);
+        config(['database.connections.mysql_external.host' => $source->MySQL_host]);
         #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
         config(['database.connections.mysql_external.database' => $source->Mysql_db]);
         config(['database.connections.mysql_external.username' => $source->Mysql_username]);
