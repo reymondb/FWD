@@ -37,17 +37,19 @@
                     'X-CSRF-Token': $('input[name=_token]').val()
                 }
             });
-            $("#campaign_id").on("change",function(){
-                $.ajax({
-                    url: "/getleadlists?campaignid="+$("#campaign_id").val(),
-                    type: 'GET',
-                    contentType: false, // The content type used when sending data to the server.
-                    cache: false, // To unable request pages to be cached
-                    processData: false,
-                    success: function (data) {
-                        console.log(data);
-                                  
-                    }
+            $(document).ready(function(){
+                $("#campaign_id").on("change",function(){
+                    $.ajax({
+                        url: "/getleadlists?campaignid="+$("#campaign_id").val(),
+                        type: 'GET',
+                        contentType: false, // The content type used when sending data to the server.
+                        cache: false, // To unable request pages to be cached
+                        processData: false,
+                        success: function (data) {
+                            console.log(data);
+                                    
+                        }
+                    });
                 });
             });
         </script>
