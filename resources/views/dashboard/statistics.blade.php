@@ -76,7 +76,7 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
-                    $("#reportholder").html("<table id='leadstatslists' class='table' style='width=\"50%\"'><tr><th colspan='2'>From vicidial_list</th></tr><tr><th style='width=\"200px\"'>Status</th><th style='width=\"200px\">Total Count</th></tr></table>");
+                    $("#reportholder").html("<table id='leadstatslists' class='table' style='width:50%'><tr><th colspan='2'>From vicidial_list</th></tr><tr><th style='width:200px'>Status</th><th style='width:200px'>Total Count</th></tr></table>");
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
                         $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.total+'</td></tr>');
