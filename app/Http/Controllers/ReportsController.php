@@ -85,7 +85,7 @@ class ReportsController extends Controller
         config(['database.connections.mysql_external.password' => $source->Mysql_password]);
 
         $data = DB::connection('mysql_external')
-            ->table('vicidial_logs')
+            ->table('vicidial_log')
             ->select('list_id','status',DB::raw("count(status)as total"))
             ->where('list_id',$request->list_id)
             ->groupby('status')
