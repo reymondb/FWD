@@ -128,8 +128,8 @@
                             @foreach($contacts as $d)
                                 <tr>
                                     <td>{{$d->id}}</td>
-                                    <td>@if(isset($d->MobileNum))<a href="/reports?mobile={{$d->MobileNum}}" target="_blank">{{$d->MobileNum}}</a>  @else {{$d->MobileNum}} @endif</td>
-                                    <td>@if(isset($d->LandlineNum))<a href="/reports?landline={{$d->LandlineNum}}" target="_blank">{{$d->LandlineNum}}</a>  @else {{$d->LandlineNum}} @endif</td>
+                                    <td>@if(isset($d->MobileNum))<a href="/lead_details?mobile={{$d->MobileNum}}" target="_blank">{{$d->MobileNum}}</a>  @else {{$d->MobileNum}} @endif</td>
+                                    <td>@if(isset($d->LandlineNum))<a href="/lead_details?landline={{$d->LandlineNum}}" target="_blank">{{$d->LandlineNum}}</a>  @else {{$d->LandlineNum}} @endif</td>
                                     <td>{{$d->FirstName}}</td>
                                     <td>{{$d->LastName}}</td>
                                     <td>{{$d->Address}}</td>
