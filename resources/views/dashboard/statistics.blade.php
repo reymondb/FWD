@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" >
-                            <table class='table table-bordered table-hover' >
+                            <table class='table table-bordered table-hover' id="leadstats">
                                 <thead>
                                     <tr><th colspan='8'>From vicidial_list</th></tr>
                                     <tr>
@@ -121,7 +121,7 @@
                     
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
-                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td></td><td>'+v.total3+'</td><td></td><td>'+v.total4+'</td><td></td><td>'+v.total5+'</td><td></td><td>'+v.total6+'</td><td></td></tr>');
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                         
                         //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
@@ -137,6 +137,11 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
+                    if ( $.fn.DataTable.isDataTable('#leadstats') ) {
+                        $('#leadstats').DataTable().destroy();
+                    }
+
+                    $('#leadstats tbody').empty();
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $("#reportholderlogs").html("<table id='leadstatslogs' class='table' ><tr><th colspan='8'>From vicidial_logs</th></tr><tr><th style='width:100px'>Status</th><th style='width:100px'>Status Name</th><th style='width:200px'>Total Count</th><th colspan='2'>Dial Attempt Pass #1</th><th colspan='2'>Dial Attempt Pass #2</th><th colspan='2'>Dial Attempt Pass #3</th><th colspan='2'>Dial Attempt Pass #4</th><th colspan='2'>Dial Attempt Pass #5</th><th colspan='2'>Dial Attempt Pass > #5</th></tr></table>");
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
@@ -144,10 +149,23 @@
                         $('#leadstatslogs').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td></tr>');
                         //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
-                    
+                    $('#leadstats').DataTable( {
+                        "paging":   false,
+                        "ordering": false,
+                        "info":     false
+                    } );
                             
                 }
             });
         }
     </script>
+    
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
 @stop
