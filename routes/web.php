@@ -30,14 +30,12 @@ Route::get('/noblankchart','DashboardController@noblankchart')->name('noblankcha
 Route::get('/supplierchart','DashboardController@supplierchart')->name('supplierchart');
 Route::get('/getCampaignTotals','DashboardController@getCampaignTotals')->name('getCampaignTotals');
 
-
 Route::get('/import', 'ImportController@getImport')->name('import');
 Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
 Route::post('/import_process', 'ImportController@processImport')->name('import_process');
 
 Route::get('/leads', 'LeadsController@Index')->name('contactszz');
-Route::get('/lead_details/{$landline}', 'LeadDetailsController@fetchDetails');
-Route::get('/leaddetail/{$landline}', 'ReportsController@fetchDetails')->name('fetchLeadDetail');
+Route::get('/lead_details', 'LeadDetailsController@fetchDetails');
 Route::post('/downloadleads', 'LeadsController@exportLeads')->name('exportLeads');
 #Route::post('/leadwashing/exportunique', 'LeadsController@exportUniqueLeads')->name('exportUniqueLeads');
 #Route::post('/leadwashing/exportduplicate', 'LeadsController@exportDuplicateLeads')->name('exportDuplicateLeads');
@@ -74,6 +72,8 @@ Route::get('/optimizeChart1', 'OptimizerController@leadschart')->name('optimize1
 Route::get('/optimizeChart2', 'OptimizerController@supplierchart')->name('optimize2');
 Route::get('/optimizeChart3', 'OptimizerController@blankchart')->name('optimize3');
 Route::get('/optimizeChart4', 'OptimizerController@notblankchart')->name('optimize4');
+
+
 
 /**
  * middleware('App\Http\Middleware\AdminMiddleware')->
