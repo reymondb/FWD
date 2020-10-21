@@ -69,37 +69,34 @@
 
         function fetchLeadStatList(){
             $.ajax({
-                    url: "/getleadstats?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
-                        type: 'GET',
-                        contentType: false, // The content type used when sending data to the server.
-                        cache: false, // To unable request pages to be cached
-                        processData: false,
-                        success: function (data) {
-                            //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
-                            $.each(data, function(k, v) {
-                                //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
-                            });
-                                    
-                        }
+                url: "/getleadstats?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
+                type: 'GET',
+                contentType: false, // The content type used when sending data to the server.
+                cache: false, // To unable request pages to be cached
+                processData: false,
+                success: function (data) {
+                    //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
+                    $.each(data, function(k, v) {
+                        //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
-                });
+                }
+            });
         }
         function fetchLeadStatLog(){
             $.ajax({
-                    url: "/getleadstatslogs?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
-                        type: 'GET',
-                        contentType: false, // The content type used when sending data to the server.
-                        cache: false, // To unable request pages to be cached
-                        processData: false,
-                        success: function (data) {
-                            //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
-                            $.each(data, function(k, v) {
-                                //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
-                            });
-                                    
-                        }
+                url: "/getleadstatslogs?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
+                type: 'GET',
+                contentType: false, // The content type used when sending data to the server.
+                cache: false, // To unable request pages to be cached
+                processData: false,
+                success: function (data) {
+                    //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
+                    $.each(data, function(k, v) {
+                        //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
-                });
+                            
+                }
+            });
         }
     </script>
 @stop
