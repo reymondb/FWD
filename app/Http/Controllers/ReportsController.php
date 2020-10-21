@@ -77,49 +77,5 @@ class ReportsController extends Controller
         
     }
 
-    public function fetchDetails($landline)
-    {
-        
-        if(isset($request->landline)){
-            $num = $request->landline;
-            $getcampaign=Contact::where('LandlineNum',$request->landline)->groupby('campaign_id')->get();
-        }
-        if(isset($request->mobile)){
-            $num = $request->mobile;
-            $getcampaign=Contact::where('MobileNum',$request->mobile)->groupby('campaign_id')->get();
-            
-        }
-
-        if($getcampaign){
-            
-            $data=array();
-            foreach($getcampaign as $k=>$c){
-                $source=Campaigns::where('id',$c->campaign_id)->first();
-                
-                config(['database.connections.mysql_external.url' => $source->MySQL_url]);
-                #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
-                config(['database.connections.mysql_external.database' => $source->Mysql_db]);
-                config(['database.connections.mysql_external.username' => $source->Mysql_username]);
-                config(['database.connections.mysql_external.password' => $source->Mysql_password]);
-                #https://188.166.215.132/
-
-                $dataz = DB::connection('mysql_external')
-                    #->table('vicidial_list')
-                    ->table('vicidial_log')
-                    ->select('phone_number','lead_id','vicidial_statuses.status_name','call_date','campaign_id')
-                    ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_log.status')
-                    ->where('phone_number',"$num")
-                    ->get();
-                DB::disconnect('mysql_source');
-               
-                $data[] = $dataz;
-            }
-           
-        }
-        else{
-
-        }
-        return view('dashboard/lead_details')->with('data',$data)->with("phonenumber",$num);
-    }
     
 }
