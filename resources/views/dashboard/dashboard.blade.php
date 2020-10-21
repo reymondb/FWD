@@ -309,9 +309,9 @@
             }
 
             function loadChart3(campaignids){
-                $(".loading2").show();
+                $(".loading3").show();
                 $('#blanktotals').remove(); 
-                $('#resetter2').append('<canvas id="blanktotals" height="280" width="600"><canvas>');
+                $('#resetter3').append('<canvas id="blanktotals" height="280" width="600"><canvas>');
                 var url2 = "/blankchart?campaignid="+campaignids;;
                 var BlankTotals = new Array();
                 var BlankLabels = new Array();
@@ -358,7 +358,7 @@
                         
                         });
                     }).always(function (data) {
-                        $(".loading2").hide();
+                        $(".loading3").hide();
                         });;
                 });
             }
