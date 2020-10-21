@@ -76,7 +76,7 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
-                    $("#reportholder").html("<table id='leadstatslists'></table>");
+                    $("#reportholder").html("<table id='leadstatslists' class='table'></table>");
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
                         $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.total+'</td></tr>');
@@ -85,7 +85,7 @@
                 }
             });
         }
-        
+
         function fetchLeadStatLog(){
             $.ajax({
                 url: "/getleadstatslogs?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
