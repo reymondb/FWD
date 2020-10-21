@@ -57,7 +57,7 @@
                             </table>
                         </div>
                         <br>
-                        <div class="table-responsive" id="reportholderlogs">
+                        <div class="table-responsive">
                             <table class='table table-bordered table-hover' id="reportholderlogs">
                                 <thead>
                                     <tr><th colspan='8'>From vicidial_list</th></tr>
