@@ -88,7 +88,7 @@
                                         <th >LEAD %</th>
                                     </tr>
                                 </thead>                                
-                                <tbody>
+                                <tbody id="reportholderlogzz">
 
                                 </tbody>
                             </table>
@@ -136,7 +136,7 @@
             });
             $("#list_id").on("change",function(){
                 $("#leadstatslists").html("");
-                $("#reportholderlogs tbody").html("");
+                $("#reportholderlogzz").html("");
                 fetchLeadStatList();
                 fetchLeadStatLog();
             });
