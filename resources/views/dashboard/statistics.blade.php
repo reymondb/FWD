@@ -134,7 +134,7 @@
                         "paging":   false,
                         "ordering": true,
                         "info":     false
-                        dom: 'Bfrtip',
+                        "dom": 'Bfrtip',
                         buttons: [
                             'copyHtml5',
                             'excelHtml5',
