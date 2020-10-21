@@ -37,26 +37,25 @@ class ReportsController extends Controller
 
     public function fetchLeadLists(Request $request)
     {
-        if(isset($request->campaignid)){
-            DB::enableQueryLog();
-            $source=Campaigns::where('id',$request->campaignid)->first();
-            dd(DB::getQueryLog());
-            config(['database.connections.mysql_external.url' => $source->MySQL_host]);
-            #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
-            config(['database.connections.mysql_external.database' => $source->Mysql_db]);
-            config(['database.connections.mysql_external.username' => $source->Mysql_username]);
-            config(['database.connections.mysql_external.password' => $source->Mysql_password]);
+        
+        DB::enableQueryLog();
+        $source=Campaigns::where('id',$request->campaignid)->first();
+        dd(DB::getQueryLog());
+        config(['database.connections.mysql_external.url' => $source->MySQL_host]);
+        #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
+        config(['database.connections.mysql_external.database' => $source->Mysql_db]);
+        config(['database.connections.mysql_external.username' => $source->Mysql_username]);
+        config(['database.connections.mysql_external.password' => $source->Mysql_password]);
 
-            $data = DB::connection('mysql_external')
-                ->table('vicidial_list')
-                ->select('list_id')
-                ->groupby('list_id')
-                ->get();
-            return $data;
-        }
-        else{
-            return 0;
-        }
+        $data = DB::connection('mysql_external')
+            ->table('vicidial_list')
+            ->select('list_id')
+            ->groupby('list_id')
+            ->get();
+        DB::disconnect('mysql_source');
+
+        return $data;
+        
        
     }
 
