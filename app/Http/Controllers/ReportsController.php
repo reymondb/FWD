@@ -105,12 +105,12 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
         $data = DB::connection('mysql_external')
             ->table('vicidial_log')
             ->select('list_id','vicidial_log.status',DB::raw("count(vicidial_log.status)as total"),'status_name',
-            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 1 THEN 1 ELSE 0 END) AS total1"),
-            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 2 THEN 1 ELSE 0 END) AS total2"),
-            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 3 THEN 1 ELSE 0 END) AS total3"),
-            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 4 THEN 1 ELSE 0 END) AS total4"),
-            DB::raw("SUM(CASE WHEN vicidial_list.called_count = 5 THEN 1 ELSE 0 END) AS total5"),
-            DB::raw("SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
+            DB::raw("SUM(CASE WHEN vicidial_log.called_count = 1 THEN 1 ELSE 0 END) AS total1"),
+            DB::raw("SUM(CASE WHEN vicidial_log.called_count = 2 THEN 1 ELSE 0 END) AS total2"),
+            DB::raw("SUM(CASE WHEN vicidial_log.called_count = 3 THEN 1 ELSE 0 END) AS total3"),
+            DB::raw("SUM(CASE WHEN vicidial_log.called_count = 4 THEN 1 ELSE 0 END) AS total4"),
+            DB::raw("SUM(CASE WHEN vicidial_log.called_count = 5 THEN 1 ELSE 0 END) AS total5"),
+            DB::raw("SUM(CASE WHEN vicidial_log.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_log.status')
             ->where('list_id',$request->list_id)
             ->groupby('vicidial_log.status')
