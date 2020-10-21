@@ -35,20 +35,20 @@
                                     </th>
                                     <tr>
                                         <th style='width:50px'>Status</th>
-                                        <th style='width:100px'>Status Name</th>
-                                        <th style='width:200px'>Total Count</th>                                        
-                                        <th style='width:100px'>COUNT</th>
-                                        <th style='width:200px'>LEAD %</th>                                     
-                                        <th style='width:100px'>COUNT</th>
-                                        <th style='width:200px'>LEAD %</th>                                     
-                                        <th style='width:100px'>COUNT</th>
-                                        <th style='width:200px'>LEAD %</th>                                     
-                                        <th style='width:100px'>COUNT</th>
-                                        <th style='width:200px'>LEAD %</th>                                     
-                                        <th style='width:100px'>COUNT</th>
-                                        <th style='width:200px'>LEAD %</th>                                     
-                                        <th style='width:100px'>COUNT</th>
-                                        <th style='width:200px'>LEAD %</th>
+                                        <th style='width:200px'>Status Name</th>
+                                        <th>Total Count</th>                                        
+                                        <th >COUNT</th>
+                                        <th>LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th>LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th>LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th >LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th >LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th >LEAD %</th>
                                     </tr>
                                 </thead>                                
                                 <tbody id="leadstatslists">
@@ -58,6 +58,40 @@
                         </div>
                         <br>
                         <div class="table-responsive" id="reportholderlogs">
+                            <table class='table table-bordered table-hover' id="reportholderlogs">
+                                <thead>
+                                    <tr><th colspan='8'>From vicidial_list</th></tr>
+                                    <tr>
+                                        <th colspan=3></th>
+                                        <th colspan='2'>Dial Attempt Pass #1</th>
+                                        <th colspan='2'>Dial Attempt Pass #2</th>
+                                        <th colspan='2'>Dial Attempt Pass #3</th>
+                                        <th colspan='2'>Dial Attempt Pass #4</th>
+                                        <th colspan='2'>Dial Attempt Pass #5</th>
+                                        <th colspan='2'>Dial Attempt Pass > #5</th>
+                                    </th>
+                                    <tr>
+                                        <th style='width:50px'>Status</th>
+                                        <th style='width:200px'>Status Name</th>
+                                        <th>Total Count</th>                                        
+                                        <th >COUNT</th>
+                                        <th>LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th>LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th>LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th >LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th >LEAD %</th>                                     
+                                        <th >COUNT</th>
+                                        <th >LEAD %</th>
+                                    </tr>
+                                </thead>                                
+                                <tbody>
+
+                                </tbody>
+                            </table>
                             
                         </div>
                     </div>
@@ -102,7 +136,7 @@
             });
             $("#list_id").on("change",function(){
                 $("#leadstatslists").html("");
-                $("#reportholderlogs").html("");
+                $("#reportholderlogs tbody").html("");
                 fetchLeadStatList();
                 fetchLeadStatLog();
             });
@@ -122,12 +156,8 @@
                     }
 
                     $('#leadstats tbody').empty();
-                    
-                    //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
                         $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
-                        
-                        //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
                     
                     $('#leadstats').DataTable( {
@@ -154,13 +184,30 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
-                    //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
-                    $("#reportholderlogs").html("<table id='leadstatslogs' class='table' ><tr><th colspan='8'>From vicidial_logs</th></tr><tr><th style='width:100px'>Status</th><th style='width:100px'>Status Name</th><th style='width:200px'>Total Count</th><th colspan='2'>Dial Attempt Pass #1</th><th colspan='2'>Dial Attempt Pass #2</th><th colspan='2'>Dial Attempt Pass #3</th><th colspan='2'>Dial Attempt Pass #4</th><th colspan='2'>Dial Attempt Pass #5</th><th colspan='2'>Dial Attempt Pass > #5</th></tr></table>");
-                    //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
+                    
+                    if ( $.fn.DataTable.isDataTable('#reportholderlogs') ) {
+                        $('#reportholderlogs').DataTable().destroy();
+                    }
+
+                    $('#reportholderlogs tbody').empty();
+                   // $("#reportholderlogs").html("<table id='leadstatslogs' class='table' ><tr><th colspan='8'>From vicidial_logs</th></tr><tr><th >Status</th><th  style='width:200px'>Status Name</th><th>Total Count</th><th colspan='2'>Dial Attempt Pass #1</th><th colspan='2'>Dial Attempt Pass #2</th><th colspan='2'>Dial Attempt Pass #3</th><th colspan='2'>Dial Attempt Pass #4</th><th colspan='2'>Dial Attempt Pass #5</th><th colspan='2'>Dial Attempt Pass > #5</th></tr></table>");
                     $.each(data, function(k, v) {
-                        $('#leadstatslogs').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td></tr>');
-                        //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
+                        $('#reportholderlogs tbody').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
+
+                    
+                    $('#reportholderlogs').DataTable( {
+                        "paging":   false,
+                        "ordering": true,
+                        "info":     false,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copyHtml5',
+                            'excelHtml5',
+                            'csvHtml5',
+                            'pdfHtml5'
+                        ]
+                    } );
                             
                 }
             });
