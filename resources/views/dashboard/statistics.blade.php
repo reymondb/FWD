@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" >
-                            <table class='table' >
+                            <table class='table table-bordered table-hover' >
                                 <thead>
                                     <tr><th colspan='8'>From vicidial_list</th></tr>
                                     <tr>
@@ -121,7 +121,7 @@
                     
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
-                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td></td><td>'+v.total1+'</td><td></td><td>'+v.total2+'</td><td></td><td>'+v.total3+'</td><td></td><td>'+v.total4+'</td><td></td><td>'+v.total5+'</td><td></td><td>'+v.total6+'</td><td></td></tr>');
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+v.total1+'</td><td></td><td>'+v.total2+'</td><td></td><td>'+v.total3+'</td><td></td><td>'+v.total4+'</td><td></td><td>'+v.total5+'</td><td></td><td>'+v.total6+'</td><td></td></tr>');
                         
                         //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
