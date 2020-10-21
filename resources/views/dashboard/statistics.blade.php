@@ -38,7 +38,7 @@
                 }
             });
             $(document).ready(function(){
-                $("#campaign_id").on("change",function(){
+                $("#campaign").on("change",function(){
                     $.ajax({
                         url: "/getleadlists?campaignid="+$("#campaign_id").val(),
                         type: 'GET',
