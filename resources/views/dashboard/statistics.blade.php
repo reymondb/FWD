@@ -14,14 +14,16 @@
                             @foreach ($campaigns as $c)
                                 <option value="{{$c->id}}">{{$c->CampaignName}}</option>
                             @endforeach
-                        </select>
+                        </select> 
+
+                        Select List ID:
                         <select id="list_id" name="list_id"></select>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" id="reportholder">
                             
                         </div>
-                        sadsad
+                        <br>
                         <div class="table-responsive" id="reportholderlogs">
                             
                         </div>
