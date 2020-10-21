@@ -50,7 +50,7 @@ class LeadDetailsController extends Controller
             $data=array();
             foreach($getcampaign as $k=>$c){
                 $source=Campaigns::where('id',$c->campaign_id)->first();
-                echo $source->MySQL_host; die();
+                
                 config(['database.connections.mysql_external.host' => $source->MySQL_host]);
                 #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
                 config(['database.connections.mysql_external.database' => $source->Mysql_db]);
