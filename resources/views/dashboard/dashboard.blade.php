@@ -308,10 +308,10 @@
                 });
             }
 
-            function loadChart2(campaignids){
+            function loadChart3(campaignids){
                 $(".loading2").show();
-                $('#supplierchart').remove(); 
-                $('#resetter2').append('<canvas id="supplierchart" height="280" width="600"><canvas>');
+                $('#blanktotals').remove(); 
+                $('#resetter2').append('<canvas id="blanktotals" height="280" width="600"><canvas>');
                 var url2 = "/blankchart?campaignid="+campaignids;;
                 var BlankTotals = new Array();
                 var BlankLabels = new Array();
@@ -364,10 +364,10 @@
             }
 
             
-            function loadChart3(campaignids){
-                $(".loading3").show();
-                $('#blanktotals').remove(); 
-                $('#resetter3').append('<canvas id="blanktotals" height="280" width="600"><canvas>');
+            function loadChart2(campaignids){
+                $(".loading2").show();
+                $('#supplierchart').remove(); 
+                $('#resetter2').append('<canvas id="supplierchart" height="280" width="600"><canvas>');
                 var url3 = "/supplierchart?campaignid="+campaignids;
                 var supplierTotals = new Array();
                 var supplierLabels = new Array();
@@ -412,7 +412,7 @@
                         
                         });
                     }).always(function (data) {
-                        $(".loading3").hide();
+                        $(".loading2").hide();
                         });
                 });
             }
