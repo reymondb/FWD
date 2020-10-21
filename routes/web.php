@@ -78,6 +78,8 @@ Route::get('/optimizeChart4', 'OptimizerController@notblankchart')->name('optimi
 Route::get('/stats', 'ReportsController@index')->name('fetchReport');
 Route::get('/reports', 'ReportsController@fetchReport')->name('fetchReport');
 Route::get('/getleadlists', 'ReportsController@fetchLeadLists')->name('fetchLeadLists');
+Route::get('/getleadstats', 'ReportsController@fetchLeadStats')->name('fetchLeadStats');
+Route::get('/getleadstatslogs', 'ReportsController@fetchLeadStatsLogs')->name('fetchLeadStatsLogs');
 
 /**
  * middleware('App\Http\Middleware\AdminMiddleware')->
