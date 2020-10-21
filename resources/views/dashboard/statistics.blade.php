@@ -23,9 +23,9 @@
                         <div class="table-responsive" >
                             <table class='table table-bordered table-hover' id="leadstats">
                                 <thead>
-                                    <tr><th colspan='15'>From vicidial_list</th></tr>
+                                    <tr><th colspan='16'>From vicidial_list</th></tr>
                                     <tr>
-                                        <th colspan=3></th>
+                                        <th colspan=4></th>
                                         <th colspan='2'>Dial Attempt Pass #1</th>
                                         <th colspan='2'>Dial Attempt Pass #2</th>
                                         <th colspan='2'>Dial Attempt Pass #3</th>
@@ -36,7 +36,8 @@
                                     <tr>
                                         <th style='width:50px'>Status</th>
                                         <th style='width:200px'>Status Name</th>
-                                        <th>Total Count</th>                                        
+                                        <th></th> 
+                                        <th></th>                                       
                                         <th >COUNT</th>
                                         <th>LEAD %</th>                                     
                                         <th >COUNT</th>
@@ -61,9 +62,9 @@
                         <div class="table-responsive">
                             <table class='table table-bordered table-hover' id="reportholderlogs">
                                 <thead>
-                                    <tr><th colspan='15'>From vicidial_list</th></tr>
+                                    <tr><th colspan='16'>From vicidial_list</th></tr>
                                     <tr>
-                                        <th colspan=3></th>
+                                        <th colspan=4></th>
                                         <th colspan='2'>Dial Attempt Pass #1</th>
                                         <th colspan='2'>Dial Attempt Pass #2</th>
                                         <th colspan='2'>Dial Attempt Pass #3</th>
@@ -74,7 +75,8 @@
                                     <tr>
                                         <th style='width:50px'>Status</th>
                                         <th style='width:200px'>Status Name</th>
-                                        <th>Total Count</th>                                        
+                                        <th></th> 
+                                        <th></th>                                       
                                         <th >COUNT</th>
                                         <th>LEAD %</th>                                     
                                         <th >COUNT</th>
@@ -158,7 +160,7 @@
 
                     $('#leadstats tbody').empty();
                     $.each(data, function(k, v) {
-                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2)+'%</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
                     
                     $('#leadstats').DataTable( {
@@ -193,7 +195,7 @@
                     $('#reportholderlogs tbody').empty();
                    // $("#reportholderlogs").html("<table id='leadstatslogs' class='table' ><tr><th colspan='8'>From vicidial_logs</th></tr><tr><th >Status</th><th  style='width:200px'>Status Name</th><th>Total Count</th><th colspan='2'>Dial Attempt Pass #1</th><th colspan='2'>Dial Attempt Pass #2</th><th colspan='2'>Dial Attempt Pass #3</th><th colspan='2'>Dial Attempt Pass #4</th><th colspan='2'>Dial Attempt Pass #5</th><th colspan='2'>Dial Attempt Pass > #5</th></tr></table>");
                     $.each(data, function(k, v) {
-                        $('#reportholderlogs tbody').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2)+'%</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
 
                     
