@@ -67,8 +67,6 @@ Route::post('/editsupplier', 'SupplierController@editSupplier')->name('editSuppl
 Route::get('/editsupplier', 'SupplierController@supplier')->name('editSupplierz');
 
 
-Route::get('/stats', 'ReportsController@index')->name('fetchReport');
-Route::get('/reports', 'ReportsController@fetchReport')->name('fetchReport');
 Route::get('/optimize', 'OptimizerController@index')->name('optimize');
 Route::get('/optimizeChart1', 'OptimizerController@leadschart')->name('optimize1');
 Route::get('/optimizeChart2', 'OptimizerController@supplierchart')->name('optimize2');
@@ -76,6 +74,10 @@ Route::get('/optimizeChart3', 'OptimizerController@blankchart')->name('optimize3
 Route::get('/optimizeChart4', 'OptimizerController@notblankchart')->name('optimize4');
 
 
+
+Route::get('/stats', 'ReportsController@index')->name('fetchReport');
+Route::get('/reports', 'ReportsController@fetchReport')->name('fetchReport');
+Route::get('/getleadlists', 'ReportsController@fetchLeadLists')->name('fetchLeadLists');
 
 /**
  * middleware('App\Http\Middleware\AdminMiddleware')->

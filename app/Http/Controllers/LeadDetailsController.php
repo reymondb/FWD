@@ -76,6 +76,9 @@ class LeadDetailsController extends Controller
         }
         return view('dashboard/lead_details')->with('data',$data)->with("phonenumber",$num);
     }
+
+   
+    
    
     
 }
