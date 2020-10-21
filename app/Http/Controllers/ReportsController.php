@@ -24,12 +24,14 @@ class ReportsController extends Controller
 {
     public function index(Request $request)
     {
+        $campaigns = Campaigns::all();
         /*
         mysql_external
         url MySQL_url
         database Mysql_db
         username Mysql_username
         password Mysql_password*/
+        return view('dashboard/statistics')->with('campaigns',$campaigns);
     }
 
     public function fetchReport(Request $request)
@@ -43,7 +45,6 @@ class ReportsController extends Controller
             $getcampaign=Contact::where('MobileNum',$request->mobile)->groupby('campaign_id')->get();
             
         }
-
         if($getcampaign){
             
             $data=array();

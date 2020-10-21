@@ -89,6 +89,11 @@
                                     Manage Charts
                                 </a>
                                 @endif
+                                @if(Auth::user()->role ==1 || Auth::user()->role ==2)
+                                <a class="nav-link" href="/stats"><div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
+                                    Lead Statistics 
+                                </a>
+                                @endif
                             </div>
                         </div>
                         <div class="sb-sidenav-footer">

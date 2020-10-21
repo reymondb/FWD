@@ -66,6 +66,8 @@ Route::get('/deletesupplier/{id}', 'SupplierController@deleteSupplier')->name('d
 Route::post('/editsupplier', 'SupplierController@editSupplier')->name('editSupplier');
 Route::get('/editsupplier', 'SupplierController@supplier')->name('editSupplierz');
 
+
+Route::get('/stats', 'ReportsController@index')->name('fetchReport');
 Route::get('/reports', 'ReportsController@fetchReport')->name('fetchReport');
 Route::get('/optimize', 'OptimizerController@index')->name('optimize');
 Route::get('/optimizeChart1', 'OptimizerController@leadschart')->name('optimize1');

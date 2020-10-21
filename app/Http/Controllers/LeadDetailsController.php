@@ -35,7 +35,6 @@ class LeadDetailsController extends Controller
     
     public function fetchDetails(Request $request)
     {
-        
         if(isset($request->landline)){
             $num = $request->landline;
             $getcampaign=Contact::where('LandlineNum',$request->landline)->groupby('campaign_id')->get();

@@ -362,7 +362,6 @@
                         });;
                 });
             }
-
             
             function loadChart2(campaignids){
                 $(".loading2").show();
