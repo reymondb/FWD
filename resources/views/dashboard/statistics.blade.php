@@ -117,7 +117,11 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
-                    $("#leadstatslists").html("");
+                    if ( $.fn.DataTable.isDataTable('#leadstats') ) {
+                        $('#leadstats').DataTable().destroy();
+                    }
+
+                    $('#leadstats tbody').empty();
                     
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $.each(data, function(k, v) {
@@ -125,6 +129,12 @@
                         
                         //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
+                    
+                    $('#leadstats').DataTable( {
+                        "paging":   false,
+                        "ordering": false,
+                        "info":     false
+                    } );
                 }
             });
         }
@@ -137,11 +147,6 @@
                 cache: false, // To unable request pages to be cached
                 processData: false,
                 success: function (data) {
-                    if ( $.fn.DataTable.isDataTable('#leadstats') ) {
-                        $('#leadstats').DataTable().destroy();
-                    }
-
-                    $('#leadstats tbody').empty();
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                     $("#reportholderlogs").html("<table id='leadstatslogs' class='table' ><tr><th colspan='8'>From vicidial_logs</th></tr><tr><th style='width:100px'>Status</th><th style='width:100px'>Status Name</th><th style='width:200px'>Total Count</th><th colspan='2'>Dial Attempt Pass #1</th><th colspan='2'>Dial Attempt Pass #2</th><th colspan='2'>Dial Attempt Pass #3</th><th colspan='2'>Dial Attempt Pass #4</th><th colspan='2'>Dial Attempt Pass #5</th><th colspan='2'>Dial Attempt Pass > #5</th></tr></table>");
                     //$('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
@@ -149,11 +154,6 @@
                         $('#leadstatslogs').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td></tr>');
                         //$('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+'</option>');
                     });
-                    $('#leadstats').DataTable( {
-                        "paging":   false,
-                        "ordering": false,
-                        "info":     false
-                    } );
                             
                 }
             });
