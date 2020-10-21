@@ -55,6 +55,24 @@
                                 <tbody id="leadstatslists">
 
                                 </tbody>
+                                
+                                <tfoot>
+                                    <th></th> 
+                                    <th></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                    <th class="sum"></th>
+                                </tfoot>
                             </table>
                         </div>
                         <hr>
@@ -177,27 +195,20 @@
                         ],
                         "footerCallback": function ( row, data, start, end, display ) {
                                     var api = this.api(), data;
-                        
-                                    // Remove the formatting to get integer data for summation
-                                    var intVal = function ( i ) {
-                                        return typeof i === 'string' ?
-                                            i.replace(/[\$,]/g, '')*1 :
-                                            typeof i === 'number' ?
-                                                i : 0;
-                                    };
-                        
-                                    // Total over all pages 1
-                                    overall = api
-                                        .column( 2 )
+                                   
+                                    api.columns('.sum', {
+                                        page: 'current'
+                                    }).every(function() {
+                                        var sum = this
                                         .data()
-                                        .reduce( function (a, b) {
-                                            return intVal(a) + intVal(b);
-                                        }, 0 );
-                                        
-                                    // Update footer
-                                    $( api.column( 1 ).footer() ).html("Total:");
-                                    
-                                    $( api.column( 2 ).footer() ).html('$'+overall);
+                                        .reduce(function(a, b) {
+                                            var x = parseFloat(a) || 0;
+                                            var y = parseFloat(b) || 0;
+                                            return x + y;
+                                        }, 0);
+                                        $(this.footer()).html(sum);
+                                    });
+
                                 }
                     } );
                 }
