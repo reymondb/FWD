@@ -40,7 +40,7 @@
             $(document).ready(function(){
                 $("#campaign").on("change",function(){
                     $.ajax({
-                        url: "/getleadlists?campaignid="+$("#campaign_id").val(),
+                        url: "/getleadlists?campaignid="+$("#campaign").val(),
                         type: 'GET',
                         contentType: false, // The content type used when sending data to the server.
                         cache: false, // To unable request pages to be cached
