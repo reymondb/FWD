@@ -66,7 +66,8 @@ class ReportsController extends Controller
 
         $data = DB::connection('mysql_external')
             ->table('vicidial_list')
-            ->select('list_id','status',DB::raw("count(status)as total"))
+            ->select('list_id','status',DB::raw("count(status)as total"),'status_name')
+            ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
             ->where('list_id',$request->list_id)
             ->groupby('status')
             ->get();
@@ -86,7 +87,8 @@ class ReportsController extends Controller
 
         $data = DB::connection('mysql_external')
             ->table('vicidial_log')
-            ->select('list_id','status',DB::raw("count(status)as total"))
+            ->select('list_id','status',DB::raw("count(status)as total"),'status_name')
+            ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
             ->where('list_id',$request->list_id)
             ->groupby('status')
             ->get();
