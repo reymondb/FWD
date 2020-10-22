@@ -192,9 +192,34 @@
                                     return a + b;
                                 });
 
-                                $(column.footer()).html(sum);
+                                $(column.footer()).html('Sum: ' + sum);
                             });
                         }
+                        "footerCallback": function ( row, data, start, end, display ) {
+                                    var api = this.api(), data;
+                                    // Remove the formatting to get integer data for summation
+                                    var intVal = function ( i ) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '')*1 :
+                                            typeof i === 'number' ?
+                                                i : 0;
+                                    };
+
+                                    api.columns('.sum', {
+                                        page: 'current'
+                                    }).every(function() {
+                                        var sum = this
+                                        .data()
+                                        .reduce(function(a, b) {
+                                            var x = intVal(a) || 0;
+                                            var y = intVal(b) || 0;
+                                            return x + y;
+                                        }, 0);
+                                        console.log(sum);
+                                        $(this.footer()).html(sum);
+                                    });
+
+                                }
                     } );
                 }
             });
