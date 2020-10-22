@@ -36,43 +36,26 @@
                                     <tr>
                                         <th style='width:50px'>Status</th>
                                         <th style='width:200px'>Status Name</th>
-                                        <th></th> 
-                                        <th></th>                                       
-                                        <th >COUNT</th>
-                                        <th>LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th>LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th>LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th >LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th >LEAD %</th>                                     
-                                        <th >COUNT</th>
+                                        <th class="sum"></th> 
+                                        <th class="sum"></th>                                       
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum" >COUNT</th>
                                         <th >LEAD %</th>
                                     </tr>
                                 </thead>                                
                                 <tbody id="leadstatslists">
 
                                 </tbody>
-                                
-                                <tfoot>
-                                    <th></th> 
-                                    <th></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                    <th class="sum"></th>
-                                </tfoot>
+
                             </table>
                         </div>
                         <hr>
@@ -195,15 +178,22 @@
                         ],
                         "footerCallback": function ( row, data, start, end, display ) {
                                     var api = this.api(), data;
-                                   
+                                    // Remove the formatting to get integer data for summation
+                                    var intVal = function ( i ) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '')*1 :
+                                            typeof i === 'number' ?
+                                                i : 0;
+                                    };
+
                                     api.columns('.sum', {
                                         page: 'current'
                                     }).every(function() {
                                         var sum = this
                                         .data()
                                         .reduce(function(a, b) {
-                                            var x = parseFloat(a) || 0;
-                                            var y = parseFloat(b) || 0;
+                                            var x = intVal(a) || 0;
+                                            var y = intVal(b) || 0;
                                             return x + y;
                                         }, 0);
                                         $(this.footer()).html(sum);
