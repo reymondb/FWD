@@ -212,38 +212,42 @@
                             'pdfHtml5'
                         ],
                         "initComplete": function (settings, json) {
-                            this.api().columns('.sum').every(function () {
-                                var column = this;
-                               
-                                var sum = column
-                                .data()
-                                .reduce(function (a, b) { 
-                                    a = parseInt(a, 10);
-                                    if(isNaN(a)){ a = 0; }
-                                    b = parseInt(b, 10);
-                                    if(isNaN(b)){ b = 0; }
-                                    
-                                    return a + b;
-                                });
+                            if(this.fnSettings().aoData.length===0) {
+                                console.log("no data");
+                            } else {
+                                this.api().columns('.sum').every(function () {
+                                    var column = this;
+                                
+                                    var sum = column
+                                    .data()
+                                    .reduce(function (a, b) { 
+                                        a = parseInt(a, 10);
+                                        if(isNaN(a)){ a = 0; }
+                                        b = parseInt(b, 10);
+                                        if(isNaN(b)){ b = 0; }
+                                        
+                                        return a + b;
+                                    });
 
-                                $(column.footer()).html(sum);
-                            });
-                            this.api().columns('.sum2').every(function () {
-                                var column = this;
-                               
-                                var sum = column
-                                .data()
-                                .reduce(function (a, b) { 
-                                    a = parseFloat(a);
-                                    if(isNaN(a)){ a = 0; }
-                                    b = parseFloat(b);
-                                    if(isNaN(b)){ b = 0; }
-                                    
-                                    return a + b;
+                                    $(column.footer()).html(sum);
                                 });
+                                this.api().columns('.sum2').every(function () {
+                                    var column = this;
+                                
+                                    var sum = column
+                                    .data()
+                                    .reduce(function (a, b) { 
+                                        a = parseFloat(a);
+                                        if(isNaN(a)){ a = 0; }
+                                        b = parseFloat(b);
+                                        if(isNaN(b)){ b = 0; }
+                                        
+                                        return a + b;
+                                    });
 
-                                $(column.footer()).html(sum.toFixed(4));
-                            });
+                                    $(column.footer()).html(sum.toFixed(4));
+                                });
+                            }
                         }
                     } );
                 }
