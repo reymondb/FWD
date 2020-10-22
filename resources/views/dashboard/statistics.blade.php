@@ -29,9 +29,9 @@
                                     <tr><th colspan=2 class="report_th">Original Batch Date</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">Batch ID</th><th colspan=2 class="report_th" id="batch_id"></th></tr> 
                                     <tr><th colspan=2 class="report_th">LEAD COST (AUD)</th><th colspan=2 class="report_th" id="lead_cost_report"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th" id="total_leads"></th></tr>
                                     <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th" id="replace"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="batch_cycle"></th></tr>
 
                                     <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
@@ -42,7 +42,7 @@
                                     <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th" id="total_dials"></th></tr>
                                     
                                     <tr>
                                         <th colspan=4></th>
@@ -185,8 +185,12 @@
                     if ( $.fn.DataTable.isDataTable('#leadstats') ) {
                         $('#leadstats').DataTable().destroy();
                     }
-                    var ha = 0;
-                    var nha = 0;
+                    var ha = 0; //human answer
+                    var nha = 0; // not human answered
+                    var total_dials = 0; // total dials
+                    var total_leads = 80000; //total leads
+                    var = batch_cycle;
+                    var na = 0; //total not answered
                     $('#leadstats tbody').empty();
                     $.each(data, function(k, v) {
                         $("#over_all").html(v.overalltotal);
@@ -196,11 +200,22 @@
                         else{
                            nha = nha + v.total;
                         }
+                        if(v.status=="NA"){
+                            na = v.total;
+                        }
+                        total_dials = v.overalltotal;
                         $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
                     });
                     $("#human_answered").html(ha);
                     $("#batch_id").html($("#list_id").val());
                     $("#lead_cost_report").html($("#lead_cost").val());
+                    $("#total_dials").html(total_dials); 
+                    $("#total_leads").html(total_leads); 
+                    var batch_cycle = (total_dials-na)/total_leads;
+                    
+                    $("#batch_cycle").html((batch_cycle).toFixed(4));
+
+                                       
                      
                     $('#leadstats').DataTable( {
                         "paging":   false,
