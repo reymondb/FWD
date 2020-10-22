@@ -339,7 +339,7 @@
     </script>
     <style>
         .report_th{
-            padding:5px 10px;
+            padding:5px 10px !important;
             font-size:12px;
         }
     </style>
