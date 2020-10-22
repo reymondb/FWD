@@ -245,7 +245,7 @@
                                         return a + b;
                                     });
 
-                                    $(column.footer()).html(sum);
+                                    $(column.footer()).html(parseFloat(sum).toFixed(4));
                                 });
                             }
                         }
@@ -321,7 +321,7 @@
                                         return a + b;
                                     });
 
-                                    $(column.footer()).html(sum);
+                                    $(column.footer()).html(parseFloat(sum).toFixed(4));
                                 });
                             }
                         }
