@@ -37,19 +37,19 @@
                                         <th style='width:50px'>Status</th>
                                         <th style='width:200px'>Status Name</th>
                                         <th class="sum"></th> 
-                                        <th class="sum"></th>                                       
+                                        <th class="sum2"></th>                                       
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>
+                                        <th class="sum2">LEAD %</th>
                                     </tr>
                                 </thead>                                
                                 <tbody id="leadstatslists">
@@ -203,6 +203,22 @@
                                     a = parseInt(a, 10);
                                     if(isNaN(a)){ a = 0; }
                                     b = parseInt(b, 10);
+                                    if(isNaN(b)){ b = 0; }
+                                    
+                                    return a + b;
+                                });
+
+                                $(column.footer()).html(sum);
+                            });
+                            this.api().columns('.sum2').every(function () {
+                                var column = this;
+                               
+                                var sum = column
+                                .data()
+                                .reduce(function (a, b) { 
+                                    a = parseFloat(a, 10);
+                                    if(isNaN(a)){ a = 0; }
+                                    b = parseFloat(b, 10);
                                     if(isNaN(b)){ b = 0; }
                                     
                                     return a + b;
