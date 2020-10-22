@@ -284,7 +284,7 @@
                                     return ret;
                                 }
                         
-                            },
+                            }},
                             { extend: 'csvHtml5', header:true, footer: true },
                             { extend: 'pdfHtml5', header:true, footer: true }
                         ],
