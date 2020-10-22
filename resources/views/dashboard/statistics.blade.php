@@ -176,6 +176,8 @@
             $("#list_id").on("change",function(){
                 $("#leadstatslists").html("");
                 $("#reportholderlogzz").html("");
+                $("#over_all").html("0");
+                $("#over_all2").html("0");
                 fetchLeadStatList();
                 fetchLeadStatLog();
             });
