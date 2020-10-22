@@ -26,23 +26,23 @@
                                 <thead>
                                     <tr><th colspan='16'>From vicidial_list (Overall Lead Total: <span id="over_all">0</span> )</th></tr>
                                     
-                                    <tr><th colspan=2>Original Batch Date</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>Batch ID</th><th colspan=2 id="batch_id"></th></tr> 
-                                    <tr><th colspan=2>LEAD COST (AUD)</th><th colspan=2 id="lead_cost_report"></th></tr>
-                                    <tr><th colspan=2>TOTAL NUMBERS IN THE FILE</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>Lead Batch Dialer Cycle</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Original Batch Date</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Batch ID</th><th colspan=2 class="report_th" id="batch_id"></th></tr> 
+                                    <tr><th colspan=2 class="report_th">LEAD COST (AUD)</th><th colspan=2 class="report_th" id="lead_cost_report"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
 
-                                    <tr><th colspan=2>COST / QL (CPQL)</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>COST / LEAD (CPL)</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>Penetration (Human Ans)</th><th colspan=2 id="human_answered"></th></tr>
-                                    <tr><th colspan=2>Penetration Rate</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>COST / Contactable LEAD (CPCL)</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>FX</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>COST / QL (PHP)</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>COST / LEAD (PHP)</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>COST / Contactable LEAD (PHP)</th><th colspan=2 id="replace"></th></tr>
-                                    <tr><th colspan=2>TOTAL DIALS</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Penetration (Human Ans)</th><th colspan=2 class="report_th" id="human_answered"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Penetration Rate</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (CPCL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     
                                     <tr>
                                         <th colspan=4></th>
@@ -337,7 +337,12 @@
     
 } );
     </script>
-    
+    <style>
+        .report_th{
+            padding:5px 10px;
+            font-size:12px;
+        }
+    </style>
     
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
