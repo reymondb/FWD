@@ -39,17 +39,17 @@
                                         <th class="sum"></th> 
                                         <th class="sum"></th>                                       
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>                                     
+                                        <th class="sum2">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum">LEAD %</th>
+                                        <th class="sum2">LEAD %</th>
                                     </tr>
                                 </thead>                                
                                 <tbody id="leadstatslists">
@@ -196,21 +196,13 @@
                         "initComplete": function (settings, json) {
                             this.api().columns('.sum').every(function () {
                                 var column = this;
-                                var intVal = function ( i ) {
-                                        return typeof i === 'string' ?
-                                            //i.replace(/[\$,]/g, '')*1 :
-                                            i.replace('%', '')*1 :
-                                            typeof i === 'number' ?
-                                                i : 0;
-                                    };
+                               
                                 var sum = column
                                 .data()
                                 .reduce(function (a, b) { 
-                                    //a = parseInt(a, 10);
-                                    a = intVal(a);
+                                    a = parseInt(a, 10);
                                     if(isNaN(a)){ a = 0; }
-                                    b = intVal(b);
-                                   // b = parseInt(b, 10);
+                                    b = parseInt(b, 10);
                                     if(isNaN(b)){ b = 0; }
                                     
                                     return a + b;
