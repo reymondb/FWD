@@ -80,7 +80,9 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             ->select('list_id',
             'vicidial_list.status',
             DB::raw("(SELECT COUNT(vicidial_list.list_id) FROM `vicidial_list` WHERE list_id=$request->list_id) as overalltotal"),
-            DB::raw("count(vicidial_list.status)as total"),'status_name',
+            DB::raw("count(vicidial_list.status)as total"),
+            'status_name',
+            'human_answered',
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 1 THEN 1 ELSE 0 END) AS total1"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 2 THEN 1 ELSE 0 END) AS total2"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 3 THEN 1 ELSE 0 END) AS total3"),
@@ -107,7 +109,11 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
 
         $data = DB::connection('mysql_external')
             ->table('vicidial_log')
-            ->select('list_id','vicidial_log.status',DB::raw("count(vicidial_log.status)as total"),'status_name',
+            ->select('list_id',
+            'vicidial_log.status',
+            DB::raw("count(vicidial_log.status)as total"),
+            'status_name',
+            'human_answered',
             DB::raw("(SELECT COUNT(vicidial_log.list_id) FROM `vicidial_log` WHERE list_id=$request->list_id) as overalltotal"),
             DB::raw("SUM(CASE WHEN vicidial_log.called_count = 1 THEN 1 ELSE 0 END) AS total1"),
             DB::raw("SUM(CASE WHEN vicidial_log.called_count = 2 THEN 1 ELSE 0 END) AS total2"),

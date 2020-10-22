@@ -18,12 +18,32 @@
 
                         Select List ID:
                         <select id="list_id" name="list_id"></select>
+                        Lead Cost: <input type="text" name="lead_cost" id="lead_cost" value="0">
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" >
                             <table class='table table-bordered table-hover' id="leadstats">
                                 <thead>
                                     <tr><th colspan='16'>From vicidial_list (Overall Lead Total: <span id="over_all">0</span> )</th></tr>
+                                    
+                                    <tr><th>Original Batch Date</th><th id="replace"></th></tr>
+                                    <tr><th>Batch ID</th><th id="batch_id"></th></tr> 
+                                    <tr><th>LEAD COST (AUD)</th><th id="lead_cost_report"></th></tr>
+                                    <tr><th>TOTAL NUMBERS IN THE FILE</th><th id="replace"></th></tr>
+                                    <tr><th>Lead Batch Dialer Cycle</th><th id="replace"></th></tr>
+                                    <tr><th>TOTAL QUALIFIED LEADS (QL)</th><th id="replace"></th></tr>
+
+                                    <tr><th>COST / QL (CPQL)</th><th id="replace"></th></tr>
+                                    <tr><th>COST / LEAD (CPL)</th><th id="replace"></th></tr>
+                                    <tr><th>Penetration (Human Ans)</th><th id="human_answered"></th></tr>
+                                    <tr><th>Penetration Rate</th><th id="replace"></th></tr>
+                                    <tr><th>COST / Contactable LEAD (CPCL)</th><th id="replace"></th></tr>
+                                    <tr><th>FX</th><th id="replace"></th></tr>
+                                    <tr><th>COST / QL (PHP)</th><th id="replace"></th></tr>
+                                    <tr><th>COST / LEAD (PHP)</th><th id="replace"></th></tr>
+                                    <tr><th>COST / Contactable LEAD (PHP)</th><th id="replace"></th></tr>
+                                    <tr><th>TOTAL DIALS</th><th id="replace"></th></tr>
+                                    
                                     <tr>
                                         <th colspan=4></th>
                                         <th colspan='2'>Dial Attempt Pass #1</th>
@@ -195,13 +215,23 @@
                     if ( $.fn.DataTable.isDataTable('#leadstats') ) {
                         $('#leadstats').DataTable().destroy();
                     }
-
+                    var ha = 0;
+                    var nha = 0;
                     $('#leadstats tbody').empty();
                     $.each(data, function(k, v) {
                         $("#over_all").html(v.overalltotal);
+                        if(v.human_answered=="Y"){
+                            ha = ha + v.total;
+                        }
+                        else{
+                           nha = nha + v.total;
+                        }
                         $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
                     });
-                    
+                    $("#human_answered").html(ha);
+                    $("#batch_id").html($("#list_id").val());
+                    $("#lead_cost_report").html($("#lead_cost").val());
+                     
                     $('#leadstats').DataTable( {
                         "paging":   false,
                         "ordering": true,
