@@ -209,9 +209,9 @@
                         dom: 'Bfrtip',
                         buttons: [
                             { extend: 'copyHtml5', header:true, footer: true },
-                            { extend: 'excelHtml5', header:true, , footer: true },
-                            { extend: 'csvHtml5', header:true, , footer: true },
-                            { extend: 'pdfHtml5', header:true, , footer: true }
+                            { extend: 'excelHtml5', header:true, footer: true },
+                            { extend: 'csvHtml5', header:true, footer: true },
+                            { extend: 'pdfHtml5', header:true, footer: true }
                         ],
                         "initComplete": function (settings, json) {
                             if(this.fnSettings().aoData.length===0) {
@@ -284,9 +284,9 @@
                         dom: 'Bfrtip',
                         buttons: [
                             { extend: 'copyHtml5', header:true, footer: true },
-                            { extend: 'excelHtml5', header:true, , footer: true },
-                            { extend: 'csvHtml5', header:true, , footer: true },
-                            { extend: 'pdfHtml5', header:true, , footer: true }
+                            { extend: 'excelHtml5', header:true, footer: true },
+                            { extend: 'csvHtml5', header:true, footer: true },
+                            { extend: 'pdfHtml5', header:true, footer: true }
                         ],
                         "initComplete": function (settings, json) {
                             if(this.fnSettings().aoData.length===0) {
