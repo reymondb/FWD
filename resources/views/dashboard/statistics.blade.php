@@ -189,7 +189,7 @@
                     var nha = 0; // not human answered
                     var total_dials = 0; // total dials
                     var total_leads = 80000; //total leads
-                    var = batch_cycle;
+                    var batch_cycle = 0; 
                     var na = 0; //total not answered
                     $('#leadstats tbody').empty();
                     $.each(data, function(k, v) {
