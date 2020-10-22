@@ -196,47 +196,29 @@
                         "initComplete": function (settings, json) {
                             this.api().columns('.sum').every(function () {
                                 var column = this;
-
+                                var intVal = function ( i ) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '')*1 :
+                                            //i.replace('%', '')*1 :
+                                            typeof i === 'number' ?
+                                                i : 0;
+                                    };
                                 var sum = column
                                 .data()
                                 .reduce(function (a, b) { 
-                                    a = parseInt(a, 10);
+                                    //a = parseInt(a, 10);
+                                    a = intVal(a);
                                     if(isNaN(a)){ a = 0; }
-                                    
-                                    b = parseInt(b, 10);
+                                    b = intVal(b);
+                                   // b = parseInt(b, 10);
                                     if(isNaN(b)){ b = 0; }
                                     
                                     return a + b;
                                 });
 
-                                $(column.footer()).html('Sum: ' + sum);
+                                $(column.footer()).html(sum.toFixed(2));
                             });
-                        },
-                        "footerCallback": function ( row, data, start, end, display ) {
-                                    var api = this.api(), data;
-                                    // Remove the formatting to get integer data for summation
-                                    var intVal = function ( i ) {
-                                        return typeof i === 'string' ?
-                                            i.replace(/[\$,]/g, '')*1 :
-                                            typeof i === 'number' ?
-                                                i : 0;
-                                    };
-
-                                    api.columns('.sum', {
-                                        page: 'current'
-                                    }).every(function() {
-                                        var sum = this
-                                        .data()
-                                        .reduce(function(a, b) {
-                                            var x = intVal(a) || 0;
-                                            var y = intVal(b) || 0;
-                                            return x + y;
-                                        }, 0);
-                                        console.log(sum);
-                                        $(this.footer()).html(sum);
-                                    });
-
-                                }
+                        }
                     } );
                 }
             });
