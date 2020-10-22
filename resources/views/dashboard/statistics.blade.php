@@ -216,7 +216,7 @@
                                     return a + b;
                                 });
 
-                                $(column.footer()).html(sum.toFixed(2));
+                                $(column.footer()).html(sum);
                             });
                         }
                     } );
