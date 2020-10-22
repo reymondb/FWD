@@ -284,7 +284,7 @@
                         ],
                         "initComplete": function (settings, json) {
                             if(this.fnSettings().aoData.length===0) {
-                                
+                                console.log("no data");
                             } else {
                                 
                                 this.api().columns('.sum').every(function () {
