@@ -93,25 +93,43 @@
                                     <tr>
                                         <th style='width:50px'>Status</th>
                                         <th style='width:200px'>Status Name</th>
-                                        <th></th> 
-                                        <th></th>                                       
-                                        <th >COUNT</th>
-                                        <th>LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th>LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th>LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th >LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th >LEAD %</th>                                     
-                                        <th >COUNT</th>
-                                        <th >LEAD %</th>
+                                        <th class="sum"></th> 
+                                        <th class="sum2"></th>                                       
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum2">LEAD %</th>
                                     </tr>
                                 </thead>                                
                                 <tbody id="reportholderlogzz">
 
                                 </tbody>
+                                <tfoot>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tfoot>
                             </table>
                             
                         </div>
@@ -263,7 +281,41 @@
                             'excelHtml5',
                             'csvHtml5',
                             'pdfHtml5'
-                        ]
+                        ],
+                        "initComplete": function (settings, json) {
+                            this.api().columns('.sum').every(function () {
+                                var column = this;
+                               
+                                var sum = column
+                                .data()
+                                .reduce(function (a, b) { 
+                                    a = parseInt(a, 10);
+                                    if(isNaN(a)){ a = 0; }
+                                    b = parseInt(b, 10);
+                                    if(isNaN(b)){ b = 0; }
+                                    
+                                    return a + b;
+                                });
+
+                                $(column.footer()).html(sum);
+                            });
+                            this.api().columns('.sum2').every(function () {
+                                var column = this;
+                               
+                                var sum = column
+                                .data()
+                                .reduce(function (a, b) { 
+                                    a = parseFloat(a);
+                                    if(isNaN(a)){ a = 0; }
+                                    b = parseFloat(b);
+                                    if(isNaN(b)){ b = 0; }
+                                    
+                                    return a + b;
+                                });
+
+                                $(column.footer()).html(sum.toFixed(4));
+                            });
+                        }
                     } );
                             
                 }
