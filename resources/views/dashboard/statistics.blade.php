@@ -210,7 +210,6 @@
                         buttons: [
                             { extend: 'copyHtml5', header:true, footer: true },
                             { extend: 'excelHtml5', header:true, footer: true,
-                            ,
                             customize: function (xlsx) {
                                 //Apply styles, Center alignment of text and making it bold.
                                 var sSh = xlsx.xl['styles.xml'];
