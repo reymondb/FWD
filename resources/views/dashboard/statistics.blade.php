@@ -39,17 +39,17 @@
                                         <th class="sum"></th> 
                                         <th class="sum"></th>                                       
                                         <th class="sum">COUNT</th>
-                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum2">LEAD %</th>                                     
+                                        <th class="sum">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
-                                        <th class="sum2">LEAD %</th>
+                                        <th class="sum">LEAD %</th>
                                     </tr>
                                 </thead>                                
                                 <tbody id="leadstatslists">
@@ -179,7 +179,7 @@
                     $('#leadstats tbody').empty();
                     $.each(data, function(k, v) {
                         $("#over_all").html(v.overalltotal);
-                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2)+'%</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
                     
                     $('#leadstats').DataTable( {
@@ -233,7 +233,7 @@
                    // $("#reportholderlogs").html("<table id='leadstatslogs' class='table' ><tr><th colspan='8'>From vicidial_logs</th></tr><tr><th >Status</th><th  style='width:200px'>Status Name</th><th>Total Count</th><th colspan='2'>Dial Attempt Pass #1</th><th colspan='2'>Dial Attempt Pass #2</th><th colspan='2'>Dial Attempt Pass #3</th><th colspan='2'>Dial Attempt Pass #4</th><th colspan='2'>Dial Attempt Pass #5</th><th colspan='2'>Dial Attempt Pass > #5</th></tr></table>");
                     $.each(data, function(k, v) {
                         $("#over_all2").html(v.overalltotal);
-                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2)+'%</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'%</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
 
                     
