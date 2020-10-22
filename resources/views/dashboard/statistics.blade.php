@@ -48,14 +48,31 @@
                                         <th class="sum">LEAD %</th>                                     
                                         <th class="sum">COUNT</th>
                                         <th class="sum">LEAD %</th>                                     
-                                        <th class="sum" >COUNT</th>
-                                        <th >LEAD %</th>
+                                        <th class="sum">COUNT</th>
+                                        <th class="sum">LEAD %</th>
                                     </tr>
                                 </thead>                                
                                 <tbody id="leadstatslists">
 
                                 </tbody>
-
+                                <tfoot>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tfoot>
                             </table>
                         </div>
                         <hr>
