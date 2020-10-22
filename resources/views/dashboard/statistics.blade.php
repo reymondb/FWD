@@ -26,23 +26,23 @@
                                 <thead>
                                     <tr><th colspan='16'>From vicidial_list (Overall Lead Total: <span id="over_all">0</span> )</th></tr>
                                     
-                                    <tr><th>Original Batch Date</th><th id="replace"></th></tr>
-                                    <tr><th>Batch ID</th><th id="batch_id"></th></tr> 
-                                    <tr><th>LEAD COST (AUD)</th><th id="lead_cost_report"></th></tr>
-                                    <tr><th>TOTAL NUMBERS IN THE FILE</th><th id="replace"></th></tr>
-                                    <tr><th>Lead Batch Dialer Cycle</th><th id="replace"></th></tr>
-                                    <tr><th>TOTAL QUALIFIED LEADS (QL)</th><th id="replace"></th></tr>
+                                    <tr><th colspan=2>Original Batch Date</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>Batch ID</th><th colspan=2 id="batch_id"></th></tr> 
+                                    <tr><th colspan=2>LEAD COST (AUD)</th><th colspan=2 id="lead_cost_report"></th></tr>
+                                    <tr><th colspan=2>TOTAL NUMBERS IN THE FILE</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>Lead Batch Dialer Cycle</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 id="replace"></th></tr>
 
-                                    <tr><th>COST / QL (CPQL)</th><th id="replace"></th></tr>
-                                    <tr><th>COST / LEAD (CPL)</th><th id="replace"></th></tr>
-                                    <tr><th>Penetration (Human Ans)</th><th id="human_answered"></th></tr>
-                                    <tr><th>Penetration Rate</th><th id="replace"></th></tr>
-                                    <tr><th>COST / Contactable LEAD (CPCL)</th><th id="replace"></th></tr>
-                                    <tr><th>FX</th><th id="replace"></th></tr>
-                                    <tr><th>COST / QL (PHP)</th><th id="replace"></th></tr>
-                                    <tr><th>COST / LEAD (PHP)</th><th id="replace"></th></tr>
-                                    <tr><th>COST / Contactable LEAD (PHP)</th><th id="replace"></th></tr>
-                                    <tr><th>TOTAL DIALS</th><th id="replace"></th></tr>
+                                    <tr><th colspan=2>COST / QL (CPQL)</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>COST / LEAD (CPL)</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>Penetration (Human Ans)</th><th colspan=2 id="human_answered"></th></tr>
+                                    <tr><th colspan=2>Penetration Rate</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>COST / Contactable LEAD (CPCL)</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>FX</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>COST / QL (PHP)</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>COST / LEAD (PHP)</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>COST / Contactable LEAD (PHP)</th><th colspan=2 id="replace"></th></tr>
+                                    <tr><th colspan=2>TOTAL DIALS</th><th colspan=2 id="replace"></th></tr>
                                     
                                     <tr>
                                         <th colspan=4></th>
@@ -76,22 +76,7 @@
 
                                 </tbody>
                                 <tfoot>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
                                 </tfoot>
                             </table>
                         </div>
@@ -133,22 +118,7 @@
 
                                 </tbody>
                                 <tfoot>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
                                 </tfoot>
                             </table>
                             
