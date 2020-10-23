@@ -30,8 +30,8 @@
                                     <tr><th colspan=2 class="report_th">Batch ID</th><th colspan=2 class="report_th" id="batch_id"></th></tr> 
                                     <tr><th colspan=2 class="report_th">LEAD COST (AUD)</th><th colspan=2 class="report_th" id="lead_cost_report"></th></tr>
                                     <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th" id="total_leads"></th></tr>
-                                    <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th" id="replace"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="batch_cycle"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th" id="batch_cycle"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
 
                                     <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
@@ -170,6 +170,11 @@
                 $("#over_all2").html("0");
                 fetchLeadStatList();
                 fetchLeadStatLog();
+            });
+
+            $("#lead_cost").on("keyup change blur",function(){
+                console.log($(this).val());
+                $("#lead_cost_report").html($(this).val());
             });
             
         });
