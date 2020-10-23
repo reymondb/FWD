@@ -193,6 +193,7 @@
             var lead_cost = $("#lead_cost").val();
             var total_lead = $("#total_leads").html();
             var penetration_rate = $("#penetration_rate").html();
+            var human_answered = $("#human_answered").html();
             $("#fx").html($("#money_conversion").val());
             $("#lead_cost_report").html($("#lead_cost").val());
 
@@ -205,9 +206,9 @@
             $("#cost_lead_php").html(cost_lead_php);
 
             //calculate COST / Contactable LEAD (CPCL)
-            $("#penetration_rate_cost").html((lead_cost / penetration_rate).toFixed(4));
+            $("#penetration_rate_cost").html((lead_cost / human_answered).toFixed(4));
 
-            $("#penetration_rate_cost_php").html(((lead_cost / penetration_rate)*money_conversion).toFixed(4));
+            $("#penetration_rate_cost_php").html(((lead_cost / human_answered)*money_conversion).toFixed(4));
             
 
         }
@@ -249,7 +250,7 @@
                     $("#lead_cost_report").html($("#lead_cost").val());
                     $("#total_dials").html(total_dials); 
                     $("#total_leads").html(total_leads); 
-                    $("penetration_rate").html((ha/total_leads).toFixed(4));
+                    $("#penetration_rate").html((ha/total_leads).toFixed(4));
                     var batch_cycle = (total_dials-na)/total_leads;
                     
                     $("#batch_cycle").html((batch_cycle).toFixed(4));
