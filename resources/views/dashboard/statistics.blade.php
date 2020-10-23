@@ -45,7 +45,7 @@
                                     <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th" id="fx"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="cost_ql_php"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th" id="cost_lead_php"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="penetration_rate_cost_php" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th" id="penetration_rate_cost_php"></th></tr>
                                     <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th" id="total_dials"></th></tr>
                                     
                                     <tr>
@@ -173,7 +173,7 @@
                 $("#over_all").html("0");
                 $("#over_all2").html("0");
                 fetchLeadStatList();
-                fetchLeadStatLog();
+                //fetchLeadStatLog();
                 caclulateReports();
             });
 
@@ -252,12 +252,8 @@
                     $("#total_leads").html(total_leads); 
                     $("#penetration_rate").html((ha/total_leads).toFixed(4));
                     var batch_cycle = (total_dials-na)/total_leads;
-
-                   caclulateReports();
-
                     $("#batch_cycle").html((batch_cycle).toFixed(4));
-
-                                       
+                    caclulateReports();                    
                      
                     $('#leadstats').DataTable( {
                         "paging":   false,
@@ -312,7 +308,7 @@
                 }
             });
         }
-
+        /*
         function fetchLeadStatLog(){
             $.ajax({
                 url: "/getleadstatslogs?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
@@ -390,9 +386,7 @@
             });
         }
 
-        $(document).ready(function() {
-    
-} );
+       */
     </script>
     <style>
         .report_th{
