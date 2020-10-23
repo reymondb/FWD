@@ -84,7 +84,7 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <hr>
+                        <!--<hr>
                         <br>
                         <div class="table-responsive">
                             <table class='table table-bordered table-hover' id="reportholderlogs">
@@ -127,6 +127,7 @@
                             </table>
                             
                         </div>
+                        !-->
                     </div>
                 </div>
                
