@@ -19,7 +19,7 @@
                         Select List ID:
                         <select id="list_id" name="list_id"></select>
 
-                        Lead Cost(AUD): <input type="text" name="lead_cost" id="lead_cost" value="0">
+                        Lead Cost(AUD): <input type="text" name="lead_cost" id="lead_cost" value="1000">
 
                         AUD to PHP: <input type="text" name="money_conversion" id="money_conversion" value="34.62">
 
