@@ -179,12 +179,13 @@
                 //fetchLeadStatLog();
                 caclulateReports();
             });
-
             $("#lead_cost").on("keyup change blur",function(){
                 caclulateReports();
             });
-
             $("#money_conversion").on("keyup change blur",function(){
+                caclulateReports();
+            });
+            $("#lead_ql").on("keyup change blur",function(){
                 caclulateReports();
             });
            
