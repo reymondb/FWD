@@ -252,7 +252,9 @@
                     $("#total_leads").html(total_leads); 
                     $("#penetration_rate").html((ha/total_leads).toFixed(4));
                     var batch_cycle = (total_dials-na)/total_leads;
-                    
+
+                   caclulateReports();
+
                     $("#batch_cycle").html((batch_cycle).toFixed(4));
 
                                        
