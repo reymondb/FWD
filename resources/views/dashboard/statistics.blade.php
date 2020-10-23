@@ -218,8 +218,8 @@
 
             $("#lead_ql_report").html(lead_ql);
 
-            $("#cost_ql").html(lead_cost/lead_ql);
-            $("#lead_ql_percent").html(lead_ql/human_answered);
+            $("#cost_ql").html((lead_cost/lead_ql).toFixed(4));
+            $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(4));
 
         }
 
