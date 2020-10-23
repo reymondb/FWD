@@ -212,8 +212,8 @@
             $("#penetration_rate_cost_php").html(((lead_cost / human_answered)*money_conversion).toFixed(4));
 
             $("#lead_ql_report").html(lead_ql);
-
-            $("#cost_ql").html((lead_cost/lead_ql).toFixed(4));
+            var cost_ql = lead_cost/lead_ql
+            $("#cost_ql").html((cost_ql).toFixed(4));
             $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(4));
 
              //convert to php
