@@ -75,7 +75,7 @@ Route::get('/optimizeChart4', 'OptimizerController@notblankchart')->name('optimi
 
 
 
-Route::get('/stats', 'ReportsController@index')->name('fetchReport');
+Route::get('/stats', 'ReportsController@index')->middleware('App\Http\Middleware\AdminMiddleware')->name('fetchReport');
 Route::get('/reports', 'ReportsController@fetchReport')->name('fetchReport');
 Route::get('/getleadlists', 'ReportsController@fetchLeadLists')->name('fetchLeadLists');
 Route::get('/getleadstats', 'ReportsController@fetchLeadStats')->name('fetchLeadStats');
