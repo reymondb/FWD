@@ -18,7 +18,11 @@
 
                         Select List ID:
                         <select id="list_id" name="list_id"></select>
-                        Lead Cost: <input type="text" name="lead_cost" id="lead_cost" value="0">
+
+                        Lead Cost(AUD): <input type="text" name="lead_cost" id="lead_cost" value="0">
+
+                        AUD to PHP: <input type="text" name="money_conversion" id="money_conversion" value="34.62">
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" >
@@ -33,14 +37,14 @@
                                     <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th" id="batch_cycle"></th></tr>
                                     <tr><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
 
-                                    <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th" id="cost_ql"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th" id="cost_lead"></th></tr>
                                     <tr><th colspan=2 class="report_th">Penetration (Human Ans)</th><th colspan=2 class="report_th" id="human_answered"></th></tr>
                                     <tr><th colspan=2 class="report_th">Penetration Rate</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / Contactable LEAD (CPCL)</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th" id="replace"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="cost_ql_php"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th" id="cost_lead_php"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th" id="total_dials"></th></tr>
                                     
@@ -175,9 +179,28 @@
             $("#lead_cost").on("keyup change blur",function(){
                 console.log($(this).val());
                 $("#lead_cost_report").html($(this).val());
+                caclulateReports();
             });
+
+            $("#money_conversion").on("keyup change blur",function(){                
+                caclulateReports();
+            });
+           
             
         });
+        function caclulateReports(){
+            // cost_ql cost_lead cost_ql_php cost_lead_php money_conversion 
+            var money_conversion = $("#money_conversion").val();
+            var lead_cost = $("#lead_cost").val();
+            var total_lead = $("#total_leads").html();
+            //calculate cost per lead
+            var cost_lead = lead_cost / total_lead;
+            $("#cost_lead").html(cost_lead);
+            //convert to php
+            var cost_lead_php = cost_lead * money_conversion;
+            $("#cost_lead_php").html(cost_lead_php);
+
+        }
 
         function fetchLeadStatList(){
             $.ajax({
