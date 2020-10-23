@@ -36,13 +36,13 @@
                                     <tr><th colspan=2 class="report_th">LEAD COST (AUD)</th><th colspan=2 class="report_th" id="lead_cost_report"></th></tr>
                                     <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th" id="total_leads"></th></tr>
                                     <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th" id="batch_cycle"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="lead_ql_report"></th></tr>
+                                    <tr><th colspan=2 class="report_th yellowed">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="lead_ql_report"></th></tr>
                                     <tr><th colspan=2 class="report_th"></th><th colspan=2 class="report_th" id="lead_ql_percent"></th></tr>
-
+                                    
                                     <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th" id="cost_ql"></th></tr> 
                                     <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th" id="cost_lead"></th></tr>
-                                    <tr><th colspan=2 class="report_th">Penetration (Human Ans)</th><th colspan=2 class="report_th" id="human_answered"></th></tr>
-                                    <tr><th colspan=2 class="report_th">Penetration Rate</th><th colspan=2 class="report_th" id="penetration_rate"></th></tr>
+                                    <tr><th colspan=2 class="report_th oranged">Penetration (Human Ans)</th><th colspan=2 class="report_th" id="human_answered"></th></tr>
+                                    <tr><th colspan=2 class="report_th oranged">Penetration Rate</th><th colspan=2 class="report_th" id="penetration_rate"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / Contactable LEAD (CPCL)</th><th colspan=2 class="report_th" id="penetration_rate_cost"></th></tr>
                                     <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th" id="fx"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="cost_ql_php"></th></tr>
@@ -146,6 +146,12 @@
         .filter_inputs{
             font-size:14px;
         }
+        .oranged{
+            background-color: orange; 
+        } 
+        .yellowed{
+            background-color: yellow; 
+        } 
     </style>
     <script>
             $.ajaxSetup({
@@ -253,9 +259,13 @@
                         }
                         if(v.status=="NA"){
                             na = v.total;
+                            var bgcolor="oranged";
+                        }
+                        else{
+                            var bgcolor="";
                         }
                         total_dials = v.overalltotal;
-                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td>'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
+                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td class="'+bgcolor+'">'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
                     });
                     $("#human_answered").html(ha);
                     $("#batch_id").html($("#list_id").val());
