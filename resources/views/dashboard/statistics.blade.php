@@ -42,10 +42,10 @@
                                     <tr><th colspan=2 class="report_th">Penetration (Human Ans)</th><th colspan=2 class="report_th" id="human_answered"></th></tr>
                                     <tr><th colspan=2 class="report_th">Penetration Rate</th><th colspan=2 class="report_th" id="penetration_rate"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / Contactable LEAD (CPCL)</th><th colspan=2 class="report_th" id="penetration_rate_cost"></th></tr>
-                                    <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th" id="fx"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="cost_ql_php"></th></tr>
                                     <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th" id="cost_lead_php"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="penetration_rate_cost_php" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th" id="total_dials"></th></tr>
                                     
                                     <tr>
@@ -178,12 +178,10 @@
             });
 
             $("#lead_cost").on("keyup change blur",function(){
-                console.log($(this).val());
-                $("#lead_cost_report").html($(this).val());
                 caclulateReports();
             });
 
-            $("#money_conversion").on("keyup change blur",function(){                
+            $("#money_conversion").on("keyup change blur",function(){
                 caclulateReports();
             });
            
@@ -195,6 +193,10 @@
             var lead_cost = $("#lead_cost").val();
             var total_lead = $("#total_leads").html();
             var penetration_rate = $("#penetration_rate").html();
+            $("#fx").html($("#money_conversion").val());
+            $("#lead_cost_report").html($("#lead_cost").val());
+
+           
             //calculate cost per lead
             var cost_lead = (lead_cost / total_lead).toFixed(4);
             $("#cost_lead").html(cost_lead);
@@ -204,6 +206,9 @@
 
             //calculate COST / Contactable LEAD (CPCL)
             $("#penetration_rate_cost").html((lead_cost / penetration_rate).toFixed(4));
+
+            $("#penetration_rate_cost_php").html(((lead_cost / penetration_rate)*money_conversion).toFixed(4));
+            
 
         }
 
