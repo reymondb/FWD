@@ -29,7 +29,7 @@
                                         <tr>
                                             <td>{{$h->campaign_id}}</td>
                                             <td style="width:200px;">{{$h->lead_id}}</td>
-                                            <td>{{$h->status_name}}</td>
+                                            <td><b>{{$h->status}}</b> - {{$h->status_name}}</td>
                                             <td>{{date("M d,Y h:i:s A",strtotime($h->call_date))}}</td>
                                         </tr>
                                         @endforeach
