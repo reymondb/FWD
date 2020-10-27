@@ -93,6 +93,11 @@
                                     Lead Statistics 
                                 </a>
                                 @endif
+                                @if(Auth::user()->role ==1)
+                                <a class="nav-link" href="/dnc"><div class="sb-nav-link-icon"><i class="fas fa-user-times"></i></div>
+                                    DNC
+                                </a>
+                                @endif
                             </div>
                         </div>
                         <div class="sb-sidenav-footer">

@@ -38,10 +38,27 @@
                     <div class="col-md-2">
                         <a href="/leadwashing/exportduplicate/" id="downloadLink2" class="btn btn-primary" download>Export Duplicates</a>
                     </div>
-                    <div class="loading col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
+                    <div class="loading2 col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
                 </div>
             </div>
         </div>
+
+        <div class="card mb-4">
+            <div class="card-header"><i class="fas fa-table mr-1"></i>DNC Leads</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        Total DNC: {{ isset($dncleads) ? $dncleads : '0'}}
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/leadwashing/exportdnc/" id="downloadLink3" class="btn btn-primary" download>Export DNC</a>
+                    </div>
+                    <div class="loading3 col-md-2"><img src="images/blue loading.gif" height="100">Exporting...</div>
+                </div>
+            </div>
+        </div>
+
+        
     </div>
     
 </main>
@@ -52,6 +69,7 @@
     $(document).ready(function() {
         $(".loading").hide();
         $(".loading2").hide();
+        $(".loading3").hide();
     });
 
     var setCookie = function(name, value, expiracy) {
@@ -82,12 +100,29 @@
     var checkDownloadCookie = function() {
         if (getCookie("downloadStarted") == 1) {
             setCookie("downloadStarted", "false", 100); //Expiration could be anything... As long as we reset the value
-            $(".loading2").hide();
             $(".loading").hide();
         } else {
             downloadTimeout = setTimeout(checkDownloadCookie, 1000); //Re-run this function in 1 second.
         }
     };
+
+    $('#downloadLink2').click(function() {
+        $(".loading2").show();
+        setCookie('downloadStarted', 0, 100); //Expiration could be anything... As long as we reset the value
+        setTimeout(checkDownloadCookie, 1000); //Initiate the loop to check the cookie.
+    });
+    var downloadTimeout;
+    var checkDownloadCookie = function() {
+        if (getCookie("downloadStarted") == 1) {
+            setCookie("downloadStarted", "false", 100); //Expiration could be anything... As long as we reset the value
+            $(".loading2").hide();
+        } else {
+            downloadTimeout = setTimeout(checkDownloadCookie, 1000); //Re-run this function in 1 second.
+        }
+    };
+
+
+    
         
 </script>
 

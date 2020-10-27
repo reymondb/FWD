@@ -34,6 +34,11 @@ Route::get('/import', 'ImportController@getImport')->name('import');
 Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
 Route::post('/import_process', 'ImportController@processImport')->name('import_process');
 
+Route::get('/dnc', 'DncController@index')->name('dnc');
+Route::get('/import_dnc', 'ImportController@getDncImport')->name('import_dnc');
+Route::post('/import_dnc_parse', 'ImportController@parseDncImport')->name('import_dnc_parse');
+Route::post('/import_dnc_process', 'ImportController@processDncImport')->name('import_dnc_process');
+
 Route::get('/leads', 'LeadsController@Index')->name('contactszz')->middleware('auth');;
 Route::get('/lead_details', 'LeadDetailsController@fetchDetails');
 Route::post('/downloadleads', 'LeadsController@exportLeads')->name('exportLeads');
@@ -41,6 +46,7 @@ Route::post('/downloadleads', 'LeadsController@exportLeads')->name('exportLeads'
 #Route::post('/leadwashing/exportduplicate', 'LeadsController@exportDuplicateLeads')->name('exportDuplicateLeads');
 Route::get('/leadwashing/exportduplicate', 'LeadsController@exportDuplicateLeads2')->name('exportDuplicateLeads2');
 Route::get('/leadwashing/exportunique', 'LeadsController@exportUniqueLeads')->name('exportUniqueLeads');
+Route::get('/leadwashing/exportdnc', 'LeadsController@exportDncLeads')->name('exportDncLeads');
 Route::get('/export', 'LeadsController@export')->name('export');
 
 Route::get('/contacts', 'LeadsController@contacts')->name('contacts');

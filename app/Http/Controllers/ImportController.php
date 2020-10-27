@@ -8,6 +8,9 @@ use App\Models\CampaignUse;
 use App\Models\NewLeads;
 use App\Models\LeadBatch;
 use App\Models\LeadList;
+use App\Models\Dnc;
+
+use App\Models\DncLeads;
 use App\Models\DuplicateLeads;
 use App\Models\UniqueLeads;
 use App\User;
@@ -209,6 +212,7 @@ class ImportController extends Controller
         NewLeads::truncate();
         DuplicateLeads::truncate();
         UniqueLeads::truncate(); 
+        DncLeads::truncate(); 
         $x=1;        
         $duplicatedata=[];
         
@@ -220,6 +224,7 @@ class ImportController extends Controller
             if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
                 $contact = new NewLeads();
                 $duplicated = new DuplicateLeads();
+                $dnc = new DncLeads();
                 //$duplicated = array();
                 foreach($request->fields as $index => $field){
                     if(isset($field) || $field!=""){
@@ -255,6 +260,7 @@ class ImportController extends Controller
                         
                         $contact->$dbf = $val;
                         $duplicated[$dbf] = $val;
+                        $dnc->$dbf = $val;
 
                     }
                 }
@@ -269,12 +275,19 @@ class ImportController extends Controller
                     $checkcontact =Contact::select('contacts.id')->where('campaign_id',$campaignid)->where('LandlineNum',$landline)->first();
                   
                 }
+                $checkdnc = Dnc::where('MobileNum',$mobile)->orWhere('LandlineNum',$landline)->first();
+                if($checkdnc){
+                    $dnc->save();
+                }
+                else{
+                    
                 if($checkcontact){
                     $duplicated['id'] = $checkcontact->id;
                     $duplicated->save();
                 }
                 else{
                     $contact->save();
+                }
                 }
             }
         }
@@ -291,8 +304,90 @@ class ImportController extends Controller
         $uniqueleads = $uniqueleadsz->count();// $uniqueleadsz[0]->totalunique; //$uniqueleadsz[0]['totalunique']; //;
         $duplicateleadsz = DuplicateLeads::all();
         $duplicateleads = $duplicateleadsz->count();//$duplicateleadsz[0]->totalduplicate; //$uniqueleadsz[0]['totalduplicate'];//;
-        return view('dashboard/new_leads_report')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads);
+        
+        $dncleadsz = DncLeads::all();
+        $dncleads = $dncleadsz->count();
+        return view('dashboard/new_leads_report')->with('uniqueleads',$uniqueleads)->with('duplicateleads',$duplicateleads)->with('dncleads',$dncleads);
     }
     
+    public function getDncImport()
+    {
+        return view('dashboard/import_dnc');
+    }
+
+    //parse csv 
+    public function parseDncImport(CsvImportRequest $request)
+    {
+        
+        
+        $filename = $request->file('csv_file')->getClientOriginalName();
+        
+        $path = $request->file('csv_file')->getRealPath();
+
+        //if ($request->has('header')) {
+           // $data = Excel::load($path, function($reader) {})->get()->toArray();
+        //} else {
+            $data = array_map('str_getcsv', file($path));
+        //}
+        //print_r($data);
+        $csv_header_fields = [];
+        $total=count($data);
+        if (count($data) > 0) {
+            if($request->has('header')) {
+                /* foreach ($data[0] as $key => $value) {
+                    $csv_header_fields[] = $key;
+                }*/
+            }
+            $csv_data = array_slice($data, 0, 2);
+
+            $csv_data_file = CsvData::create([
+                'csv_filename' => $request->file('csv_file')->getClientOriginalName(),
+                'csv_header' => $request->has('header'),
+                'csv_data' => json_encode($data)
+            ]);
+        } else {
+            return redirect()->back();
+        }
+
+        return view('dashboard/import_dnc_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'))->with('totalrows',$total);
+
+    }
+
+    //process import
+    public function processDncImport(Request $request)
+    {
+        $data = CsvData::find($request->csv_data_file_id);
+        if ($data->csv_header) {
+            $jsondata = json_encode(array_slice(json_decode($data->csv_data, true), 1));
+            $csv_data = json_decode($jsondata, true);
+        }
+        else{
+            $csv_data = json_decode($data->csv_data, true);
+        }
+
+        $db_field = config('app.db_fields');
+
+        $x=0;
+        foreach ($csv_data as $row) {
+             $dnc = new Dnc();
+            if(!empty($row[0]) || !empty($row[1]) || !empty($row[2]) || !empty($row[3]) || !empty($row[4]) )  {
+                foreach($request->fields as $index => $field){
+                    if(isset($field) || $field!=""){
+                        $dbf = $db_field[$field];
+                        if($dbf=="MobileNum" || $dbf=="LandlineNum"){
+                            $val=intval(preg_replace('/[^0-9]+/', '', $row[$index]), 10);
+                        }
+                        else{
+                            $val = $row[$index];
+                        }
+                        $dnc->$dbf = $val;
+                    }
+                }  
+                $dnc->save();
+                $x++;
+            }
+        }
+        return view('dashboard/import_dnc_success')->with('totalcount',$x);
+    }
 
 }

@@ -17,6 +17,8 @@ use DB;
 
 use App\Exports\UniqueLeadsExport;
 use App\Exports\DuplicateLeadsExport;
+use App\Exports\DNCLeadsExport;
+
 use App\Exports\UniqueExport;
 use App\Exports\LeadsExport;
 
@@ -199,7 +201,15 @@ class LeadsController extends Controller
         $datetime=date("Y-m-d H:i:s");
         return Excel::download(new DuplicateLeadsExport($mobile_num,$landline,$email), "Lead Wasing - Duplicate Leads.csv");
     }
-    
+    public function exportDncLeads(Request $request)
+    {
+        $mobile_num = $request->mobile_num;
+        $landline = $request->landline;
+        $email = $request->email;
+        $type ="csv";
+        $datetime=date("Y-m-d H:i:s");
+        return Excel::download(new DNCLeadsExport(), "Lead Wasing - DNC Leads.csv");
+    }
     public function exportDuplicateLeads2()
     {
         
