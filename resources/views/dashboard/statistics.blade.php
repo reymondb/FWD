@@ -286,7 +286,7 @@
                     });
                     var ql = (ha + newleads) - (dnc + cnq);
                     
-                    $("#lead_ql").html(ql);
+                    $("#lead_ql").val(ql);
                     $("#human_answered").html(ha);
                     $("#batch_id").html($("#list_id").val());
                     $("#lead_cost_report").html($("#lead_cost").val());
