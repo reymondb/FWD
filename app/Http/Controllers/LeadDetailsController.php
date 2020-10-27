@@ -67,7 +67,7 @@ class LeadDetailsController extends Controller
                     ->get();*/
                 $dataz = DB::connection('mysql_external')
                     ->table('vicidial_list')
-                    ->select('phone_number','lead_id','vicidial_statuses.status_name','call_date','campaign_id')
+                    ->select('phone_number','lead_id','vicidial_statuses.status_name','entry_date','campaign_id')
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
                     ->where('phone_number',"$num")
                     ->get();
