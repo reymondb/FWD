@@ -51,7 +51,7 @@ class LeadsController extends Controller
         
         //DB::enableQueryLog(); // Enable query log
         $contacts = Contact::select('contacts.*','CampaignName')
-        #->leftjoin("contacts",'lead_list.ContactID','contacts.id')
+        ->leftjoin("contacts",'lead_list.ContactID','contacts.id')
         ->leftjoin("campaign",'contacts.campaign_id','campaign.id')
         ->where(function ($query) use ($batch_id,$supplier_id,$campaign_id, $mobile_num, $landline, $email, $first_name, $last_name, $search_mobile,$search_landline,$search_email, $search_firstname, $search_lastname) {
             if($search_mobile){
