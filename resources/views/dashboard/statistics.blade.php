@@ -27,7 +27,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" >
-                            <table class='table table-bordered table-hover' id="leadstats">
+                            <table class='table table-bordered table-hover table-striped' id="leadstats">
                                 <thead>
                                     <tr><th colspan='16'>From vicidial_list (Overall Lead Total: <span id="over_all">0</span> )</th></tr>
                                     
@@ -147,10 +147,10 @@
             font-size:14px;
         }
         .oranged{
-            background-color: orange; 
+            background-color: orange  !important; 
         } 
         .yellowed{
-            background-color: yellow; 
+            background-color: yellow !important; 
         } 
     </style>
     <script>
@@ -279,16 +279,24 @@
                             dnc = v.total;
                         }
                         
-                        if(v.status=="NEW"){
-                            newleads = v.total;
+                        if(v.status=="CBSale" || v.status=="Sale"){
+                            var bgcolor3="yellowed";
+                        }
+                        else{
+                            var bgcolor3="";
                         }
                         
+                        
+                        
+                        if(v.status=="NEW"){
+                            newleads = v.total;
+                        }                        
                         
                         if(v.status=="CNQ" || v.status=="CNQA" || v.status=="CNQB" || v.status=="CNQFA" || v.status=="CNQS" || v.status=="CNQU"){
                             cnq = cnq + v.total;
                         }
                         total_dials = v.overalltotal;
-                        $('#leadstatslists').append('<tr><td>'+v.status+'</td><td class="'+bgcolor+' '+bgcolor2+'">'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
+                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
                     });
                     var ql = (ha + newleads) - (dnc + cnq);
                     
