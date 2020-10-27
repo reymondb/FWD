@@ -1,5 +1,5 @@
 @extends('dashboard.dashboardlayout')
-@section('title', 'Dashboard > Content')
+@section('title', 'Lead Details')
 
 @section('content')
         <main>
