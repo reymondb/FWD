@@ -264,6 +264,12 @@
                            nha = nha + v.total;
                             var bgcolor="";
                         }
+                        if(v.sale=="Y"){
+                            var bgcolor="yellowed";
+                        }
+                        else{
+                            var bgcolor="";
+                        }
                         if(v.status=="NA"){
                             na = v.total;
                         }

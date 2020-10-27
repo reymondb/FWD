@@ -83,6 +83,7 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             DB::raw("count(vicidial_list.status)as total"),
             'status_name',
             'human_answered',
+            'sale',
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 1 THEN 1 ELSE 0 END) AS total1"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 2 THEN 1 ELSE 0 END) AS total2"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 3 THEN 1 ELSE 0 END) AS total3"),
