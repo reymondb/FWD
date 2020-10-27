@@ -58,11 +58,17 @@ class LeadDetailsController extends Controller
                 config(['database.connections.mysql_external.password' => $source->Mysql_password]);
                 #https://188.166.215.132/
 
-                $dataz = DB::connection('mysql_external')
-                    ->table('vicidial_list')
-                    #->table('vicidial_log')
+                /*$dataz = DB::connection('mysql_external')
+                    #->table('vicidial_list')
+                    ->table('vicidial_log')
                     ->select('phone_number','lead_id','vicidial_statuses.status_name','call_date','campaign_id')
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_log.status')
+                    ->where('phone_number',"$num")
+                    ->get();*/
+                $dataz = DB::connection('mysql_external')
+                    ->table('vicidial_list')
+                    ->select('phone_number','lead_id','vicidial_statuses.status_name','call_date','campaign_id')
+                    ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
                     ->where('phone_number',"$num")
                     ->get();
                 DB::disconnect('mysql_source');
