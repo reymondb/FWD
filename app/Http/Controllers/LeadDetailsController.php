@@ -68,7 +68,7 @@ class LeadDetailsController extends Controller
                     DB::enableQueryLog();
                 $dataz = DB::connection('mysql_external')
                     ->table('vicidial_list')
-                    ->select('vicidial_list.phone_number','lead_id','vicidial_statuses.status_name','call_date','entry_date','campaign_id')
+                    ->select('vicidial_list.phone_number','vicidial_list.lead_id','vicidial_statuses.status_name','vicidial_log.call_date','vicidial_list.entry_date','vicidial_log.campaign_id')
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status')
                     ->leftjoin('vicidial_log','vicidial_log.phone_number','vicidial_list.phone_number')
                     ->where('vicidial_list.phone_number',"$num")
