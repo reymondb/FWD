@@ -220,7 +220,7 @@
             $("#lead_ql_report").html(lead_ql);
             var cost_ql = lead_cost/lead_ql
             $("#cost_ql").html("$"+(cost_ql).toFixed(2));
-            $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(4));
+            $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(2));
 
              //convert to php
              var cost_lead_php = (cost_lead * money_conversion).toFixed(2);
