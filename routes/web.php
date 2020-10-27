@@ -34,7 +34,7 @@ Route::get('/import', 'ImportController@getImport')->name('import');
 Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
 Route::post('/import_process', 'ImportController@processImport')->name('import_process');
 
-Route::get('/leads', 'LeadsController@Index')->middleware('App\Http\Middleware\AdminMiddleware')->name('contactszz');
+Route::get('/leads', 'LeadsController@Index')->name('contactszz')->middleware('auth');;
 Route::get('/lead_details', 'LeadDetailsController@fetchDetails');
 Route::post('/downloadleads', 'LeadsController@exportLeads')->name('exportLeads');
 #Route::post('/leadwashing/exportunique', 'LeadsController@exportUniqueLeads')->name('exportUniqueLeads');
@@ -50,7 +50,7 @@ Route::post('/newleads_parse', 'ImportController@parseNewLeads')->name('newleads
 Route::post('/newleads_process', 'ImportController@processNewLeads')->name('newleads_process');
 Route::get('/new_leads_report', 'ImportController@newleadsReport')->name('newleadsReport');
 
-Route::get('/campaigns', 'CampaignController@index')->middleware('App\Http\Middleware\AdminMiddleware')->name('campaigns');
+Route::get('/campaigns', 'CampaignController@index')->name('campaigns')->middleware('auth');
 Route::post('/createcampaign', 'CampaignController@createCampaign')->name('createCampaign');
 Route::get('/deletecampaign/{id}', 'CampaignController@deleteCampaign')->name('deleteCampaign');
 Route::post('/editcampaign', 'CampaignController@editCampaign')->name('editCampaign');
