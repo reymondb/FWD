@@ -248,6 +248,11 @@
                     var total_leads = 80000; //total leads
                     var batch_cycle = 0; 
                     var na = 0; //total not answered
+
+                    var cnq = 0;
+                    var dnc = 0;
+                    var newleads = 0;
+
                     $('#leadstats tbody').empty();
                     $.each(data, function(k, v) {
                         $("#over_all").html(v.overalltotal);
@@ -264,9 +269,24 @@
                         }
                         else{
                         }
+                        if(v.status=="DNC"){
+                            dnc = v.total;
+                        }
+                        
+                        if(v.status=="NEW"){
+                            newleads = v.total;
+                        }
+                        
+                        
+                        if(v.status=="CNQ" || v.status=="CNQA" || v.status=="CNQB" || v.status=="CNQFA" || v.status=="CNQS" || v.status=="CNQU"){
+                            cnq = cnq + v.total;
+                        }
                         total_dials = v.overalltotal;
                         $('#leadstatslists').append('<tr><td>'+v.status+'</td><td class="'+bgcolor+'">'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
                     });
+                    var ql = (ha + newleads) - (dnc + cnq);
+                    
+                    $("#lead_ql").html(ql);
                     $("#human_answered").html(ha);
                     $("#batch_id").html($("#list_id").val());
                     $("#lead_cost_report").html($("#lead_cost").val());
