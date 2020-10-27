@@ -65,7 +65,7 @@ class LeadDetailsController extends Controller
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_log.status')
                     ->where('phone_number',"$num")
                     ->get();*/
-                    DB::enableQueryLog();
+                 //   DB::enableQueryLog();
                 $dataz = DB::connection('mysql_external')
                     ->table('vicidial_list')
                     ->select('vicidial_list.phone_number','vicidial_list.lead_id','vicidial_statuses.status_name','vicidial_log.call_date','vicidial_list.entry_date','vicidial_log.campaign_id')
@@ -73,7 +73,7 @@ class LeadDetailsController extends Controller
                     ->leftjoin('vicidial_log','vicidial_log.phone_number','vicidial_list.phone_number')
                     ->where('vicidial_list.phone_number',"$num")
                     ->get();
-                    dd(DB::getQueryLog());
+                //    dd(DB::getQueryLog());
                 DB::disconnect('mysql_source');
                
                 $data[] = $dataz;
