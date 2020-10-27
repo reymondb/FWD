@@ -59,8 +59,8 @@ class LeadDetailsController extends Controller
                 #https://188.166.215.132/
 
                 $dataz = DB::connection('mysql_external')
-                    #->table('vicidial_list')
-                    ->table('vicidial_log')
+                    ->table('vicidial_list')
+                    #->table('vicidial_log')
                     ->select('phone_number','lead_id','vicidial_statuses.status_name','call_date','campaign_id')
                     ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_log.status')
                     ->where('phone_number',"$num")
