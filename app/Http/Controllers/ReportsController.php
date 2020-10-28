@@ -105,8 +105,8 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             DB::raw("SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
             ->leftjoin('vicidial_log', function($join) use ($list_id)
             {
-                $join->on('vicidial_log.list_id', '=', $list_id);
                 $join->on('vicidial_list.lead_id', '=', 'vicidial_log.lead_id');
+                $join->where('vicidial_log.list_id', '=', $list_id);
             })
             ->leftjoin('vicidial_campaign_statuses', function($join)
             {
