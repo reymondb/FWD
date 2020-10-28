@@ -110,7 +110,7 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             })
             ->leftjoin('vicidial_campaign_statuses', function($join)
             {
-                $join->on('vicidial_campaign_statuses.status', '=', 'vicidial_log.status');
+                $join->on('vicidial_campaign_statuses.status', '=', 'vicidial_list.status');
                 $join->on('vicidial_campaign_statuses.campaign_id', '=', 'vicidial_log.campaign_id');
             }) 
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status') #
