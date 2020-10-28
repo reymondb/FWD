@@ -365,7 +365,8 @@
                             { extend: 'pdfHtml5', header:true, footer: true }*/
                         ], 
                         "language": {
-                            "thousands": ","
+                            "thousands": ",",
+                            "decimal": "."
                         },
                         "initComplete": function (settings, json) {
                             if(this.fnSettings().aoData.length===0) {
