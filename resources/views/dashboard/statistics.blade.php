@@ -203,7 +203,7 @@
             var lead_cost = $("#lead_cost").val();
             var total_lead = $("#total_leads").html();
             var penetration_rate = $("#penetration_rate").html();
-            var human_answered = $("#human_answered").html();
+            var human_answered = parseInt($("#human_answered").html());
             var lead_ql = $("#lead_ql").val();
             $("#fx").html($("#money_conversion").val());
             $("#lead_cost_report").html("$"+$("#lead_cost").val());
@@ -318,7 +318,7 @@
                         }
 
                         total_dials = v.overalltotal;
-                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
+                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total1.toLocaleString()+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2).toLocaleString()+'</td></tr>');
                     });
                     var ql = (ha + newleads) - (dnc + cnq);
                     
