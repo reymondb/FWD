@@ -267,7 +267,7 @@
                     var ha = 0; //human answer
                     var nha = 0; // not human answered
                     var total_dials = 0; // total dials
-                    var total_leads = 80000; //total leads
+                    var total_leads = 0; //total leads
                     var batch_cycle = 0; 
                     var na = 0; //total not answered
 
@@ -336,7 +336,7 @@
                         if(v.status=="CNQ" || v.status=="CNQA" || v.status=="CNQB" || v.status=="CNQFA" || v.status=="CNQS" || v.status=="CNQU"){
                             cnq = cnq + v.total;
                         }
-
+                        total_leads = v.overalltotal;
                         total_dials = v.overalltotal;
                         $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td class="right">'+numberWithCommas(v.total)+'</td><td class="right">'+(v.total / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total1)+'</td><td class="right">'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total2)+'</td><td class="right">'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total3)+'</td><td class="right">'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total4)+'</td><td class="right">'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total5)+'</td><td class="right">'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total6)+'</td><td class="right">'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
@@ -346,8 +346,8 @@
                     $("#human_answered").html(ha.toLocaleString());
                     $("#batch_id").html($("#list_id").val());
                     $("#lead_cost_report").html($("#lead_cost").val().toLocaleString());
-                    $("#total_dials").html(total_dials.toLocaleString().toLocaleString()); 
-                    $("#total_leads").html(total_leads.toLocaleString().toLocaleString()); 
+                    $("#total_dials").html(total_dialstoFixed.toLocaleString()); 
+                    $("#total_leads").html(total_leadstoFixed.toLocaleString()); 
                     $("#penetration_rate").html((ha/total_leads).toFixed(2).toLocaleString());
                     var batch_cycle = (total_dials-na)/total_leads;
                     $("#batch_cycle").html((batch_cycle).toFixed(2).toLocaleString());
