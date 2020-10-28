@@ -81,12 +81,13 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
         config(['database.connections.mysql_external.username' => $source->Mysql_username]);
         config(['database.connections.mysql_external.password' => $source->Mysql_password]);
         //DB::enableQueryLog(); 
+        $list_id=$request->list_id;
         $data = DB::connection('mysql_external')
             ->table('vicidial_list')
             ->select('list_id',
             'vicidial_list.status',
             DB::raw("(SELECT COUNT(DISTINCT vicidial_list.phone_number) FROM `vicidial_list` WHERE list_id=$request->list_id) as total_leads"),
-            DB::raw("(SELECT COUNT(vicidial_list.list_id) FROM `vicidial_list` WHERE list_id=$request->list_id) as overalltotal"),
+            DB::raw("(SELECT COUNT(vicidial_list.list_id) FROM `vicidial_list` left join vicidial_log on vicidial_list.lead_id=vicidial_log.lead_id and vicidial_log.list_id=$request->list_id WHERE list_id=$request->list_id) as overalltotal"),
             DB::raw("count(vicidial_list.status)as total"),
 
             DB::raw("vicidial_campaign_statuses.status_name as status_name1"),
@@ -102,7 +103,16 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 4 THEN 1 ELSE 0 END) AS total4"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 5 THEN 1 ELSE 0 END) AS total5"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
-            ->leftjoin('vicidial_campaign_statuses','vicidial_campaign_statuses.status','vicidial_list.status') 
+            ->leftjoin('vicidial_log', function($join) use ($list_id)
+            {
+                $join->on('vicidial_log.list_id', '=', $list_id);
+                $join->on('vicidial_list.lead_id', '=', 'vicidial_log.lead_id');
+            })
+            ->leftjoin('vicidial_campaign_statuses', function($join)
+            {
+                $join->on('vicidial_campaign_statuses.status', '=', 'vicidial_log.status');
+                $join->on('vicidial_campaign_statuses.campaign_id', '=', 'vicidial_log.campaign_id');
+            }) 
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status') #
             ->where('list_id',$request->list_id)
             ->groupby('vicidial_list.status')
