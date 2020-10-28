@@ -258,20 +258,20 @@
                     $.each(data, function(k, v) {
                         $("#over_all").html(v.overalltotal);
                         
-                        if(v.status_name1!="" && v.status_name1!="null"){
+                        if(v.status_name1!="null"){
                             var status_name = v.status_name1;
                         }
                         else{
                             var status_name = v.status_name2;
                         }
                         
-                        if(v.human_answered1!="" && v.human_answered1!="null"){
+                        if(v.human_answered1!="null"){
                             var human_answered = v.human_answered1;
                         }
                         else{
                             var human_answered = v.human_answered2;
                         }
-                        if(v.sale1!="" && v.sale1!="null"){
+                        if(v.sale1!="null"){
                             var sale = v.sale1;
                         }
                         else{
