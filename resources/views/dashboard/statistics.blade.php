@@ -258,24 +258,24 @@
                     $.each(data, function(k, v) {
                         $("#over_all").html(v.overalltotal);
                         
-                        if(v.status_name1!="null"){
-                            var status_name = v.status_name1;
-                        }
-                        else{
+                        if(!v.status_name1){
                             var status_name = v.status_name2;
                         }
-                        
-                        if(v.human_answered1!="null"){
-                            var human_answered = v.human_answered1;
-                        }
                         else{
+                            var status_name = v.status_name1;
+                        }
+                        
+                        if(!v.human_answered1){
                             var human_answered = v.human_answered2;
                         }
-                        if(v.sale1!="null"){
-                            var sale = v.sale1;
+                        else{
+                            var human_answered = v.human_answered1;
+                        }
+                        if(!v.sale1){
+                            var sale = v.sale2;
                         }
                         else{
-                            var sale = v.sale2;
+                            var sale = v.sale1;
                         }
 
                         if(human_answered=="Y"){
