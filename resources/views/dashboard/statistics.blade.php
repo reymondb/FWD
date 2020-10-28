@@ -295,6 +295,12 @@
                         if(v.status=="CNQ" || v.status=="CNQA" || v.status=="CNQB" || v.status=="CNQFA" || v.status=="CNQS" || v.status=="CNQU"){
                             cnq = cnq + v.total;
                         }
+                        if(v.status_name1!=""){
+                            var status_name = v.status_name1;
+                        }
+                        else{
+                            var status_name = v.status_name2;
+                        }
                         total_dials = v.overalltotal;
                         $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+v.status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
                     });
