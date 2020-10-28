@@ -213,12 +213,24 @@
             $("#cost_lead").html("$"+numberWithCommas(cost_lead));
            
             //calculate COST / Contactable LEAD (CPCL)
-            $("#penetration_rate_cost").html("$"+numberWithCommas((lead_cost / human_answered).toFixed(2)));
+            if(human_answered==0){
+                var penetration_rate_cost = 0;
+            }
+            else{
+                var penetration_rate_cost = lead_cost / human_answered;
+            }
+            
+            $("#penetration_rate_cost").html("$"+numberWithCommas((penetration_rate_cost).toFixed(2)));
 
-            $("#penetration_rate_cost_php").html(numberWithCommas(((lead_cost / human_answered)*money_conversion).toFixed(2)));
+            $("#penetration_rate_cost_php").html(numberWithCommas(((penetration_rate_cost)*money_conversion).toFixed(2)));
 
             $("#lead_ql_report").html(numberWithCommas(lead_ql));
-            var cost_ql = lead_cost/lead_ql;
+            if(lead_ql==0){
+                var cost_ql = 0;
+            }
+            else{
+                var cost_ql = lead_cost/lead_ql;
+            }
             $("#cost_ql").html("$"+numberWithCommas((cost_ql).toFixed(2)));
             var lead_ql_percent = (lead_ql/human_answered).toFixed(2);
             if(isNaN(lead_ql_percent))
