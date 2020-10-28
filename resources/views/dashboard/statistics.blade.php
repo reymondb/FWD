@@ -220,7 +220,12 @@
             $("#lead_ql_report").html(numberWithCommas(lead_ql));
             var cost_ql = lead_cost/lead_ql;
             $("#cost_ql").html("$"+numberWithCommas((cost_ql).toFixed(2)));
-            $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(2) || 0);
+            var lead_ql_percent = (lead_ql/human_answered).toFixed(2);
+            if(isNaN(lead_ql_percent))
+            {
+                lead_ql_percent = 0;
+            }
+            $("#lead_ql_percent").html(lead_ql_percent);
 
              //convert to php
              var cost_lead_php = (cost_lead * money_conversion).toFixed(2);
