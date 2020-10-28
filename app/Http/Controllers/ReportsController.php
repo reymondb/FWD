@@ -101,7 +101,11 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 4 THEN 1 ELSE 0 END) AS total4"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 5 THEN 1 ELSE 0 END) AS total5"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
-            ->leftjoin('vicidial_campaign_statuses','vicidial_campaign_statuses.status','vicidial_list.status') 
+            ->leftjoin('vicidial_campaign_statuses',function($join)
+            {
+                $join->on('vicidial_campaign_statuses.status', '=', 'vicidial_log.status');
+                $join->on('vicidial_campaign_statuses.campaign_id', '=', 'vicidial_log.campaign_id');
+            })
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status') #
             ->where('list_id',$request->list_id)
             ->groupby('vicidial_list.status')
@@ -114,14 +118,13 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
 
     public function fetchLeadStatsLogs(Request $request)
     {
-         
         $source=Campaigns::where('id',$request->campaignid)->first();
         config(['database.connections.mysql_external.host' => $source->MySQL_host]);
         #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
         config(['database.connections.mysql_external.database' => $source->Mysql_db]);
         config(['database.connections.mysql_external.username' => $source->Mysql_username]);
         config(['database.connections.mysql_external.password' => $source->Mysql_password]);
-        DB::enableQueryLog();
+
         $data = DB::connection('mysql_external')
             ->table('vicidial_log')
             ->select('list_id',
@@ -143,12 +146,16 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             DB::raw("SUM(CASE WHEN vicidial_log.called_count = 4 THEN 1 ELSE 0 END) AS total4"),
             DB::raw("SUM(CASE WHEN vicidial_log.called_count = 5 THEN 1 ELSE 0 END) AS total5"),
             DB::raw("SUM(CASE WHEN vicidial_log.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
-            ->leftjoin('vicidial_campaign_statuses','vicidial_campaign_statuses.status','vicidial_log.status') 
+            ->leftjoin('vicidial_campaign_statuses', function($join)
+            {
+                $join->on('vicidial_campaign_statuses.status', '=', 'vicidial_log.status');
+                $join->on('vicidial_campaign_statuses.campaign_id', '=', 'vicidial_log.campaign_id');
+            })
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_log.status') #
             ->where('list_id',$request->list_id)
             ->groupby('vicidial_log.status')
             ->get();
-            dd(DB::getQueryLog()); 
+        
         return $data;
     }
         
