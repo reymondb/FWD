@@ -201,7 +201,7 @@
             // cost_ql cost_lead cost_ql_php cost_lead_php money_conversion 
             var money_conversion = $("#money_conversion").val();
             var lead_cost = $("#lead_cost").val();
-            var total_lead = $("#total_leads").html();
+            var total_lead = parseInt($("#total_leads").html());
             var penetration_rate = $("#penetration_rate").html();
             var human_answered = parseInt($("#human_answered").html());
             var lead_ql = $("#lead_ql").val();
