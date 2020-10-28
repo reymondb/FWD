@@ -242,6 +242,7 @@
                     if ( $.fn.DataTable.isDataTable('#leadstats') ) {
                         $('#leadstats').DataTable().destroy();
                     }
+                    //console.log(data);
                     var ha = 0; //human answer
                     var nha = 0; // not human answered
                     var total_dials = 0; // total dials
