@@ -74,7 +74,9 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
         config(['database.connections.mysql_external.database' => $source->Mysql_db]);
         config(['database.connections.mysql_external.username' => $source->Mysql_username]);
         config(['database.connections.mysql_external.password' => $source->Mysql_password]);
-
+        DB::enableQueryLog(); 
+        
+       
         $data = DB::connection('mysql_external')
             ->table('vicidial_list')
             ->select('list_id',
@@ -91,11 +93,12 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 4 THEN 1 ELSE 0 END) AS total4"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 5 THEN 1 ELSE 0 END) AS total5"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6"))
-            ->leftjoin('vicidial_campaign_statuses','vicidial_campaign_statuses.status','vicidial_list.status') #vicidial_statuses
+            ->leftjoin('vicidial_campaign_statuses','vicidial_campaign_statuses.status','vicidial_list.status') 
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status') #
             ->where('list_id',$request->list_id)
             ->groupby('vicidial_list.status')
             ->get();
+            dd(DB::getQueryLog()); 
         DB::disconnect('mysql_source');
 
         return $data;
