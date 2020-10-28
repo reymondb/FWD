@@ -84,7 +84,7 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
         $list_id=$request->list_id;
         $data = DB::connection('mysql_external')
             ->table('vicidial_list')
-            ->select('list_id',
+            ->select('vicidial_list.list_id',
             'vicidial_list.status',
             DB::raw("(SELECT COUNT(DISTINCT vicidial_list.phone_number) FROM `vicidial_list` WHERE list_id=$request->list_id) as total_leads"),
             DB::raw("(SELECT COUNT(vicidial_list.list_id) FROM `vicidial_list` left join vicidial_log on vicidial_list.lead_id=vicidial_log.lead_id and vicidial_log.list_id=$request->list_id WHERE list_id=$request->list_id) as overalltotal"),
@@ -114,7 +114,7 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
                 $join->on('vicidial_campaign_statuses.campaign_id', '=', 'vicidial_log.campaign_id');
             }) 
             ->leftjoin('vicidial_statuses','vicidial_statuses.status','vicidial_list.status') #
-            ->where('list_id',$request->list_id)
+            ->where('vicidial_list.list_id',$request->list_id)
             ->groupby('vicidial_list.status')
             ->get();
         //dd(DB::getQueryLog()); 
