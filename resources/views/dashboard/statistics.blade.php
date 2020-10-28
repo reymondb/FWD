@@ -378,9 +378,9 @@
                                     var sum = column
                                     .data()
                                     .reduce(function (a, b) { 
-                                        a = parseInt(a.replace(/,/g, ''), 10);
+                                        a = parseInt(a.toString().replace(/,/g, ''), 10);
                                         if(isNaN(a)){ a = 0; }
-                                        b = parseInt(b.replace(/,/g, ''), 10);
+                                        b = parseInt(b.toString().replace(/,/g, ''), 10);
                                         if(isNaN(b)){ b = 0; }
                                         
                                         return a + b;
