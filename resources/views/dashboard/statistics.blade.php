@@ -204,7 +204,7 @@
             var total_lead = parseInt($("#total_leads").html());
             var penetration_rate = $("#penetration_rate").html();
             var human_answered = parseInt($("#human_answered").html());
-            var lead_ql = parseInt($("#lead_ql").val());
+            var lead_ql = $("#lead_ql").val();
             $("#fx").html($("#money_conversion").val());
             $("#lead_cost_report").html("$"+numberWithCommas($("#lead_cost").val()));
 
@@ -218,9 +218,9 @@
             $("#penetration_rate_cost_php").html(numberWithCommas(((lead_cost / human_answered)*money_conversion).toFixed(2)));
 
             $("#lead_ql_report").html(numberWithCommas(lead_ql));
-            var cost_ql = lead_cost/lead_ql
+            var cost_ql = lead_cost/lead_ql;
             $("#cost_ql").html("$"+numberWithCommas((cost_ql).toFixed(2)));
-            $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(2));
+            $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(2) || 0);
 
              //convert to php
              var cost_lead_php = (cost_lead * money_conversion).toFixed(2);
