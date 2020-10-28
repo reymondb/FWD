@@ -204,7 +204,7 @@
             var total_lead = parseInt($("#total_leads").html());
             var penetration_rate = $("#penetration_rate").html();
             var human_answered = parseInt($("#human_answered").html());
-            var lead_ql = $("#lead_ql").val();
+            var lead_ql = parseInt($("#lead_ql").val());
             $("#fx").html($("#money_conversion").val());
             $("#lead_cost_report").html("$"+numberWithCommas($("#lead_cost").val()));
 
