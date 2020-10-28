@@ -308,8 +308,6 @@
                             var bgcolor3="";
                         }
                         
-                        
-                        
                         if(v.status=="NEW"){
                             newleads = v.total;
                         }                        
