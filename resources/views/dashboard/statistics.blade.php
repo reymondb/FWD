@@ -29,7 +29,7 @@
                         <div class="table-responsive" >
                             <table class='table table-bordered table-hover table-striped' id="leadstats">
                                 <thead>
-                                    <tr><th colspan='16'>From vicidial_list (Overall Lead Total: <span id="over_all">0</span> )</th></tr>
+                                    <tr><th colspan='16'>From vicidial_list</th></tr>
                                     
                                     <tr><th colspan=2 class="report_th">Original Batch Date</th><th colspan=2 class="report_th right" id="replace"></th></tr>
                                     <tr><th colspan=2 class="report_th">Batch ID</th><th colspan=2 class="report_th right" id="batch_id"></th></tr> 
@@ -336,7 +336,7 @@
                         if(v.status=="CNQ" || v.status=="CNQA" || v.status=="CNQB" || v.status=="CNQFA" || v.status=="CNQS" || v.status=="CNQU"){
                             cnq = cnq + v.total;
                         }
-                        total_leads = v.overalltotal;
+                        total_leads = v.total_leads;
                         total_dials = v.overalltotal;
                         $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td class="right">'+numberWithCommas(v.total)+'</td><td class="right">'+(v.total / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total1)+'</td><td class="right">'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total2)+'</td><td class="right">'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total3)+'</td><td class="right">'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total4)+'</td><td class="right">'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total5)+'</td><td class="right">'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total6)+'</td><td class="right">'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
