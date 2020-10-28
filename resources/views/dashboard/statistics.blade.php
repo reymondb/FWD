@@ -31,24 +31,24 @@
                                 <thead>
                                     <tr><th colspan='16'>From vicidial_list (Overall Lead Total: <span id="over_all">0</span> )</th></tr>
                                     
-                                    <tr><th colspan=2 class="report_th">Original Batch Date</th><th colspan=2 class="report_th" id="replace"></th></tr>
-                                    <tr><th colspan=2 class="report_th">Batch ID</th><th colspan=2 class="report_th" id="batch_id"></th></tr> 
-                                    <tr><th colspan=2 class="report_th">LEAD COST (AUD)</th><th colspan=2 class="report_th" id="lead_cost_report"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th" id="total_leads"></th></tr>
-                                    <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th" id="batch_cycle"></th></tr>
-                                    <tr class="yellowed"><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="lead_ql_report"></th></tr>
-                                    <tr><th colspan=2 class="report_th"></th><th colspan=2 class="report_th" id="lead_ql_percent"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Original Batch Date</th><th colspan=2 class="report_th right" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Batch ID</th><th colspan=2 class="report_th right" id="batch_id"></th></tr> 
+                                    <tr><th colspan=2 class="report_th">LEAD COST (AUD)</th><th colspan=2 class="report_th right" id="lead_cost_report"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th right" id="total_leads"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th right" id="batch_cycle"></th></tr>
+                                    <tr class="yellowed"><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th right" id="lead_ql_report"></th></tr>
+                                    <tr><th colspan=2 class="report_th"></th><th colspan=2 class="report_th right" id="lead_ql_percent"></th></tr>
                                     
-                                    <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th" id="cost_ql"></th></tr> 
-                                    <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th" id="cost_lead"></th></tr>
-                                    <tr class="oranged"><th colspan=2 class="report_th">Penetration (Human Ans)</th><th colspan=2 class="report_th" id="human_answered"></th></tr>
-                                    <tr class="oranged"><th colspan=2 class="report_th">Penetration Rate</th><th colspan=2 class="report_th" id="penetration_rate"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (CPCL)</th><th colspan=2 class="report_th" id="penetration_rate_cost"></th></tr>
-                                    <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th" id="fx"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="cost_ql_php"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th" id="cost_lead_php"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th" id="penetration_rate_cost_php"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th" id="total_dials"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th right" id="cost_ql"></th></tr> 
+                                    <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th right" id="cost_lead"></th></tr>
+                                    <tr class="oranged"><th colspan=2 class="report_th">Penetration (Human Ans)</th><th colspan=2 class="report_th right" id="human_answered"></th></tr>
+                                    <tr class="oranged"><th colspan=2 class="report_th">Penetration Rate</th><th colspan=2 class="report_th right" id="penetration_rate"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (CPCL)</th><th colspan=2 class="report_th right" id="penetration_rate_cost"></th></tr>
+                                    <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th right" id="fx"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th right" id="cost_ql_php"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th right" id="cost_lead_php"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th right" id="penetration_rate_cost_php"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th right" id="total_dials"></th></tr>
                                     
                                     <tr>
                                         <th colspan=4></th>
