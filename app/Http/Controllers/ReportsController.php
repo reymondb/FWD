@@ -87,7 +87,7 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             ->select('vicidial_list.list_id',
             'vicidial_list.status',
             DB::raw('(SELECT COUNT(DISTINCT vicidial_list.phone_number) FROM `vicidial_list` WHERE vicidial_list.list_id="'.$request->list_id.'") as total_leads'),
-            DB::raw('(SELECT COUNT(vicidial_list.list_id) FROM `vicidial_list` left join vicidial_log on vicidial_list.lead_id=vicidial_log.lead_id and vicidial_log.list_id = "'.$request->list_id.'" WHERE vicidial_list.list_id="'.$request->list_id.'") as overalltotal'),
+            DB::raw('(SELECT COUNT(vicidial_list.list_id) FROM `vicidial_list` left join vicidial_log on vicidial_list.lead_id=vicidial_log.lead_id  WHERE vicidial_list.list_id="'.$request->list_id.'" and vicidial_log.list_id = "'.$request->list_id.'") as overalltotal'),
             DB::raw("count(vicidial_list.status)as total"),
 
             DB::raw("vicidial_campaign_statuses.status_name as status_name1"),
