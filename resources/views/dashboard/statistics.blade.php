@@ -231,6 +231,9 @@
 
         }
 
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
         
         function fetchLeadStatList(){
             $.ajax({
@@ -318,7 +321,7 @@
                         }
 
                         total_dials = v.overalltotal;
-                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total1.toLocaleString()+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2).toLocaleString()+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2).toLocaleString()+'</td></tr>');
+                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td>'+numberWithCommas(v.total)+'</td><td>'+(v.total / v.overalltotal).toFixed(2)+'</td><td>'+numberWithCommas(v.total1)+'</td><td>'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td>'+numberWithCommas(v.total2)+'</td><td>'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td>'+numberWithCommas(v.total3)+'</td><td>'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td>'+numberWithCommas(v.total4)+'</td><td>'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td>'+numberWithCommas(v.total5)+'</td><td>'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td>'+numberWithCommas(v.total6)+'</td><td>'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
                     var ql = (ha + newleads) - (dnc + cnq);
                     
@@ -343,7 +346,7 @@
                             /*{ extend: 'copyHtml5', header:true, footer: true },
                             { extend: 'csvHtml5', header:true, footer: true },
                             { extend: 'pdfHtml5', header:true, footer: true }*/
-                        ],
+                        ], 
                         "initComplete": function (settings, json) {
                             if(this.fnSettings().aoData.length===0) {
                                 console.log("no data");
