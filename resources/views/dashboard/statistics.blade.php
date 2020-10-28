@@ -346,8 +346,8 @@
                     $("#human_answered").html(ha.toLocaleString());
                     $("#batch_id").html($("#list_id").val());
                     $("#lead_cost_report").html($("#lead_cost").val().toLocaleString());
-                    $("#total_dials").html(total_dialstoFixed.toLocaleString()); 
-                    $("#total_leads").html(total_leadstoFixed.toLocaleString()); 
+                    $("#total_dials").html(total_dials.toLocaleString()); 
+                    $("#total_leads").html(total_leads.toLocaleString()); 
                     $("#penetration_rate").html((ha/total_leads).toFixed(2).toLocaleString());
                     var batch_cycle = (total_dials-na)/total_leads;
                     $("#batch_cycle").html((batch_cycle).toFixed(2).toLocaleString());
