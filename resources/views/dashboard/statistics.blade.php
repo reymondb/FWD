@@ -338,7 +338,7 @@
                         }
                         total_leads = v.total_leads;
                         total_dials = v.overalltotal;
-                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td class="right">'+numberWithCommas(v.total)+'</td><td class="right">'+(v.total / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total1)+'</td><td class="right">'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total2)+'</td><td class="right">'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total3)+'</td><td class="right">'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total4)+'</td><td class="right">'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total5)+'</td><td class="right">'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total6)+'</td><td class="right">'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
+                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td class="right">'+v.total+'</td><td class="right">'+(v.total / v.overalltotal).toFixed(2)+'</td><td class="right">'+v.total1+'</td><td class="right">'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total2)+'</td><td class="right">'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total3)+'</td><td class="right">'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total4)+'</td><td class="right">'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total5)+'</td><td class="right">'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total6)+'</td><td class="right">'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
                     var ql = (ha + newleads) - (dnc + cnq);
                     
@@ -364,6 +364,9 @@
                             { extend: 'csvHtml5', header:true, footer: true },
                             { extend: 'pdfHtml5', header:true, footer: true }*/
                         ], 
+                        "language": {
+                            "thousands": ","
+                        },
                         "initComplete": function (settings, json) {
                             if(this.fnSettings().aoData.length===0) {
                                 console.log("no data");
