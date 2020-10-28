@@ -206,26 +206,26 @@
             var human_answered = parseInt($("#human_answered").html());
             var lead_ql = $("#lead_ql").val();
             $("#fx").html($("#money_conversion").val());
-            $("#lead_cost_report").html("$"+$("#lead_cost").val());
+            $("#lead_cost_report").html("$"+numberWithCommas($("#lead_cost").val()));
 
             //calculate cost per lead
             var cost_lead = (lead_cost / total_lead).toFixed(2);
-            $("#cost_lead").html("$"+cost_lead);
+            $("#cost_lead").html("$"+numberWithCommas(cost_lead));
            
             //calculate COST / Contactable LEAD (CPCL)
-            $("#penetration_rate_cost").html("$"+(lead_cost / human_answered).toFixed(2));
+            $("#penetration_rate_cost").html("$"+numberWithCommas((lead_cost / human_answered).toFixed(2)));
 
-            $("#penetration_rate_cost_php").html(((lead_cost / human_answered)*money_conversion).toFixed(2));
+            $("#penetration_rate_cost_php").html(numberWithCommas(((lead_cost / human_answered)*money_conversion).toFixed(2)));
 
-            $("#lead_ql_report").html(lead_ql);
+            $("#lead_ql_report").html(numberWithCommas(lead_ql));
             var cost_ql = lead_cost/lead_ql
-            $("#cost_ql").html("$"+(cost_ql).toFixed(2));
+            $("#cost_ql").html("$"+numberWithCommas((cost_ql).toFixed(2)));
             $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(2));
 
              //convert to php
              var cost_lead_php = (cost_lead * money_conversion).toFixed(2);
-            $("#cost_lead_php").html(cost_lead_php);
-            $("#cost_ql_php").html((cost_ql * money_conversion).toFixed(2));
+            $("#cost_lead_php").html(numberWithCommas(cost_lead_php));
+            $("#cost_ql_php").html(numberWithCommas((cost_ql * money_conversion).toFixed(2)));
             
             
 
