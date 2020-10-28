@@ -114,13 +114,14 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
 
     public function fetchLeadStatsLogs(Request $request)
     {
+         
         $source=Campaigns::where('id',$request->campaignid)->first();
         config(['database.connections.mysql_external.host' => $source->MySQL_host]);
         #config(['database.connections.mysql_external.host' => $source->MySQL_url]);
         config(['database.connections.mysql_external.database' => $source->Mysql_db]);
         config(['database.connections.mysql_external.username' => $source->Mysql_username]);
         config(['database.connections.mysql_external.password' => $source->Mysql_password]);
-
+        DB::enableQueryLog();
         $data = DB::connection('mysql_external')
             ->table('vicidial_log')
             ->select('list_id',
@@ -147,7 +148,7 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             ->where('list_id',$request->list_id)
             ->groupby('vicidial_log.status')
             ->get();
-
+            dd(DB::getQueryLog()); 
         return $data;
     }
         
