@@ -231,6 +231,7 @@
 
         }
 
+        
         function fetchLeadStatList(){
             $.ajax({
                 url: "/getleadstats?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
@@ -317,19 +318,19 @@
                         }
 
                         total_dials = v.overalltotal;
-                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
+                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).tofixed(2)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).tofixed(2)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).tofixed(2)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).tofixed(2)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).tofixed(2)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).tofixed(2)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).tofixed(2)+'</td></tr>');
                     });
                     var ql = (ha + newleads) - (dnc + cnq);
                     
-                    $("#lead_ql").val(ql);
-                    $("#human_answered").html(ha);
+                    $("#lead_ql").val(ql.toLocaleString());
+                    $("#human_answered").html(ha.toLocaleString());
                     $("#batch_id").html($("#list_id").val());
-                    $("#lead_cost_report").html($("#lead_cost").val());
-                    $("#total_dials").html(total_dials); 
-                    $("#total_leads").html(total_leads); 
-                    $("#penetration_rate").html((ha/total_leads).toFixed(4));
+                    $("#lead_cost_report").html($("#lead_cost").val().toLocaleString());
+                    $("#total_dials").html(total_dials.toLocaleString().toLocaleString()); 
+                    $("#total_leads").html(total_leads.toLocaleString().toLocaleString()); 
+                    $("#penetration_rate").html((ha/total_leads).tofixed(2).toLocaleString());
                     var batch_cycle = (total_dials-na)/total_leads;
-                    $("#batch_cycle").html((batch_cycle).toFixed(4));
+                    $("#batch_cycle").html((batch_cycle).tofixed(2).toLocaleString());
                     caclulateReports();                    
                      
                     $('#leadstats').DataTable( {
@@ -377,7 +378,7 @@
                                         return a + b;
                                     });
 
-                                    $(column.footer()).html(parseFloat(sum).toFixed(4));
+                                    $(column.footer()).html(parseFloat(sum).tofixed(2));
                                 });
                             }
                         }
