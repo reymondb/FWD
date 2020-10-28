@@ -83,18 +83,14 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             'vicidial_list.status',
             DB::raw("(SELECT COUNT(vicidial_list.list_id) FROM `vicidial_list` WHERE list_id=$request->list_id) as overalltotal"),
             DB::raw("count(vicidial_list.status)as total"),
+
             DB::raw("vicidial_campaign_statuses.status_name as status_name1"),
-            DB::raw("vicidial_statuses.status_name as status_name2"),
-            
+            DB::raw("vicidial_statuses.status_name as status_name2"),            
             DB::raw("vicidial_campaign_statuses.human_answered as human_answered1"),
             DB::raw("vicidial_campaign_statuses.sale as sale1"),
-            DB::raw("vicidial_statuses.human_answered2 as human_answered2"),            
+            DB::raw("vicidial_statuses.human_answered as human_answered2"),            
             DB::raw("vicidial_statuses.sale as sale2"),
-            
-            
 
-            '.',
-            'vicidial_campaign_statuses.',
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 1 THEN 1 ELSE 0 END) AS total1"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 2 THEN 1 ELSE 0 END) AS total2"),
             DB::raw("SUM(CASE WHEN vicidial_list.called_count = 3 THEN 1 ELSE 0 END) AS total3"),
