@@ -4,7 +4,7 @@
 @section('content')
         <main>
             <div class="container-fluid">
-                <h2 class="mt-4">Lead Statistics </h2>
+                <h2 class="mt-4">Lead Statistics</h2>
                 
                 <div class="card mb-4">
                     <div class="card-header"><i class="fas fa-table mr-1"></i>Select Campaign: 
@@ -29,26 +29,26 @@
                         <div class="table-responsive" >
                             <table class='table table-bordered table-hover table-striped' id="leadstats">
                                 <thead>
-                                    <tr><th colspan='16'>From vicidial_logs (Overall Lead Total: <span id="over_all">0</span> )</th></tr>
+                                    <tr><th colspan='16'>From vicidial_list (Overall Lead Total: <span id="over_all">0</span> )</th></tr>
                                     
-                                    <tr><th colspan=2 class="report_th">Original Batch Date</th><th colspan=2 class="report_th" id="replace"></th></tr>
-                                    <tr><th colspan=2 class="report_th">Batch ID</th><th colspan=2 class="report_th" id="batch_id"></th></tr> 
-                                    <tr><th colspan=2 class="report_th">LEAD COST (AUD)</th><th colspan=2 class="report_th" id="lead_cost_report"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th" id="total_leads"></th></tr>
-                                    <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th" id="batch_cycle"></th></tr>
-                                    <tr class="yellowed"><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th" id="lead_ql_report"></th></tr>
-                                    <tr><th colspan=2 class="report_th"></th><th colspan=2 class="report_th" id="lead_ql_percent"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Original Batch Date</th><th colspan=2 class="report_th right" id="replace"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Batch ID</th><th colspan=2 class="report_th right" id="batch_id"></th></tr> 
+                                    <tr><th colspan=2 class="report_th">LEAD COST (AUD)</th><th colspan=2 class="report_th right" id="lead_cost_report"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL NUMBERS IN THE FILE</th><th colspan=2 class="report_th right" id="total_leads"></th></tr>
+                                    <tr><th colspan=2 class="report_th">Lead Batch Dialer Cycle</th><th colspan=2 class="report_th right" id="batch_cycle"></th></tr>
+                                    <tr class="yellowed"><th colspan=2 class="report_th">TOTAL QUALIFIED LEADS (QL)</th><th colspan=2 class="report_th right" id="lead_ql_report"></th></tr>
+                                    <tr><th colspan=2 class="report_th"></th><th colspan=2 class="report_th right" id="lead_ql_percent"></th></tr>
                                     
-                                    <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th" id="cost_ql"></th></tr> 
-                                    <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th" id="cost_lead"></th></tr>
-                                    <tr class="oranged"><th colspan=2 class="report_th">Penetration (Human Ans)</th><th colspan=2 class="report_th" id="human_answered"></th></tr>
-                                    <tr class="oranged"><th colspan=2 class="report_th">Penetration Rate</th><th colspan=2 class="report_th" id="penetration_rate"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (CPCL)</th><th colspan=2 class="report_th" id="penetration_rate_cost"></th></tr>
-                                    <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th" id="fx"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th" id="cost_ql_php"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th" id="cost_lead_php"></th></tr>
-                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th" id="penetration_rate_cost_php"></th></tr>
-                                    <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th" id="total_dials"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / QL (CPQL)</th><th colspan=2 class="report_th right" id="cost_ql"></th></tr> 
+                                    <tr><th colspan=2 class="report_th">COST / LEAD (CPL)</th><th colspan=2 class="report_th right" id="cost_lead"></th></tr>
+                                    <tr class="oranged"><th colspan=2 class="report_th">Penetration (Human Ans)</th><th colspan=2 class="report_th right" id="human_answered"></th></tr>
+                                    <tr class="oranged"><th colspan=2 class="report_th">Penetration Rate</th><th colspan=2 class="report_th right" id="penetration_rate"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (CPCL)</th><th colspan=2 class="report_th right" id="penetration_rate_cost"></th></tr>
+                                    <tr><th colspan=2 class="report_th">FX</th><th colspan=2 class="report_th right" id="fx"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / QL (PHP)</th><th colspan=2 class="report_th right" id="cost_ql_php"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / LEAD (PHP)</th><th colspan=2 class="report_th right" id="cost_lead_php"></th></tr>
+                                    <tr><th colspan=2 class="report_th">COST / Contactable LEAD (PHP)</th><th colspan=2 class="report_th right" id="penetration_rate_cost_php"></th></tr>
+                                    <tr><th colspan=2 class="report_th">TOTAL DIALS</th><th colspan=2 class="report_th right" id="total_dials"></th></tr>
                                     
                                     <tr>
                                         <th colspan=4></th>
@@ -201,36 +201,40 @@
             // cost_ql cost_lead cost_ql_php cost_lead_php money_conversion 
             var money_conversion = $("#money_conversion").val();
             var lead_cost = $("#lead_cost").val();
-            var total_lead = $("#total_leads").html();
+            var total_lead = parseInt($("#total_leads").html());
             var penetration_rate = $("#penetration_rate").html();
-            var human_answered = $("#human_answered").html();
+            var human_answered = parseInt($("#human_answered").html());
             var lead_ql = $("#lead_ql").val();
             $("#fx").html($("#money_conversion").val());
-            $("#lead_cost_report").html("$"+$("#lead_cost").val());
+            $("#lead_cost_report").html("$"+numberWithCommas($("#lead_cost").val()));
 
             //calculate cost per lead
             var cost_lead = (lead_cost / total_lead).toFixed(2);
-            $("#cost_lead").html("$"+cost_lead);
+            $("#cost_lead").html("$"+numberWithCommas(cost_lead));
            
             //calculate COST / Contactable LEAD (CPCL)
-            $("#penetration_rate_cost").html("$"+(lead_cost / human_answered).toFixed(2));
+            $("#penetration_rate_cost").html("$"+numberWithCommas((lead_cost / human_answered).toFixed(2)));
 
-            $("#penetration_rate_cost_php").html(((lead_cost / human_answered)*money_conversion).toFixed(2));
+            $("#penetration_rate_cost_php").html(numberWithCommas(((lead_cost / human_answered)*money_conversion).toFixed(2)));
 
-            $("#lead_ql_report").html(lead_ql);
+            $("#lead_ql_report").html(numberWithCommas(lead_ql));
             var cost_ql = lead_cost/lead_ql
-            $("#cost_ql").html("$"+(cost_ql).toFixed(2));
+            $("#cost_ql").html("$"+numberWithCommas((cost_ql).toFixed(2)));
             $("#lead_ql_percent").html((lead_ql/human_answered).toFixed(2));
 
              //convert to php
              var cost_lead_php = (cost_lead * money_conversion).toFixed(2);
-            $("#cost_lead_php").html(cost_lead_php);
-            $("#cost_ql_php").html((cost_ql * money_conversion).toFixed(2));
+            $("#cost_lead_php").html(numberWithCommas(cost_lead_php));
+            $("#cost_ql_php").html(numberWithCommas((cost_ql * money_conversion).toFixed(2)));
             
             
 
         }
 
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
         function fetchLeadStatList(){
             $.ajax({
                 url: "/getleadstatslogs?list_id="+$("#list_id").val()+"&campaignid="+$("#campaign").val(),
@@ -246,14 +250,14 @@
                     var ha = 0; //human answer
                     var nha = 0; // not human answered
                     var total_dials = 0; // total dials
-                    var total_leads = 80000; //total leads
+                    var total_leads = 0; //total leads
                     var batch_cycle = 0; 
                     var na = 0; //total not answered
 
                     var cnq = 0;
                     var dnc = 0;
                     var newleads = 0;
-
+                    var total_leads = 0;
                     $('#leadstats tbody').empty();
                     $.each(data, function(k, v) {
                         $("#over_all").html(v.overalltotal);
@@ -317,19 +321,20 @@
                         }
 
                         total_dials = v.overalltotal;
-                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td>'+v.total+'</td><td>'+(v.total / v.overalltotal).toFixed(4)+'</td><td>'+v.total1+'</td><td>'+(v.total1 / v.overalltotal).toFixed(4)+'</td><td>'+v.total2+'</td><td>'+(v.total2 / v.overalltotal).toFixed(4)+'</td><td>'+v.total3+'</td><td>'+(v.total3 / v.overalltotal).toFixed(4)+'</td><td>'+v.total4+'</td><td>'+(v.total4 / v.overalltotal).toFixed(4)+'</td><td>'+v.total5+'</td><td>'+(v.total5 / v.overalltotal).toFixed(4)+'</td><td>'+v.total6+'</td><td>'+(v.total6 / v.overalltotal).toFixed(4)+'</td></tr>');
+                        total_leads = v.totalleads;
+                        $('#leadstatslists').append('<tr class="'+bgcolor3+' '+bgcolor+' '+bgcolor2+'"><td>'+v.status+'</td><td class="">'+status_name+'</td><td class="right">'+numberWithCommas(v.total)+'</td><td class="right">'+(v.total / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total1)+'</td><td class="right">'+(v.total1 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total2)+'</td><td class="right">'+(v.total2 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total3)+'</td><td class="right">'+(v.total3 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total4)+'</td><td class="right">'+(v.total4 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total5)+'</td><td class="right">'+(v.total5 / v.overalltotal).toFixed(2)+'</td><td class="right">'+numberWithCommas(v.total6)+'</td><td class="right">'+(v.total6 / v.overalltotal).toFixed(2)+'</td></tr>');
                     });
                     var ql = (ha + newleads) - (dnc + cnq);
                     
-                    $("#lead_ql").val(ql);
-                    $("#human_answered").html(ha);
+                    $("#lead_ql").val(ql.toLocaleString());
+                    $("#human_answered").html(ha.toLocaleString());
                     $("#batch_id").html($("#list_id").val());
-                    $("#lead_cost_report").html($("#lead_cost").val());
-                    $("#total_dials").html(total_dials); 
-                    $("#total_leads").html(total_leads); 
-                    $("#penetration_rate").html((ha/total_leads).toFixed(4));
+                    $("#lead_cost_report").html($("#lead_cost").val().toLocaleString());
+                    $("#total_dials").html(total_dials.toLocaleString().toLocaleString()); 
+                    $("#total_leads").html(total_leads.toLocaleString().toLocaleString()); 
+                    $("#penetration_rate").html((ha/total_leads).toFixed(2).toLocaleString());
                     var batch_cycle = (total_dials-na)/total_leads;
-                    $("#batch_cycle").html((batch_cycle).toFixed(4));
+                    $("#batch_cycle").html((batch_cycle).toFixed(2).toLocaleString());
                     caclulateReports();                    
                      
                     $('#leadstats').DataTable( {
@@ -342,7 +347,7 @@
                             /*{ extend: 'copyHtml5', header:true, footer: true },
                             { extend: 'csvHtml5', header:true, footer: true },
                             { extend: 'pdfHtml5', header:true, footer: true }*/
-                        ],
+                        ], 
                         "initComplete": function (settings, json) {
                             if(this.fnSettings().aoData.length===0) {
                                 console.log("no data");
@@ -377,7 +382,7 @@
                                         return a + b;
                                     });
 
-                                    $(column.footer()).html(parseFloat(sum).toFixed(4));
+                                    $(column.footer()).html(parseFloat(sum).toFixed(2));
                                 });
                             }
                         }
@@ -469,6 +474,9 @@
         .report_th{
             padding:5px 10px !important;
             font-size:12px;
+        }
+        .right{
+            text-align: right !important;
         }
     </style>
     

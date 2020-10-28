@@ -125,6 +125,7 @@ SUM(CASE WHEN vicidial_list.called_count >=6 THEN 1 ELSE 0 END) AS total6
             ->table('vicidial_log')
             ->select('list_id',
             'vicidial_log.status',
+            DB::raw("(SELECT COUNT(vicidial_list.list_id) FROM `vicidial_list` WHERE list_id=$request->list_id) as totalleads"),
             DB::raw("(SELECT COUNT(vicidial_log.list_id) FROM `vicidial_log` WHERE list_id=$request->list_id) as overalltotal"),
             DB::raw("count(vicidial_log.status)as total"),
 
