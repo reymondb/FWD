@@ -285,7 +285,7 @@
                            nha = nha + v.total;
                             var bgcolor="";
                         }
-                        if(v.sale=="Y"){
+                        if(sale=="Y"){
                             var bgcolor2="yellowed";
                         }
                         else{
