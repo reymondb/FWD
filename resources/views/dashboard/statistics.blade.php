@@ -345,7 +345,7 @@
                     $("#lead_ql").val(ql);
                     $("#human_answered").html(ha.toLocaleString());
                     //$("#batch_id").html($("#list_id").val());
-                    $("#batch_id").html($("#list_id").html());
+                    $("#batch_id").html($( "#list_id option:selected" ).text());
                     $("#lead_cost_report").html($("#lead_cost").val().toLocaleString());
                     $("#total_dials").html(total_dials.toLocaleString()); 
                     $("#total_leads").html(total_leads.toLocaleString()); 
