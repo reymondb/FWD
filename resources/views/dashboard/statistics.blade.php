@@ -170,7 +170,7 @@
                     success: function (data) {
                         $('#list_id').empty().append('<option selected="selected" value="">Select List ID</option>');
                         $.each(data, function(k, v) {
-                            $('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+' '+v.list_name+'</option>');
+                            $('#list_id').append('<option value="'+v.list_id+'">'+v.list_id+' - '+v.list_name+'</option>');
                         });
                                 
                     }
