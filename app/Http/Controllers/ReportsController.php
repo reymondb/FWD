@@ -51,8 +51,8 @@ class ReportsController extends Controller
         config(['database.connections.mysql_external.password' => $source->Mysql_password]);
 
         $data = DB::connection('mysql_external')
-            ->table('vicidial_list')
-            ->select('list_id')
+            ->table('vicidial_lists')
+            ->select('list_id','list_name')
             ->groupby('list_id')
             ->get();
         DB::disconnect('mysql_source');
