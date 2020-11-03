@@ -20,6 +20,8 @@ use App\Exports\UniqueLeadsExport;
 use App\Exports\DuplicateLeadsExport;
 use App\Exports\UniqueExport;
 use App\Exports\LeadsExport;
+use App\Exports\DNCLeadsExport;
+
 
 class DncController extends Controller
 {
@@ -128,16 +130,17 @@ class DncController extends Controller
         return Excel::download(new DuplicateLeadsExport(), "Lead Wasing - Duplicate Leads $datetime.csv");
     }
 
-    public function exportUniqueLeads2()
+    public function exportdnc()
     {
         $datetime=date("Y-m-d His");
         setCookie("downloadStarted", 1, time() + 20, '/', "", false, false);
-        return Excel::download(new UniqueLeadsExport(), "Lead Wasing - Unique Leads $datetime.csv");
+        return Excel::download(new DNCLeadsExport(), "DNC List - $datetime.csv");
     }
 
     public function export() 
     {
             return Excel::download(new UniqueExport, 'zzz.csv');
     }
+    
     
 }

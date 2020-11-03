@@ -127,11 +127,16 @@
                                 <div class="card-header">
                                     <div style="display: inline;">
                                         DNC Dashboard
+                                        @if( Auth::user()->role ==1)
+                                        <div style="display: inline-block"">
+                                            <a href="/dnc/exportdnc" id="downloadLink2" class="btn btn-primary" download>Export DNC</a>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart" id="resetter5"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                            <canvas id="dnctotals" height="280" width="600"></canvas>
+                                        <canvas id="dnctotals" height="280" width="600"></canvas>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -140,8 +145,7 @@
                         </div>    
                     </div>
                 </div>
-                
-                  <!-- /.row -->
+                <!-- /.row -->
             </section>
         </main>
 

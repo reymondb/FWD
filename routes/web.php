@@ -30,6 +30,8 @@ Route::get('/noblankchart','DashboardController@noblankchart')->name('noblankcha
 Route::get('/supplierchart','DashboardController@supplierchart')->name('supplierchart');
 Route::get('/dncchart','DashboardController@dncchart')->name('dncchart');
 Route::get('/getCampaignTotals','DashboardController@getCampaignTotals')->name('getCampaignTotals');
+Route::get('/dnc/exportdnc','DashboardController@exportdnc')->name('exportdnc');
+
 
 Route::get('/import', 'ImportController@getImport')->name('import');
 Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
