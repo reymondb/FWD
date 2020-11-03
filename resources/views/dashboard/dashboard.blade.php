@@ -120,6 +120,25 @@
                             <!-- /.card -->
                         </div>      
                     </div>
+                    <div class="row" style="padding-top:20px;">
+                        <div class="col-md-6">    
+                            <!-- Pie CHART -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <div style="display: inline;">
+                                        DNC Dashboard
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart" id="resetter5"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                            <canvas id="dnctotals" height="280" width="600"></canvas>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>    
+                    </div>
                 </div>
                 
                   <!-- /.row -->
@@ -474,6 +493,58 @@
                 
                 
             }
+
+            var url5 = "/dncchart";
+                var DNCtotals = new Array();
+                var DncLabels = new Array();
+                var DncPercentage = new Array();
+                var DNC_total = 0;
+                $(document).ready(function(){
+                    $.get(url5, function(response){
+                        response.forEach(function(data){
+                            console.log(data);
+                            DNCtotals.push(data.totals);
+                            DncLabels.push(data.Label);
+                            DncPercentage.push(data.percentage);
+                            DNC_total = DNC_total + data.totals;
+                        });
+                        $("#dnc_total").html(numberWithCommas(DNC_total));
+                        var ctx = document.getElementById("dnctotals").getContext('2d');
+                        var myPieChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data:{
+                                datasets: [{
+                                    data: DNCtotals,
+                                    backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                                }],
+
+                                // These labels appear in the legend and in the tooltips when hovering different arcs
+                                labels: DncLabels
+                            },                        
+                            options: {
+                                legend: {
+                                    display: true,
+                                    position: 'left',
+                                },
+                                tooltips: {
+                                    enabled: false
+                                },
+                                plugins: {
+                                    labels: {
+                                        render: 'percentage',
+                                        fontColor: '#FFFFFF',
+                                        precision: 2
+                                    }
+                                }
+                            }
+                        
+                        });
+                    }).always(function (data) {
+                        $(".loading4").hide();
+                        $(".loading5").hide();
+                    });
+                });
+            
             
 
 

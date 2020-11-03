@@ -214,6 +214,41 @@ class DashboardController extends Controller
         }
         return response()->json($data);
     }
+
+    public function dncchart()
+    {
+        
+        
+            $thirtydays = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
+                                        END AS z
+                                FROM
+                                    dnc) AS a
+                            WHERE
+                                z BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE()");
+
+            $sixty = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
+                                                END AS z
+                                        FROM
+                                            dnc) AS a
+                                    WHERE
+                                        z BETWEEN CURDATE() - INTERVAL 60 DAY AND CURDATE() - INTERVAL 30 DAY");
+
+            $sixtyup = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
+                                                END AS z
+                                        FROM
+                                            dnc) AS a
+                                    WHERE
+                                        z < CURDATE() - INTERVAL 60 DAY");
+           
+            $data=array();
+            $data[0] = array('Label' => '30 days and below','totals' =>$thirtydays[0]->totals);
+            $data[1] = array('Label' => '30 days to 60 days','totals' => $sixty[0]->totals);
+            $data[2] = array('Label' => '60 days and up','totals' => $sixtyup[0]->totals);
+       
+        return response()->json($data);
+    }
+
+    
     
 
 }
