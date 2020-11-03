@@ -130,11 +130,11 @@ class DncController extends Controller
         return Excel::download(new DuplicateLeadsExport(), "Lead Wasing - Duplicate Leads $datetime.csv");
     }
 
-    public function exportdnc()
+    public function exportdnc($type)
     {
         $datetime=date("Y-m-d His");
         setCookie("downloadStarted", 1, time() + 20, '/', "", false, false);
-        return Excel::download(new DNCLeadsExport(), "DNC List - $datetime.csv");
+        return Excel::download(new DNCLeadsExport($type), "DNC List - $datetime.csv");
     }
 
     public function export() 

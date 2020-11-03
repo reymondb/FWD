@@ -129,7 +129,10 @@
                                         DNC Dashboard
                                         @if( Auth::user()->role ==1)
                                         <div style="display: inline-block"">
-                                            <a href="/dnc/exportdnc" id="downloadLink2" class="btn btn-primary" download>Export DNC</a>
+                                            <a href="/dnc/exportdnc/1" id="downloadLink2" class="btn btn-primary" style="font-size: 12px;" download><i class="fas fa-download"></i> 5 days</a>
+                                            <a href="/dnc/exportdnc/2" id="downloadLink2" class="btn btn-primary" style="font-size: 12px;" download><i class="fas fa-download"></i> 30 days</a>
+                                            <a href="/dnc/exportdnc/3" id="downloadLink2" class="btn btn-primary" style="font-size: 12px;" download><i class="fas fa-download"></i> 60 days</a>
+                                            <a href="/dnc/exportdnc/4" id="downloadLink2" class="btn btn-primary" style="font-size: 12px;" download><i class="fas fa-download"></i> 60up days</a>
                                         </div>
                                         @endif
                                     </div>

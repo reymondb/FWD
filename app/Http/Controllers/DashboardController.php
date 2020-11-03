@@ -218,13 +218,19 @@ class DashboardController extends Controller
     public function dncchart()
     {
         
-        
+            $fivedays = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
+                        END AS z
+                FROM
+                    dnc) AS a
+                WHERE
+                z BETWEEN CURDATE() - INTERVAL 5 DAY AND CURDATE()");
+
             $thirtydays = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
                                         END AS z
                                 FROM
                                     dnc) AS a
                             WHERE
-                                z BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE()");
+                                z BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() - INTERVAL 5 DAY");
 
             $sixty = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
                                                 END AS z
@@ -241,10 +247,10 @@ class DashboardController extends Controller
                                         z < CURDATE() - INTERVAL 60 DAY");
            
             $data=array();
-            $data[0] = array('Label' => '30 days and below','totals' =>$thirtydays[0]->totals);
-            $data[1] = array('Label' => '30 days to 60 days','totals' => $sixty[0]->totals);
-            $data[2] = array('Label' => '60 days and up','totals' => $sixtyup[0]->totals);
-       
+            $data[0] = array('Label' => '5 days and below','totals' =>$fivedays[0]->totals);
+            $data[1] = array('Label' => '5 days to 30 days','totals' =>$thirtydays[0]->totals);
+            $data[2] = array('Label' => '30 days to 60 days','totals' => $sixty[0]->totals);
+            $data[3] = array('Label' => '60 days and up','totals' => $sixtyup[0]->totals);
         return response()->json($data);
     }
 
