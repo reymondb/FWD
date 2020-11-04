@@ -15,7 +15,7 @@
                                 <option value="{{$c->id}}">{{$c->CampaignName}}</option>
                             @endforeach
                         </select>
-                        <img src="images/blue loading.gif" class="loading5"  height="30">
+                        <img src="images/blue loading.gif" class="loading6"  height="30">
                     </li>
                 </ol>
                 
@@ -133,6 +133,8 @@
                                             <a href="/dnc/exportdnc/2" id="downloadLink2" class="btn btn-primary" style="font-size: 12px;" download><i class="fas fa-download"></i> 30 days</a>
                                             <a href="/dnc/exportdnc/3" id="downloadLink2" class="btn btn-primary" style="font-size: 12px;" download><i class="fas fa-download"></i> 60 days</a>
                                             <a href="/dnc/exportdnc/4" id="downloadLink2" class="btn btn-primary" style="font-size: 12px;" download><i class="fas fa-download"></i> 60 days++</a>
+                                            <button class="btn-primary btn" onclick="refreshChart5()" style="font-size: 12px;">Refresh Data</button>
+                                        <img src="images/blue loading.gif" class="loading5"  height="30">
                                         </div>
                                         @endif
                                     </div>
@@ -166,15 +168,20 @@
             loadChart3();
             loadChart4();
             
+            loadChart5();
+            
+            
             $(".loading1").hide();
             $(".loading2").hide();
             $(".loading3").hide();
             $(".loading4").hide();
             $(".loading5").hide();
+            $(".loading6").hide();
+            
 
             function refreshCharts(){
                 var campaignid = $("#campaignid").val();
-                $(".loading5").show();
+                $(".loading6").show();
                 
                 console.log(campaignid);
                 loadChart1(campaignid);
@@ -259,8 +266,26 @@
                     }
                 });
             }
-            
 
+            
+            function refreshChart5(){
+                $(".loading5").show();
+                
+                $.ajax({
+                    url: "/optimizeChart5",
+                    type: 'GET',
+                    contentType: false, // The content type used when sending data to the server.
+                    cache: false, // To unable request pages to be cached
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                        $("#updated5").html(data);
+                        loadChart5();
+                        $(".loading5").hide();                
+                    }
+                });
+            }
+            
             function getCampaignTotals(campaignids){
                 $.ajax({
                     url: "/getCampaignTotals?campaignid="+campaignids,
@@ -274,7 +299,6 @@
                     }
                 });
             }
-            
 
             function loadChart1(campaignids){
                 $(".loading1").show();
@@ -501,7 +525,8 @@
                 
             }
 
-            var url5 = "/dncchart";
+            function loadChart5(){
+                var url5 = "/dncchart";
                 var DNCtotals = new Array();
                 var DncLabels = new Array();
                 var DncPercentage = new Array();
@@ -551,6 +576,7 @@
                         $(".loading5").hide();
                     });
                 });
+            }
             
             
 

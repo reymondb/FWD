@@ -57,6 +57,14 @@
                                 <img src="images/blue loading.gif" class="loading4 loader" height="50">
                             </td>
                         </tr>
+                        <tr>
+                            <td>DNC Chart</td>
+                            <td id="updated5">{{$chart5}}</td>
+                            <td>
+                                <button class="btn-primary btn" onclick="refreshChart5()">Refresh Data</button>
+                                <img src="images/blue loading.gif" class="loading5 loader" height="50">
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -74,6 +82,7 @@
     $(".loading2").hide();
     $(".loading3").hide();
     $(".loading4").hide();
+    $(".loading5").hide();
     function refreshChart1(){
         $(".loading1").show();
         
@@ -136,6 +145,23 @@
                 console.log(data);
                 $("#updated4").html(data);
                 $(".loading4").hide();                
+            }
+        });
+    }
+    
+    function refreshChart5(){
+        $(".loading5").show();
+        
+        $.ajax({
+            url: "/optimizeChart5",
+            type: 'GET',
+            contentType: false, // The content type used when sending data to the server.
+            cache: false, // To unable request pages to be cached
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                $("#updated5").html(data);
+                $(".loading5").hide();                
             }
         });
     }

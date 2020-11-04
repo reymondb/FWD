@@ -36,9 +36,14 @@ class OptimizerController extends Controller
          $chart2=Charts::select('created_at')->where('chart_type',2)->first();
          $chart3=Charts::select('created_at')->where('chart_type',3)->first();
          $chart4=Charts::select('created_at')->where('chart_type',4)->first();
+         $chart5=Charts::select('created_at')->where('chart_type',5)->first();
         
          //return view('dashboard/charts')->with('chart1',$chart1)->with('chart2',$chart2)->with('chart3',$chart3);
-         return view('dashboard/charts')->with('chart1',date("M d,Y h:i:s A",strtotime($chart1->created_at)))->with('chart2',date("M d,Y h:i:s A",strtotime($chart2->created_at)))->with('chart3',date("M d,Y h:i:s A",strtotime($chart3->created_at)))->with('chart4',date("M d,Y h:i:s A",strtotime($chart4->created_at)));
+         return view('dashboard/charts')->with('chart1',date("M d,Y h:i:s A",strtotime($chart1->created_at)))
+         ->with('chart2',date("M d,Y h:i:s A",strtotime($chart2->created_at)))
+         ->with('chart3',date("M d,Y h:i:s A",strtotime($chart3->created_at)))
+         ->with('chart4',date("M d,Y h:i:s A",strtotime($chart4->created_at)))
+         ->with('chart5',date("M d,Y h:i:s A",strtotime($chart5->created_at)));
 
     }
 
@@ -198,4 +203,63 @@ class OptimizerController extends Controller
         return $date;
     }
 
+
+    public function DncChart()
+    {
+        
+        Charts::where('chart_type',5)->delete();
+        $fivedays = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE STR_TO_DATE(LastDNCWashing,'%m/%d/%Y')
+                        END AS z
+                FROM
+                    dnc) AS a
+                WHERE
+                z BETWEEN CURDATE() - INTERVAL 5 DAY AND CURDATE()");
+
+        $chart=new Charts();
+        $chart->label = '5 days and below ('.$fivedays[0]->totals.')';
+        $chart->total = $fivedays[0]->totals;
+        $chart->chart_type = 5 ;
+        $chart->save();
+
+        $thirtydays = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE STR_TO_DATE(LastDNCWashing,'%m/%d/%Y')
+                                        END AS z
+                                FROM
+                                    dnc) AS a
+                            WHERE
+                                z BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() - INTERVAL 5 DAY");
+
+        $chart=new Charts();
+        $chart->label = '5 days to 30 days ('.$thirtydays[0]->totals.')';
+        $chart->total = $thirtydays[0]->totals;
+        $chart->chart_type = 5 ;
+        $chart->save();
+
+        $sixty = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE STR_TO_DATE(LastDNCWashing,'%m/%d/%Y')
+                                                END AS z
+                                        FROM
+                                            dnc) AS a
+                                    WHERE
+                                        z BETWEEN CURDATE() - INTERVAL 60 DAY AND CURDATE() - INTERVAL 30 DAY");
+        $chart=new Charts();
+        $chart->label = '30 days to 60 days ('.$sixty[0]->totals.')';
+        $chart->total = $sixty[0]->totals;
+        $chart->chart_type = 5 ;
+        $chart->save();
+
+        $sixtyup = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE STR_TO_DATE(LastDNCWashing,'%m/%d/%Y')
+                                            END AS z
+                                    FROM
+                                        dnc) AS a
+                                WHERE
+                                    z < CURDATE() - INTERVAL 60 DAY");
+        $chart=new Charts();
+        $chart->label = '60 days and up  ('.$sixtyup[0]->totals.')';
+        $chart->total = $sixtyup[0]->totals;
+        $chart->chart_type = 5 ;
+        $chart->save();
+
+        $date=date("M d,Y H:i:s A",strtotime($chart->created_at));
+        return $date;
+
+    }
 }

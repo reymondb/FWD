@@ -81,6 +81,9 @@ Route::get('/optimizeChart1', 'OptimizerController@leadschart')->name('optimize1
 Route::get('/optimizeChart2', 'OptimizerController@supplierchart')->name('optimize2');
 Route::get('/optimizeChart3', 'OptimizerController@blankchart')->name('optimize3');
 Route::get('/optimizeChart4', 'OptimizerController@notblankchart')->name('optimize4');
+Route::get('/optimizeChart5', 'OptimizerController@DncChart')->name('optimize5');
+
+
 
 
 

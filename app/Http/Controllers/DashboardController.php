@@ -217,7 +217,9 @@ class DashboardController extends Controller
 
     public function dncchart()
     {
-        
+        $data=Charts::where('chart_type',5)->orderBy('label')->select(DB::raw('label as Label'),DB::raw('total as totals'))->get();  
+        return response()->json($data);
+        /*
             $fivedays = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE STR_TO_DATE(LastDNCWashing,'%m/%d/%Y')
                         END AS z
                 FROM
@@ -245,13 +247,14 @@ class DashboardController extends Controller
                                             dnc) AS a
                                     WHERE
                                         z < CURDATE() - INTERVAL 60 DAY");
+            
            
             $data=array();
             $data[0] = array('Label' => '5 days and below ('.$fivedays[0]->totals.')','totals' =>$fivedays[0]->totals);
             $data[1] = array('Label' => '5 days to 30 days ('.$thirtydays[0]->totals.')','totals' =>$thirtydays[0]->totals);
             $data[2] = array('Label' => '30 days to 60 days ('.$sixty[0]->totals.')','totals' => $sixty[0]->totals);
             $data[3] = array('Label' => '60 days and up ('.$sixtyup[0]->totals.')','totals' => $sixtyup[0]->totals);
-        return response()->json($data);
+        return response()->json($data);*/
     }
 
     
