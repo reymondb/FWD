@@ -35,6 +35,7 @@
                                 <th>LastName</th>
                                 <th>Address</th>
                                 <th>Email</th>
+                                <th>Last DNC Washed</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,7 +47,8 @@
                                     <td>{{$d->FirstName}}</td>
                                     <td>{{$d->LastName}}</td>
                                     <td>{{$d->Address}}</td>
-                                    <td>{{$d->Email}}</td>                                     
+                                    <td>{{$d->Email}}</td>
+                                    <td>{{$d->LastDNCWashing}}</td>                                       
                                 </tr>
                             @endforeach
                         </tbody>

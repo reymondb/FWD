@@ -218,29 +218,29 @@ class DashboardController extends Controller
     public function dncchart()
     {
         
-            $fivedays = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
-                        END AS z
+            $fivedays = DB::select("SELECT count(id) as totals FROM (SELECT id,DATE_FORMAT(CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
+            END, '%Y-%m-%d')AS z
                 FROM
                     dnc) AS a
                 WHERE
                 z BETWEEN CURDATE() - INTERVAL 5 DAY AND CURDATE()");
 
-            $thirtydays = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
-                                        END AS z
+            $thirtydays = DB::select("SELECT count(id) as totals FROM (SELECT id,DATE_FORMAT(CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
+            END, '%Y-%m-%d') AS z
                                 FROM
                                     dnc) AS a
                             WHERE
                                 z BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() - INTERVAL 5 DAY");
 
-            $sixty = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
-                                                END AS z
+            $sixty = DB::select("SELECT count(id) as totals FROM (SELECT id,DATE_FORMAT(CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
+            END, '%Y-%m-%d') AS z
                                         FROM
                                             dnc) AS a
                                     WHERE
                                         z BETWEEN CURDATE() - INTERVAL 60 DAY AND CURDATE() - INTERVAL 30 DAY");
 
-            $sixtyup = DB::select("SELECT count(id) as totals FROM (SELECT id,CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
-                                                END AS z
+            $sixtyup = DB::select("SELECT count(id) as totals FROM (SELECT id,DATE_FORMAT(CASE WHEN LastDNCWashing IS NULL THEN created_at ELSE LastDNCWashing
+            END, '%Y-%m-%d') AS z
                                         FROM
                                             dnc) AS a
                                     WHERE
